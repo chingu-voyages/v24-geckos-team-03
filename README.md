@@ -13,15 +13,17 @@ Below you can find an overview of the branches we are using.
 ```
 - *master*: (current production release that is seen by live users - updated through PRs)
 - *dev*: (code for the next release - updated through PRs)
-- feature (working branches)
+- feature or bug (working branches)
 -- feature/#<Issue Number>_<little feature title>
 -- feature/#<Issue Number>_<little feature title>
--- feature/#<Issue Number>_<little feature title>
+-- bug/#<Issue Number>_<little feature title>
 ```
 
 *master*: Only updated from the development branch Pull Requests. This branch always reflects the current production release that is seen by live users.
+
 *dev*: Reflects the code for the next release. Developers work in working branches, which are then pulled into this branch. All code pulled into this branch must be tested and undergo peer review as part of the PR process.
-*feature*: working branches, individual branches created by each developer when they are working on changes and bug fixes. Format feature/#<Issue Number>_<little feature title>
+
+*feature/bug*: Individual branches created by each developer when they are working on changes and bug fixes. Format feature/#<Issue Number>_<little feature title>
 
 ### Feature Branch Example
 
