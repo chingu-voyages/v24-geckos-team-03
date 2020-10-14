@@ -11,8 +11,8 @@ Add-project-description-here | Voyage-24 | https://chingu.io/
 Below you can find an overview of the branches we are using.
 
 ```
-- master (protected)
-- dev (protected)
+- master (codebase merged at end of each sprint? couple times during voyage?)
+- dev (pull requests merged here)
 - feature
 -- feature/#<Issue Number>_<little feature title>
 -- feature/#<Issue Number>_<little feature title>
