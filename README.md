@@ -11,9 +11,9 @@ Add-project-description-here | Voyage-24 | https://chingu.io/
 Below you can find an overview of the branches we are using.
 
 ```
-- master (codebase merged at end of each sprint? couple times during voyage?)
-- dev (pull requests merged here)
-- feature
+- *master*: Only updated from the development branch Pull Requests. This branch always reflects the current production release that is seen by live users.
+- *dev*: Reflects the code for the next release. Developers work in working branches, which are then pulled into this branch. All code pulled into this branch must be tested and undergo peer review as part of the PR process.
+- feature: working branches, individual branches created by each developer when they are working on changes and bug fixes.
 -- feature/#<Issue Number>_<little feature title>
 -- feature/#<Issue Number>_<little feature title>
 -- feature/#<Issue Number>_<little feature title>
