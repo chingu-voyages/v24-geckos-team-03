@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { ThemeProvider, Box, Image, Heading, Text, Stack} from '@chakra-ui/core';
 
 const App = () => {
