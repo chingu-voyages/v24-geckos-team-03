@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 function Search() {
-  return <div>Hello</div>;
+  return (
+    <div>
+      <form></form>
+    </div>
+  );
 }
 
 export default Search;
