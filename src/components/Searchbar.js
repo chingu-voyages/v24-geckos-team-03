@@ -25,7 +25,6 @@ function Search() {
         });
     }
   }, [search]);
-  console.log(searhResults);
 
   return (
     <div>
