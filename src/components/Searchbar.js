@@ -26,6 +26,7 @@ function Search() {
     }
   }, [search]);
 
+  console.log(searhResults);
   return (
     <div>
       <form onSubmit={searchSubmit}>
