@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
+import { Context } from "../Context";
 import axios from "axios";
 
 function Search() {
-  const [search, setSearch] = useState("");
-  const [searhResults, setSearchResults] = useState([]);
+  const { setSearch, setSearchResults, search, searhResults } = useContext(
+    Context
+  );
   const inputEl = useRef(null);
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
@@ -14,7 +16,6 @@ function Search() {
   }
 
   useEffect(() => {
-    console.log("h");
     if (search.length > 0) {
       axios
         .get(
