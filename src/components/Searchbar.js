@@ -17,13 +17,17 @@ function Search() {
 
   useEffect(() => {
     if (search.length > 0) {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${search}`
-        )
-        .then(res => {
-          setSearchResults(res.data.results);
-        });
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${search}`
+          )
+          .then(res => {
+            setSearchResults(res.data.results);
+          });
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [search, setSearchResults]);
 
