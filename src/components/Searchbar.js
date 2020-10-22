@@ -3,7 +3,7 @@ import { Context } from "../Context";
 import axios from "axios";
 
 function Search() {
-  const { setSearch, setSearchResults, search, searhResults } = useContext(
+  const { setSearch, setSearchResults, search, searchResults } = useContext(
     Context
   );
   const inputEl = useRef(null);
@@ -25,9 +25,9 @@ function Search() {
           setSearchResults(res.data.results);
         });
     }
-  }, [search]);
+  }, [search, setSearchResults]);
 
-  console.log(searhResults);
+  console.log(searchResults);
   return (
     <div>
       <form onSubmit={searchSubmit}>

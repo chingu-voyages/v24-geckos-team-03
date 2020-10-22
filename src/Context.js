@@ -4,11 +4,11 @@ const Context = React.createContext();
 
 function ContextProvider(props) {
   const [search, setSearch] = useState("");
-  const [searhResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   return (
     <Context.Provider
-      value={{ setSearch, setSearchResults, search, searhResults }}
+      value={{ setSearch, setSearchResults, search, searchResults }}
     >
       {props.children}
     </Context.Provider>
