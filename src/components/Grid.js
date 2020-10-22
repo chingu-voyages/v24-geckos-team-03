@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../Context";
+import Movieboxes from "./Movieboxes";
+import { flexWrap, justifyContent } from "styled-system";
 
 function Grid() {
+  const { searchResults, ImageUrl } = useContext(Context);
   const gridStyles = {
-    maxWidth: "800px",
+    maxWidth: "1200px",
     height: "800px",
-    backgroundColor: "red",
-    margin: "0 auto"
+
+    margin: "0 auto",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly"
   };
-  return <div className="container" style={gridStyles}></div>;
+
+  const movieBoxes = searchResults.map(function(movie) {
+    return (
+      <Movieboxes
+        key={movie.id}
+        title={movie.original_title}
+        imageSrc={ImageUrl + movie.poster_path}
+      />
+    );
+  });
+
+  return (
+    <div className="container" style={gridStyles}>
+      {movieBoxes}
+    </div>
+  );
 }
 
 export default Grid;

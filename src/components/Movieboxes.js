@@ -1,6 +1,14 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
+import { Box, Image } from "@chakra-ui/core";
 
 function Movieboxes(props) {
-  return <div className="box"></div>;
+  return (
+    <Box bg="tomato" w="150px" m={4} color="white" fontSize={"8px"}>
+      <Image />
+
+      <h1>{props.title}</h1>
+    </Box>
+  );
 }
+
+export default Movieboxes;
