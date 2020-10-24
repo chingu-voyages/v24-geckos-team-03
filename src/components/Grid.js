@@ -26,7 +26,7 @@ function Grid() {
 
   return (
     <div className="container" style={gridStyles}>
-      {movieBoxes}
+      {searchResults.length > 0 ? movieBoxes : null}
     </div>
   );
 }
