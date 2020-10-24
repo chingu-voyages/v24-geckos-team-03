@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../Context";
 import Movieboxes from "./Movieboxes";
-import { flexWrap, justifyContent, backgroundColor } from "styled-system";
 
 function Grid() {
   const { searchResults, ImageUrl } = useContext(Context);

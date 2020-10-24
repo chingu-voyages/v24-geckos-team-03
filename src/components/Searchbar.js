@@ -3,9 +3,13 @@ import { Context } from "../Context";
 import axios from "axios";
 
 function Search() {
-  const { setSearch, setSearchResults, search, searchResults } = useContext(
-    Context
-  );
+  const {
+    setSearch,
+    setSearchResults,
+    search,
+    searchResults,
+    setIsSearch
+  } = useContext(Context);
   const inputEl = useRef(null);
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
@@ -13,6 +17,7 @@ function Search() {
   function searchSubmit(e) {
     e.preventDefault();
     setSearch(inputEl.current.value);
+    setIsSearch(true);
   }
 
   useEffect(() => {
