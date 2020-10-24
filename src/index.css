@@ -1,9 +1,17 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
 }
 
 
-.search-bar {
-  padding-bottom: 3%;
+.nav-bar {
+  position: fixed;
+  margin-bottom: 5%;
+}
+
+.link {
+  font-size: 80%;
+  font-weight: 300;
 }
