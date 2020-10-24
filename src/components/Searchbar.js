@@ -33,7 +33,7 @@ function Search() {
 
   console.log(searchResults);
   return (
-    <div>
+    <div className="search-bar">
       <form onSubmit={searchSubmit}>
         <input type="text" ref={inputEl}></input>
         <button>Search Movies</button>
