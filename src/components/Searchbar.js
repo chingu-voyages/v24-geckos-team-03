@@ -3,12 +3,10 @@ import { Context } from "../Context";
 import axios from "axios";
 
 function Search() {
-  const { setSearch, setSearchResults, search, searchResults } = useContext(
+  const { setSearch, setSearchResults, search, searchResults, APIKEY } = useContext(
     Context
   );
   const inputEl = useRef(null);
-
-  const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
   function searchSubmit(e) {
     e.preventDefault();
@@ -29,7 +27,7 @@ function Search() {
         console.log(err);
       }
     }
-  }, [search, setSearchResults]);
+  }, [search, setSearchResults, APIKEY]);
 
   console.log(searchResults);
   return (
