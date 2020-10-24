@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import Searchbar from "../components/Searchbar";
 import Grid from "../components/Grid";
+<<<<<<< HEAD
 import { Context } from "../Context";
+=======
+import NavBar from "../components/NavBar";
+>>>>>>> c1a7bec5ac776ea5801d19583bf0d081a6787259
 
 function Homepage() {
   const {
@@ -21,7 +25,8 @@ function Homepage() {
         overflow: "scroll"
       }}
     >
-      <Searchbar />
+      <NavBar />
+      
       <Grid />
     </div>
   );

@@ -7,6 +7,7 @@ function ContextProvider(props) {
   const [isSearch, setIsSearch] = useState(false);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
   return (
     <Context.Provider
@@ -16,8 +17,12 @@ function ContextProvider(props) {
         search,
         searchResults,
         ImageUrl,
+<<<<<<< HEAD
         isSearch,
         setIsSearch
+=======
+        APIKEY,
+>>>>>>> c1a7bec5ac776ea5801d19583bf0d081a6787259
       }}
     >
       {props.children}

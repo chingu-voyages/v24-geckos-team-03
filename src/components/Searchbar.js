@@ -3,6 +3,7 @@ import { Context } from "../Context";
 import axios from "axios";
 
 function Search() {
+<<<<<<< HEAD
   const {
     setSearch,
     setSearchResults,
@@ -10,9 +11,12 @@ function Search() {
     searchResults,
     setIsSearch
   } = useContext(Context);
+=======
+  const { setSearch, setSearchResults, search, searchResults, APIKEY } = useContext(
+    Context
+  );
+>>>>>>> c1a7bec5ac776ea5801d19583bf0d081a6787259
   const inputEl = useRef(null);
-
-  const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
   function searchSubmit(e) {
     e.preventDefault();
@@ -34,11 +38,11 @@ function Search() {
         console.log(err);
       }
     }
-  }, [search, setSearchResults]);
+  }, [search, setSearchResults, APIKEY]);
 
   console.log(searchResults);
   return (
-    <div>
+    <div className="search-bar">
       <form onSubmit={searchSubmit}>
         <input type="text" ref={inputEl}></input>
         <button>Search Movies</button>
