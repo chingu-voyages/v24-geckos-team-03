@@ -14,7 +14,6 @@ function Homepage() {
       }}
     >
       <NavBar />
-      
       <Grid />
     </div>
   );
