@@ -1,22 +1,22 @@
+import { Box } from "@chakra-ui/core";
 import React from "react";
-import Searchbar from "../components/Searchbar";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
 
 function Homepage() {
   return (
-    <div
+    <Box
+      bg="primaryBackground"
+      h="100vh"
+      w="100vw"
       style={{
-        backgroundColor: "#150e06",
-        height: "100vh",
-        width: "100vw",
-        overflow: "scroll"
+        overflow: "scroll",
       }}
     >
       <NavBar />
-      
+
       <Grid />
-    </div>
+    </Box>
   );
 }
 

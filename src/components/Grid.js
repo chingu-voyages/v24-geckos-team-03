@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Context } from "../Context";
 import Movieboxes from "./Movieboxes";
 import { useDisclosure } from "@chakra-ui/core";
-import { flexWrap, justifyContent, backgroundColor } from "styled-system";
 import MovieDetails from "./MovieDetails";
 
 function Grid() {
