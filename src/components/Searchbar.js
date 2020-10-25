@@ -35,7 +35,7 @@ function Search() {
         console.log(err);
       }
     }
-  }, [search, setSearchResults, APIKEY]);
+  }, [search, setSearchResults, APIKEY, setIsSearch]);
 
   console.log(searchResults);
   return (
