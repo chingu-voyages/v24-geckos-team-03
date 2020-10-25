@@ -3,19 +3,15 @@ import { Context } from "../Context";
 import axios from "axios";
 
 function Search() {
-<<<<<<< HEAD
   const {
     setSearch,
     setSearchResults,
     search,
     searchResults,
-    setIsSearch
+    setIsSearch,
+    APIKEY
   } = useContext(Context);
-=======
-  const { setSearch, setSearchResults, search, searchResults, APIKEY } = useContext(
-    Context
-  );
->>>>>>> c1a7bec5ac776ea5801d19583bf0d081a6787259
+
   const inputEl = useRef(null);
 
   function searchSubmit(e) {
