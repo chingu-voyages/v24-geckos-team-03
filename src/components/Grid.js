@@ -16,7 +16,8 @@ function Grid() {
     maxWidth: "1200px",
 
     margin: "0 auto",
-    marginTop: "5%",
+
+    marginTop: "11%",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-evenly"

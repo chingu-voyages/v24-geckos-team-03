@@ -29,6 +29,7 @@ function Search() {
           )
           .then(res => {
             setSearchResults(res.data.results);
+            setIsSearch(true);
           });
       } catch (err) {
         console.log(err);
