@@ -22,6 +22,7 @@ function MovieDetails(props) {
 
   useEffect(() => {
     if (id !== null) {
+      setMovieDetails(null); // prevents details from previous modal from showing up
       try {
         axios
           .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`)
@@ -31,6 +32,8 @@ function MovieDetails(props) {
       } catch (err) {
         console.log(err);
       }
+    } else {
+      setMovieDetails(null);
     }
   }, [id, APIKEY]);
 
