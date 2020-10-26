@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
+import {Button} from "@chakra-ui/core";
 
 function Search() {
   const {
@@ -42,7 +43,7 @@ function Search() {
     <div className="search-bar">
       <form onSubmit={searchSubmit}>
         <input type="text" ref={inputEl}></input>
-        <button>Search Movies</button>
+        <Button mx="5px" h="2em">Search Movies</Button>
       </form>
     </div>
   );
