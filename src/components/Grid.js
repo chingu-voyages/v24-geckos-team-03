@@ -16,24 +16,25 @@ function Grid() {
     maxWidth: "1200px",
 
     margin: "0 auto",
-    marginTop: "5%",
+
+    marginTop: "11%",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-evenly",
+    justifyContent: "space-evenly"
   };
 
-  const movieBoxes = searchResults.map(function (movie) {
+  const movieBoxes = searchResults.map(function(movie) {
     return (
       <Movieboxes
         key={movie.id}
         title={movie.original_title}
         imageSrc={ImageUrl + movie.poster_path}
-        onClick={()=>onHandleMovieClick(movie.id)}
+        onClick={() => onHandleMovieClick(movie.id)}
       />
     );
   });
 
-  function onHandleMovieClick(id){
+  function onHandleMovieClick(id) {
     setMovieId(id);
     onOpen();
   }
@@ -41,7 +42,7 @@ function Grid() {
   return (
     <>
       <div className="container" style={gridStyles}>
-        {movieBoxes}
+        {searchResults.length > 0 ? movieBoxes : null}
       </div>
 
       <MovieDetails isOpen={isOpen} onClose={onClose} id={movieId} />

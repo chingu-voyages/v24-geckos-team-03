@@ -3,14 +3,21 @@ import { Context } from "../Context";
 import axios from "axios";
 
 function Search() {
-  const { setSearch, setSearchResults, search, searchResults, APIKEY } = useContext(
-    Context
-  );
+  const {
+    setSearch,
+    setSearchResults,
+    search,
+    searchResults,
+    setIsSearch,
+    APIKEY
+  } = useContext(Context);
+
   const inputEl = useRef(null);
 
   function searchSubmit(e) {
     e.preventDefault();
     setSearch(inputEl.current.value);
+    setIsSearch(true);
   }
 
   useEffect(() => {
@@ -22,12 +29,13 @@ function Search() {
           )
           .then(res => {
             setSearchResults(res.data.results);
+            setIsSearch(true);
           });
       } catch (err) {
         console.log(err);
       }
     }
-  }, [search, setSearchResults, APIKEY]);
+  }, [search, setSearchResults, APIKEY, setIsSearch]);
 
   console.log(searchResults);
   return (
