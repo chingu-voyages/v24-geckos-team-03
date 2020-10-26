@@ -19,10 +19,12 @@ function MovieDetails(props) {
   const { APIKEY } = useContext(Context);
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
+  const [movieCredits, setMovieCredits] = useState(null);
 
   useEffect(() => {
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
+      setMovieCredits(null); 
       try {
         axios
           .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`)
@@ -32,8 +34,21 @@ function MovieDetails(props) {
       } catch (err) {
         console.log(err);
       }
+
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}`
+          )
+          .then((res) => {
+            setMovieCredits(res.data.cast);
+          });
+      } catch (err) {
+        console.log(err);
+      }
     } else {
       setMovieDetails(null);
+      setMovieCredits(null);
     }
   }, [id, APIKEY]);
 
@@ -45,7 +60,20 @@ function MovieDetails(props) {
     maximumFractionDigits: 0,
   });
 
-  //formatter.format(2500); /* $2,500.00 */
+  let castList = [];
+
+  if (movieCredits !== null) {
+    castList = movieCredits.slice(0, 20).map((castMember, index) => {
+      const { cast_id, character, name } = castMember;
+      return (
+        <Box key={cast_id}>{`${
+          name.length > 18 ? `${name.substring(0, 18)}...` : name
+        } (${
+          character.length > 10 ? `${character.substring(0, 10)}...` : character
+        })`}</Box>
+      );
+    });
+  }
 
   return (
     <>
@@ -57,6 +85,7 @@ function MovieDetails(props) {
             <ModalCloseButton />
             <ModalBody>
               <Stack>
+                <Box>Summary</Box>
                 <Box
                   p="10px"
                   borderWidth="1px"
@@ -66,12 +95,13 @@ function MovieDetails(props) {
                 >
                   {movieDetails.overview}
                 </Box>
+                <Box mt="15px">Details</Box>
                 <Grid
                   p="10px"
                   borderWidth="1px"
                   borderColor="primaryBorder"
                   rounded="lg"
-                  templateColumns="45% 45%"
+                  templateColumns="50% 50%"
                   columnGap="10px"
                   fontSize="0.8em"
                 >
@@ -94,6 +124,22 @@ function MovieDetails(props) {
                     <Box>Revenue: {formatter.format(movieDetails.revenue)}</Box>
                   )}
                 </Grid>
+                <Box mt="15px">Cast</Box>
+
+                {movieCredits !== null && (
+                  <Grid
+                    p="10px"
+                    borderWidth="1px"
+                    borderColor="primaryBorder"
+                    rounded="lg"
+                    templateColumns="50% 50%"
+                    columnGap="10px"
+                    fontSize="0.7em"
+                  >
+                    {castList}
+                  </Grid>
+                )}
+
                 <Box
                   p="10px"
                   textAlign="center"
