@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
-import {Button} from "@chakra-ui/core";
+import { Button } from "@chakra-ui/core";
 
 function Search() {
   const {
@@ -10,7 +10,8 @@ function Search() {
     search,
     searchResults,
     setIsSearch,
-    APIKEY
+    APIKEY,
+    setDefaultMovies
   } = useContext(Context);
 
   const inputEl = useRef(null);
@@ -31,6 +32,7 @@ function Search() {
           .then(res => {
             setSearchResults(res.data.results);
             setIsSearch(true);
+            setDefaultMovies(false);
           });
       } catch (err) {
         console.log(err);
@@ -43,7 +45,9 @@ function Search() {
     <div className="search-bar">
       <form onSubmit={searchSubmit}>
         <input type="text" ref={inputEl}></input>
-        <Button mx="5px" h="2em">Search Movies</Button>
+        <Button mx="5px" h="2em">
+          Search Movies
+        </Button>
       </form>
     </div>
   );

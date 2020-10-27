@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import Searchbar from "./Searchbar";
+import { Link as Links } from "react-router-dom";
+import { Context } from "../Context";
 import {
   Box,
   Flex,
@@ -7,26 +9,32 @@ import {
   Link,
   Switch,
   Heading,
-  Stack,
+  Stack
 } from "@chakra-ui/core";
 
 const NavBar = () => {
+  const { setDefaultMovies, defaultMovies } = useContext(Context);
   const clicked = () => {
-    console.log("NavBar Logo Clicked");
+    setDefaultMovies(true);
+    console.log(defaultMovies);
+    console.log("hello");
   };
   return (
     <Box className="nav-bar" bg="primaryBackground" w="100%" px={5} py={2}>
       <Stack isInline justifyContent="space-between">
         {" "}
-        <Stack isInline onClick={clicked}>
-          <Image
-            src="https://cdn1.iconfinder.com/data/icons/media-colorful-1/48/film_roll-512.png"
-            size={30}
-          />
-          <Heading as="h3" size="lg" color="logoText">
-            Daily Flix
-          </Heading>
-        </Stack>
+        <Links to="/">
+          {" "}
+          <Stack isInline onClick={clicked}>
+            <Image
+              src="https://cdn1.iconfinder.com/data/icons/media-colorful-1/48/film_roll-512.png"
+              size={30}
+            />{" "}
+            <Heading as="h3" size="lg" color="logoText">
+              Daily Flix
+            </Heading>
+          </Stack>
+        </Links>
         <Stack isInline>
           <Searchbar />
           <Switch size="sm" ml={2} />
