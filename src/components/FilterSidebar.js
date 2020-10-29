@@ -135,7 +135,7 @@ function FilterSidebar() {
     <div style={sidebar}>
       <Heading color="white">Find Movies By</Heading>
       <form onSubmit={formSubmit}>
-        <select ref={inputEl}>
+        <select ref={inputEl} style={{ marginRight: "10px" }}>
           <option>Genre</option>
           <option value="80">Comedy</option>
           <option value="28">Action</option>
@@ -143,7 +143,7 @@ function FilterSidebar() {
           <option value="16">Animation</option>
         </select>
 
-        <select ref={selectEl}>
+        <select ref={selectEl} style={{ marginRight: "10px" }}>
           <option>Year</option>
           <option>2020</option>
           <option>2019</option>
@@ -159,7 +159,7 @@ function FilterSidebar() {
           <option>2009</option>
         </select>
 
-        <button>Submit</button>
+        <button>Sub</button>
       </form>
     </div>
   );

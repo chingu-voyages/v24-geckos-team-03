@@ -19,6 +19,7 @@ function Search() {
   function searchSubmit(e) {
     e.preventDefault();
     setSearch(inputEl.current.value);
+
     setIsSearch(true);
   }
 
@@ -33,6 +34,7 @@ function Search() {
             setSearchResults(res.data.results);
             setIsSearch(true);
             setDefaultMovies(false);
+            inputEl.current.value = "";
           });
       } catch (err) {
         console.log(err);
