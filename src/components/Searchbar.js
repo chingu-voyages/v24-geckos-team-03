@@ -38,7 +38,7 @@ function Search() {
         console.log(err);
       }
     }
-  }, [search, setSearchResults, APIKEY, setIsSearch]);
+  }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
 
   console.log(searchResults);
   return (

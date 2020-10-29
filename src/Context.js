@@ -5,6 +5,7 @@ const Context = React.createContext();
 
 function ContextProvider(props) {
   const ImageUrl = "https://image.tmdb.org/t/p/w400";
+  // state checks wheither favorite movies are displaying or not
   const [isSearch, setIsSearch] = useState(false);
   const [defaultMovies, setDefaultMovies] = useState(true);
   const [search, setSearch] = useState("");
@@ -12,7 +13,7 @@ function ContextProvider(props) {
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
   useEffect(() => {
-    if (defaultMovies == true) {
+    if (defaultMovies === true) {
       try {
         axios
           .get(
