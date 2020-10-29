@@ -12,11 +12,13 @@ import {
   Stack,
   Box,
   Grid,
+  Image,
+  Text,
 } from "@chakra-ui/core";
 import axios from "axios";
 
 function MovieDetails(props) {
-  const { APIKEY } = useContext(Context);
+  const { APIKEY, ImageUrl } = useContext(Context);
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
@@ -24,10 +26,12 @@ function MovieDetails(props) {
   useEffect(() => {
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
-      setMovieCredits(null); 
+      setMovieCredits(null);
       try {
         axios
-          .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`)
+          .get( // retrieve credits object based on movie id
+            `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`
+            )
           .then((res) => {
             setMovieDetails(res.data);
           });
@@ -37,7 +41,7 @@ function MovieDetails(props) {
 
       try {
         axios
-          .get(
+          .get( // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}`
           )
           .then((res) => {
@@ -52,7 +56,7 @@ function MovieDetails(props) {
     }
   }, [id, APIKEY]);
 
-  // Create our number formatter.
+  // Create our number formatter for USD currency
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -63,23 +67,47 @@ function MovieDetails(props) {
   let castList = [];
 
   if (movieCredits !== null) {
-    castList = movieCredits.slice(0, 20).map((castMember, index) => {
-      const { cast_id, character, name } = castMember;
-      return (
-        <Box key={cast_id}>{`${
-          name.length > 18 ? `${name.substring(0, 18)}...` : name
-        } (${
-          character.length > 10 ? `${character.substring(0, 10)}...` : character
-        })`}</Box>
-      );
-    });
+    const numberOfActorsDisplayed = 10;
+    // the code beloe takes the first X objects in the movie credit array
+    // for each of these, a Box is generated with a headshot, actor name, and character
+    castList = movieCredits
+      .slice(0, numberOfActorsDisplayed)
+      .map((castMember, index) => {
+        const { cast_id, character, name, profile_path } = castMember;
+
+        return (
+          <Box key={cast_id}>
+            <Grid
+              p="3px"
+              borderWidth="1px"
+              borderColor="primaryBorder"
+              rounded="lg"
+              templateColumns="30% 70%"
+              columnGap="3px"
+            >
+              <Image
+                rounded="lg"
+                src={ImageUrl + profile_path}
+                h="80px"
+                objectFit="cover"
+              />
+              <Box p="7px">
+                {name} <br />{" "}
+                <Text fontSize="0.9em" fontStyle="italic">
+                  {character}
+                </Text>
+              </Box>
+            </Grid>
+          </Box>
+        );
+      });
   }
 
   return (
     <>
       <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        {movieDetails !== null && (
+        {movieDetails !== null && movieCredits !== null && ( // boolean && will only execute what comes next if true
           <ModalContent bg="primaryBackground" color="primaryText">
             <ModalHeader>{movieDetails.title}</ModalHeader>
             <ModalCloseButton />
@@ -128,12 +156,9 @@ function MovieDetails(props) {
 
                 {movieCredits !== null && (
                   <Grid
-                    p="10px"
-                    borderWidth="1px"
-                    borderColor="primaryBorder"
-                    rounded="lg"
                     templateColumns="50% 50%"
                     columnGap="10px"
+                    rowGap="10px"
                     fontSize="0.7em"
                   >
                     {castList}
