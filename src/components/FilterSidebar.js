@@ -12,96 +12,15 @@ function FilterSidebar() {
   const selectEl = useRef(null);
   const { setSearchResults, APIKEY, setDefaultMovies } = useContext(Context);
 
-  function genres() {
-    var genres = [
-      {
-        id: 28,
-        name: "Action"
-      },
-      {
-        id: 12,
-        name: "Adventure"
-      },
-      {
-        id: 16,
-        name: "Animation"
-      },
-      {
-        id: 35,
-        name: "Comedy"
-      },
-      {
-        id: 80,
-        name: "Crime"
-      },
-      {
-        id: 99,
-        name: "Documentary"
-      },
-      {
-        id: 18,
-        name: "Drama"
-      },
-      {
-        id: 10751,
-        name: "Family"
-      },
-      {
-        id: 14,
-        name: "Fantasy"
-      },
-      {
-        id: 36,
-        name: "History"
-      },
-      {
-        id: 27,
-        name: "Horror"
-      },
-      {
-        id: 10402,
-        name: "Music"
-      },
-      {
-        id: 9648,
-        name: "Mystery"
-      },
-      {
-        id: 10749,
-        name: "Romance"
-      },
-      {
-        id: 878,
-        name: "Science Fiction"
-      },
-      {
-        id: 10770,
-        name: "TV Movie"
-      },
-      {
-        id: 53,
-        name: "Thriller"
-      },
-      {
-        id: 10752,
-        name: "War"
-      },
-      {
-        id: 37,
-        name: "Western"
-      }
-    ];
-  }
-
   function formSubmit(e) {
     e.preventDefault();
     setSubmit(true);
     setGenre(inputEl.current.value);
     setYear(selectEl.current.value);
-    console.log("sub");
   }
 
   useEffect(() => {
+    //   Checks wheither if correct selections are submitted
     if (genre != "Genre" && year != "Year") {
       console.log("hello");
       try {
@@ -120,31 +39,72 @@ function FilterSidebar() {
     }
   }, [submit]);
 
-  console.log(year, genre);
-
   const sidebar = {
-    // position: "absolute",
-    // top: "100px",
-    // left: "50%",
-    // transform: "translate(-50%)"
     marginTop: "250px",
     textAlign: "center"
+  };
+  const filterButton = {
+    border: "none",
+    color: "black",
+    padding: "8px 32px",
+    textAlign: "center",
+    textDecoration: "none",
+    display: "inlineBlock",
+    fontSize: "16px",
+    margin: "4px 2px",
+    cursor: "pointer",
+    backgroundColor: "#2c3e50",
+    borderRadius: "30px",
+    outline: "none"
+  };
+
+  const selectStyles = {
+    marginRight: "10px",
+    position: "relative",
+
+    width: "20em",
+    height: "3em",
+    lineHeight: "3",
+    background: "#2c3e50",
+    overflow: "hidden",
+    borderRadius: ".25em",
+    padding: "0 .5em",
+    color: "#fff",
+    cursor: "pointer"
   };
 
   return (
     <div style={sidebar}>
       <Heading color="white">Find Movies By</Heading>
       <form onSubmit={formSubmit}>
-        <select ref={inputEl} style={{ marginRight: "10px" }}>
-          <option>Genre</option>
-          <option value="80">Comedy</option>
+        <select ref={inputEl} style={selectStyles}>
+          <option selected disabled>
+            Genre
+          </option>
           <option value="28">Action</option>
+
           <option value="12">Adventure</option>
           <option value="16">Animation</option>
+          <option value="35">Comedy</option>
+          <option value="80">Crime</option>
+          <option value="99">Documentary</option>
+          <option value="18">Drama</option>
+          <option value="14">Fantasy</option>
+          <option value="36">History</option>
+          <option value="10402">Music</option>
+          <option value="9648">Mystery</option>
+          <option value="10749">Romance</option>
+
+          <option value="878">Science Fiction</option>
+          <option value="10770">Tv Movie</option>
+          <option value="53">Thriller</option>
+          <option value="10752">War</option>
         </select>
 
-        <select ref={selectEl} style={{ marginRight: "10px" }}>
-          <option>Year</option>
+        <select ref={selectEl} style={selectStyles}>
+          <option selected disabled>
+            Year
+          </option>
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>
@@ -159,7 +119,7 @@ function FilterSidebar() {
           <option>2009</option>
         </select>
 
-        <button>Sub</button>
+        <button style={filterButton}>Submit</button>
       </form>
     </div>
   );
