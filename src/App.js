@@ -1,16 +1,25 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
-import { Switch, Route } from "react-router-dom";
+import {BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
+import FavoriteMovies from './pages/FavoriteMovies';
+
 
 const App = () => {
   return (
-    <div className="App">
+    <BrowserRouter>
+        <div className="App">
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <Homepage />
         </Route>
+        
+        <Route path="/favorites" component={FavoriteMovies} />
+        
+     
       </Switch>
     </div>
+    </BrowserRouter>
+
   );
 };
 

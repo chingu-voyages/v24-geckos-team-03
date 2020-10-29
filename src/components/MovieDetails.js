@@ -178,6 +178,18 @@ function MovieDetails(props) {
             </ModalBody>
 
             <ModalFooter>
+              {/* Added an Add to Favorites buttom - Erion */}
+            <Button
+                borderColor="logoText"
+                borderWidth="3px"
+                backgroundColor="primaryBackground"
+                color="logoText"
+                _hover
+                mr={3}
+                onClick={onClose}
+              >
+                Add to favorites
+              </Button>
               <Button
                 borderColor="logoText"
                 borderWidth="3px"

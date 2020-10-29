@@ -1,10 +1,11 @@
 import React from "react";
 import Searchbar from './Searchbar';
+import { Link as RouterLink } from "react-router-dom";
 import { ThemeProvider, Box, Flex, Link, Image,  Switch , Heading, Stack} from "@chakra-ui/core";
 
 const NavBar = () => {
     return (
-        <ThemeProvider>
+        
             <Box className="nav-bar"
               bg="#333"
               w="100%"
@@ -29,13 +30,14 @@ const NavBar = () => {
             </Stack>
               
             <Box float="right" mr={10}>
-              <Link px={2} color="#fff" className="link">My Favorites</Link>
+              {/* Use RouterLink as written in ChakraUI docs */}
+              <Link as={RouterLink} to="/favorites" px={2} color="#fff" className="link">My Favorites</Link>
               <Link px={2} color="#fff" className="link">Watched</Link>
               <Link px={2} color="#fff" className="link">Watch List</Link>
             </Box>
           </Box>
       
-        </ThemeProvider>
+        
     )
 }
 
