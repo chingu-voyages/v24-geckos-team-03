@@ -18,10 +18,23 @@ import {
 import axios from "axios";
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl } = useContext(Context);
+  const { APIKEY, ImageUrl, db } = useContext(Context);
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
+
+//create a handler for "add to favorites" button on the Modal.
+  const handleAddToFavorites = () => {
+    //add image and title of movies clicked to the DB
+    db.collection('favoriteMovies').add({
+      id: id,
+      movieImage: ImageUrl + movieDetails.poster_path,
+      movieTitle: movieDetails.title,
+    })
+    
+  }
+
+
 
   useEffect(() => {
     if (id !== null) {
@@ -186,7 +199,7 @@ function MovieDetails(props) {
                 color="logoText"
                 _hover
                 mr={3}
-                onClick={onClose}
+                onClick={handleAddToFavorites}
               >
                 Add to favorites
               </Button>

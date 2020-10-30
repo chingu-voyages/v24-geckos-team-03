@@ -1,7 +1,7 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
 import {BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
-import FavoriteMovies from './pages/FavoriteMovies';
+import FavoriteMoviespage from './pages/FavoriteMoviespage';
 
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
           <Homepage />
         </Route>
         
-        <Route path="/favorites" component={FavoriteMovies} />
+        <Route path="/favorites" component={FavoriteMoviespage} />
         
      
       </Switch>

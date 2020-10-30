@@ -4,14 +4,13 @@ import Grid from "../components/Grid";
 import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
 import NavBar from "../components/NavBar";
+import { Localbase } from 'localbase';
+import FavoriteMovies from './../components/FavoriteMovies';
 
 
-const FavoriteMovies = () => {
 
-    //create a handler for "add to favorites" button on the Modal.
-const handleAddToFavorites = () => {
-    
-}
+const FavoriteMoviespage = () => {
+
 const headerStyles = {
     position: "absolute",
     top: "100px",
@@ -31,7 +30,7 @@ const headerStyles = {
     >
       <h1 style={headerStyles}>Favorite Movies</h1>
       <NavBar />
-      
+      <FavoriteMovies />
     </Box>
   );
          
@@ -39,4 +38,4 @@ const headerStyles = {
     
 }
 
-export default FavoriteMovies;
+export default FavoriteMoviespage;
