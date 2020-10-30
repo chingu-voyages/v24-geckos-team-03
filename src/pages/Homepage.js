@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Box } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
+import FilterSidebar from "../components/FilterSidebar";
+
 import { Context } from "../Context";
 
 function Homepage() {
@@ -21,7 +23,7 @@ function Homepage() {
       h="100vh"
       w="100vw"
       style={{
-        overflow: "scroll",
+        overflow: "scroll"
       }}
     >
       <h1 style={headerStyles}>{isSearch ? null : "Popular Movies"}</h1>

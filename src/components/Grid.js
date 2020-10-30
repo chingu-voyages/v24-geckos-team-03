@@ -16,7 +16,7 @@ function Grid() {
 
     margin: "0 auto",
 
-    marginTop: "11%",
+    marginTop: "5%",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-evenly"

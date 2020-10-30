@@ -5,19 +5,32 @@ import Movieboxes from "../components/Movieboxes";
 const FavoriteMovies = () => {
     const {allFavMovies} = useContext(Context);
      
+    const gridStyles = {
+        maxWidth: "1200px",
+        margin: "0 auto",
+        marginTop: "11%",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly"
+      };
+
     return (
         <>
+            <div className="container" style={gridStyles}>
             {allFavMovies.map(movie => {
-                return (
-                    <Movieboxes
-                        key={movie.id}
-                        title={movie.movieTitle}
-                        imageSrc={movie.movieImage}
+                    return (
+                        <Movieboxes
+                            key={movie.id}
+                            title={movie.movieTitle}
+                            imageSrc={movie.movieImage}
+                        
+                        />
+                    )
                     
-                    />
-                )
-                
-            })}
+                })}
+        </div>
+
+       
            
         </>
     )
@@ -28,7 +41,7 @@ const FavoriteMovies = () => {
 //     imageSrc={movie.movieImage}
     
 // />
-        
+   
 
     
 export default FavoriteMovies;
