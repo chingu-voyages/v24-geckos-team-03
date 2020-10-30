@@ -42,7 +42,6 @@ function Search() {
     }
   }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
 
-  console.log(searchResults);
   return (
     <div className="search-bar">
       <form onSubmit={searchSubmit}>
