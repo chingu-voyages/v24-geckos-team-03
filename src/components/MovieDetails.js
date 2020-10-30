@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../Context";
+import { Link } from "react-router-dom";
 import {
   Modal,
   ModalOverlay,
@@ -13,7 +14,7 @@ import {
   Box,
   Grid,
   Image,
-  Text,
+  Text
 } from "@chakra-ui/core";
 import axios from "axios";
 
@@ -29,10 +30,11 @@ function MovieDetails(props) {
       setMovieCredits(null);
       try {
         axios
-          .get( // retrieve credits object based on movie id
+          .get(
+            // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`
-            )
-          .then((res) => {
+          )
+          .then(res => {
             setMovieDetails(res.data);
           });
       } catch (err) {
@@ -41,10 +43,11 @@ function MovieDetails(props) {
 
       try {
         axios
-          .get( // retrieve credits object based on movie id
+          .get(
+            // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}`
           )
-          .then((res) => {
+          .then(res => {
             setMovieCredits(res.data.cast);
           });
       } catch (err) {
@@ -61,7 +64,7 @@ function MovieDetails(props) {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    maximumFractionDigits: 0
   });
 
   let castList = [];
@@ -107,91 +110,108 @@ function MovieDetails(props) {
     <>
       <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        {movieDetails !== null && movieCredits !== null && ( // boolean && will only execute what comes next if true
-          <ModalContent bg="primaryBackground" color="primaryText">
-            <ModalHeader>{movieDetails.title}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Stack>
-                <Box>Summary</Box>
-                <Box
-                  p="10px"
-                  borderWidth="1px"
-                  borderColor="primaryBorder"
-                  rounded="lg"
-                  fontSize="0.9em"
-                >
-                  {movieDetails.overview}
-                </Box>
-                <Box mt="15px">Details</Box>
-                <Grid
-                  p="10px"
-                  borderWidth="1px"
-                  borderColor="primaryBorder"
-                  rounded="lg"
-                  templateColumns="50% 50%"
-                  columnGap="10px"
-                  fontSize="0.8em"
-                >
-                  <Box>
-                    Runtime:{" "}
-                    {movieDetails.runtime === 0
-                      ? "?"
-                      : `${movieDetails.runtime} minutes`}
+        {movieDetails !== null &&
+        movieCredits !== null && ( // boolean && will only execute what comes next if true
+            <ModalContent bg="primaryBackground" color="primaryText">
+              <ModalHeader>{movieDetails.title}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Stack>
+                  <Box>Summary</Box>
+                  <Box
+                    p="10px"
+                    borderWidth="1px"
+                    borderColor="primaryBorder"
+                    rounded="lg"
+                    fontSize="0.9em"
+                  >
+                    {movieDetails.overview}
                   </Box>
-                  <Box>Popularity: {movieDetails.popularity}</Box>
-                  <Box>Status: {movieDetails.status}</Box>
-                  <Box>
-                    Release Date:{" "}
-                    {new Date(movieDetails.release_date).toLocaleDateString()}
-                  </Box>
-                  {movieDetails.budget !== 0 && (
-                    <Box>Budget: {formatter.format(movieDetails.budget)}</Box>
-                  )}
-                  {movieDetails.revenue !== 0 && (
-                    <Box>Revenue: {formatter.format(movieDetails.revenue)}</Box>
-                  )}
-                </Grid>
-                <Box mt="15px">Cast</Box>
-
-                {movieCredits !== null && (
+                  <Box mt="15px">Details</Box>
                   <Grid
+                    p="10px"
+                    borderWidth="1px"
+                    borderColor="primaryBorder"
+                    rounded="lg"
                     templateColumns="50% 50%"
                     columnGap="10px"
-                    rowGap="10px"
-                    fontSize="0.7em"
+                    fontSize="0.8em"
                   >
-                    {castList}
+                    <Box>
+                      Runtime:{" "}
+                      {movieDetails.runtime === 0
+                        ? "?"
+                        : `${movieDetails.runtime} minutes`}
+                    </Box>
+                    <Box>Popularity: {movieDetails.popularity}</Box>
+                    <Box>Status: {movieDetails.status}</Box>
+                    <Box>
+                      Release Date:{" "}
+                      {new Date(movieDetails.release_date).toLocaleDateString()}
+                    </Box>
+                    {movieDetails.budget !== 0 && (
+                      <Box>Budget: {formatter.format(movieDetails.budget)}</Box>
+                    )}
+                    {movieDetails.revenue !== 0 && (
+                      <Box>
+                        Revenue: {formatter.format(movieDetails.revenue)}
+                      </Box>
+                    )}
                   </Grid>
-                )}
+                  <Box mt="15px">Cast</Box>
 
-                <Box
-                  p="10px"
-                  textAlign="center"
+                  {movieCredits !== null && (
+                    <Grid
+                      templateColumns="50% 50%"
+                      columnGap="10px"
+                      rowGap="10px"
+                      fontSize="0.7em"
+                    >
+                      {castList}
+                    </Grid>
+                  )}
+
+                  <Box
+                    p="10px"
+                    textAlign="center"
+                    color="logoText"
+                    fontStyle="italic"
+                    fontSize="1.1em"
+                  >
+                    {movieDetails.tagline}
+                  </Box>
+                </Stack>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor="primaryBackground"
                   color="logoText"
-                  fontStyle="italic"
-                  fontSize="1.1em"
+                  _hover
+                  mr={3}
+                  onClick={onClose}
                 >
-                  {movieDetails.tagline}
-                </Box>
-              </Stack>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button
-                borderColor="logoText"
-                borderWidth="3px"
-                backgroundColor="primaryBackground"
-                color="logoText"
-                _hover
-                mr={3}
-                onClick={onClose}
-              >
-                Close
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        )}
+                  Close
+                </Button>
+                <Link to={`/${id}`}>
+                  {" "}
+                  <Button
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3}
+                    onClick={onClose}
+                  >
+                    More Details
+                  </Button>
+                </Link>
+              </ModalFooter>
+            </ModalContent>
+          )}
       </Modal>
     </>
   );
