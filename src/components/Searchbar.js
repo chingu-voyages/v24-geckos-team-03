@@ -40,6 +40,8 @@ function Search() {
         console.log(err);
       }
     }
+
+    console.log(searchResults);
   }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
 
   return (
