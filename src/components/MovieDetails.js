@@ -184,17 +184,6 @@ function MovieDetails(props) {
               </ModalBody>
 
               <ModalFooter>
-                <Button
-                  borderColor="logoText"
-                  borderWidth="3px"
-                  backgroundColor="primaryBackground"
-                  color="logoText"
-                  _hover
-                  mr={3}
-                  onClick={onClose}
-                >
-                  Close
-                </Button>
                 <Link to={`/${id}`}>
                   {" "}
                   <Button
@@ -207,6 +196,17 @@ function MovieDetails(props) {
                     onClick={onClose}
                   >
                     More Details
+                  </Button>
+                  <Button
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3}
+                    onClick={onClose}
+                  >
+                    Close
                   </Button>
                 </Link>
               </ModalFooter>
