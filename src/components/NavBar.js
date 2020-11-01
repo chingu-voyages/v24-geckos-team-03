@@ -30,12 +30,11 @@ const NavBar = () => {
         </Stack>
         <Box float="right" marginRight="198px" pt="4px">
             {/* Use RouterLink as written in ChakraUI docs */}
-            <Link as={RouterLink} to="/favorites" px={2} color="#fff" className="link">My Favorites</Link>
-            <Link px={2} color="#fff" className="link">Watch List</Link>
+            <Link textDecoration="none" _hover={{color : "#49c3fd"}} as={RouterLink} to="/favorites" px={2} color="#fff" className="link">My Favorites</Link>
+            <Link _hover={{color : "#49c3fd"}} className="navbar-links" px={2} color="#fff" className="link">Watch List</Link>
         </Box>
       </Box>
       
-        
     )
 }
 

@@ -4,7 +4,7 @@ import Movieboxes from "../components/Movieboxes";
 
 const FavoriteMovies = () => {
     const {allFavMovies} = useContext(Context);
-     
+
     const gridStyles = {
         maxWidth: "1200px",
         marginTop: "10%",
@@ -31,6 +31,7 @@ const FavoriteMovies = () => {
             </div>
         </>
     )
+                      
 }
 //     <Movieboxes
 //     key={movie.id}

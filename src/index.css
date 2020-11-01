@@ -11,12 +11,14 @@ body {
   text-align: center;
 }
 
+/* Navbar styles */
 .link {
   font-size: 90%;
   font-weight: 400;
 }
-/* Page Headings styles */
 
+
+/* Page Headings styles */
 .page-heading {
   color: white;
   font-size: 200%;
