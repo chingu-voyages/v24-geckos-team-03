@@ -3,12 +3,9 @@ import axios from "axios";
 import { Context } from "../Context";
 import { Box, Heading, Image, Text, Flex } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-import { flex } from "styled-system";
 
 function MovieDetailsBody(props) {
-  const { APIKEY, ImageUrl, setPersonId, setDefaultMovies } = useContext(
-    Context
-  );
+  const { APIKEY, ImageUrl, setPersonId } = useContext(Context);
 
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
@@ -65,7 +62,7 @@ function MovieDetailsBody(props) {
   if (movieTrailers.length > 0) {
     movieTrailersboxes = movieTrailers.map(trailer => {
       return (
-        <Box mr="10px">
+        <Box mr="10px" key={trailer.id}>
           <iframe
             width="420"
             height="345"
@@ -172,17 +169,17 @@ function MovieDetailsBody(props) {
       <div style={detailBody}>
         <div style={container}>
           <Box paddingY="30px">
-            <Heading>Summary</Heading>
+            <Heading pb="10px">Summary</Heading>
             <p>{movieData.overview}</p>
           </Box>
 
           <Box paddingY="30px">
-            <Heading> Cast</Heading>
+            <Heading pb="10px"> Cast</Heading>
             <Flex>{castList}</Flex>
           </Box>
 
           <Box paddingTop="30px">
-            <Heading>Trailers</Heading>
+            <Heading pb="10px">Trailers</Heading>
             <Flex wrap="nowrap" overflowX="auto" justifyContent="center">
               {movieTrailersboxes}
             </Flex>
