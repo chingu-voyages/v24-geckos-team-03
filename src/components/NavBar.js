@@ -19,9 +19,9 @@ const NavBar = () => {
           <Stack isInline onClick={clicked}>
             <Image
               src="https://cdn1.iconfinder.com/data/icons/media-colorful-1/48/film_roll-512.png"
-              size={30}
+              size={46}
             />
-            <Heading as="h3" size="lg" color="#49c3fd">
+            <Heading as="h3" size="xl" color="#49c3fd" fontFamily="Nunito">
               Daily Flix
             </Heading>
           </Stack>
