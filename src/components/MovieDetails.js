@@ -101,6 +101,7 @@ function searchByActor(person_id) {
             >
               <Image
                 onClick={()=>searchByActor(person_id)}
+                cursor="pointer"
                 rounded="lg"
                 src={ImageUrl + profile_path}
                 h="80px"
