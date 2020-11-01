@@ -11,14 +11,14 @@ import FavoriteMovies from './../components/FavoriteMovies';
 
 const FavoriteMoviespage = () => {
 
-const headerStyles = {
-    position: "absolute",
-    top: "100px",
-    color: "red",
-    left: "150px",
-    fontSize: "25px",
-    fontWeight: "400"
-  };
+// const headerStyles = {
+    // position: "absolute",
+    // top: "100px",
+    // color: "red",
+    // left: "150px",
+    // fontSize: "25px",
+    // fontWeight: "400"
+//   };
   return (
     <Box
       bg="primaryBackground"
@@ -28,10 +28,15 @@ const headerStyles = {
         overflow: "scroll",
       }}
     >
-      <h1 style={headerStyles}>Favorite Movies</h1>
       <NavBar />
-      <FavoriteMovies />
+      <Box>
+        <h1 className="page-heading">Favorite Movies</h1>
+      </Box>
+      <Box className="movie-grid">
+        <FavoriteMovies />
+      </Box>
     </Box>
+  
   );
          
         

@@ -43,16 +43,26 @@ function Search() {
   }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
 
   console.log(searchResults);
-  return (
-    <div className="search-bar">
+  // return (
+  //   <div className="search-bar">
+  //     <form onSubmit={searchSubmit}>
+  //       <input type="text" ref={inputEl} placeholder="Search for a movie"></input>
+  //       <Button mx="5px" h="2em">
+  //         Search Movies
+  //       </Button>
+  //     </form>
+  //   </div>
+  // );
+    return (
+      <div className="search">
       <form onSubmit={searchSubmit}>
-        <input type="text" ref={inputEl}></input>
-        <Button mx="5px" h="2em">
-          Search Movies
-        </Button>
+        <input type="text" name="search" ref={inputEl} placeholder="Search movie here!"></input>
+        <button type="submit" name="button">
+          <i className="fas fa-search"></i>
+        </button>
       </form>
     </div>
-  );
+    );
 }
 
 export default Search;

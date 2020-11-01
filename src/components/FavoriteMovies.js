@@ -7,8 +7,8 @@ const FavoriteMovies = () => {
      
     const gridStyles = {
         maxWidth: "1200px",
+        marginTop: "10%",
         margin: "0 auto",
-        marginTop: "11%",
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "space-evenly"
@@ -17,21 +17,18 @@ const FavoriteMovies = () => {
     return (
         <>
             <div className="container" style={gridStyles}>
-            {allFavMovies.map(movie => {
-                    return (
-                        <Movieboxes
-                            key={movie.id}
-                            title={movie.movieTitle}
-                            imageSrc={movie.movieImage}
+                {allFavMovies.map(movie => {
+                        return (
+                            <Movieboxes
+                                key={movie.id}
+                                title={movie.movieTitle}
+                                imageSrc={movie.movieImage}
+                            
+                            />
+                        )
                         
-                        />
-                    )
-                    
-                })}
-        </div>
-
-       
-           
+                    })}
+            </div>
         </>
     )
 }

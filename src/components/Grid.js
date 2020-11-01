@@ -13,9 +13,7 @@ function Grid() {
 
   const gridStyles = {
     maxWidth: "1200px",
-
     margin: "0 auto",
-
     marginTop: "5%",
     display: "flex",
     flexWrap: "wrap",
