@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import Searchbar from './Searchbar';
 import { Link as RouterLink } from "react-router-dom";
 import { ThemeProvider, Box, Flex, Link, Image,  Switch , Heading, Stack} from "@chakra-ui/core";
+import { Context } from "../Context";
 
 const NavBar = () => {
-    return (
-    
-        <Box className="nav-bar"
-          bg="#333"
-          w="100%"
-          px={5}
-          py={2}
-        >
-      
-        <Stack isInline justifyContent="space-between">
-          <Stack isInline>
+  const { setDefaultMovies, defaultMovies, setPersonId } = useContext(Context);
+  const clicked = () => {
+    setPersonId(null);
+    setDefaultMovies(true);
+    console.log(defaultMovies);
+    console.log("hello");
+  };
+  return (
+    <Box className="nav-bar" bg="primaryBackground" w="100%" px={5} py={2}>
+      <Stack isInline justifyContent="space-between">
+        {" "}
+        <Link to="/"></Link>
+          {" "}
+          <Stack isInline onClick={clicked}>
             <Image
               src="https://cdn1.iconfinder.com/data/icons/media-colorful-1/48/film_roll-512.png"
               size={30}
