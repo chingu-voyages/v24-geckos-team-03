@@ -19,10 +19,18 @@ import {
 import axios from "axios";
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl } = useContext(Context);
+  const { APIKEY, ImageUrl, setPersonId, setDefaultMovies } = useContext(
+    Context
+  );
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
+
+  function searchByActor(person_id) {
+    setPersonId(person_id);
+    setDefaultMovies(true);
+    onClose();
+  }
 
   useEffect(() => {
     if (id !== null) {
@@ -76,7 +84,13 @@ function MovieDetails(props) {
     castList = movieCredits
       .slice(0, numberOfActorsDisplayed)
       .map((castMember, index) => {
-        const { cast_id, character, name, profile_path } = castMember;
+        const {
+          cast_id,
+          character,
+          name,
+          profile_path,
+          id: person_id
+        } = castMember;
 
         return (
           <Box key={cast_id}>
@@ -89,6 +103,8 @@ function MovieDetails(props) {
               columnGap="3px"
             >
               <Image
+                onClick={() => searchByActor(person_id)}
+                cursor="pointer"
                 rounded="lg"
                 src={ImageUrl + profile_path}
                 h="80px"

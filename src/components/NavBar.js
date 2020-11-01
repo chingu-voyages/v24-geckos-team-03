@@ -13,8 +13,9 @@ import {
 } from "@chakra-ui/core";
 
 const NavBar = () => {
-  const { setDefaultMovies, defaultMovies } = useContext(Context);
+  const { setDefaultMovies, defaultMovies, setPersonId } = useContext(Context);
   const clicked = () => {
+    setPersonId(null);
     setDefaultMovies(true);
     console.log(defaultMovies);
     console.log("hello");
