@@ -18,10 +18,22 @@ import {
 import axios from "axios";
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl, setPersonId, setDefaultMovies } = useContext(Context);
+  const { APIKEY, ImageUrl, setPersonId, setDefaultMovies, db } = useContext(Context);
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
+
+//create a handler for "add to favorites" button on the Modal.
+  const handleAddToFavorites = () => {
+    //add image and title of movies clicked to the DB
+    db.collection('favoriteMovies').add({
+      id: id,
+      movieImage: ImageUrl + movieDetails.poster_path,
+      movieTitle: movieDetails.title,
+    })
+    
+  }
+
 
 function searchByActor(person_id) {
   setPersonId(person_id);
@@ -197,6 +209,18 @@ function searchByActor(person_id) {
               </ModalBody>
 
               <ModalFooter>
+                 {/* Added an Add to Favorites buttom - Erion */}
+            <Button
+                borderColor="logoText"
+                borderWidth="3px"
+                backgroundColor="primaryBackground"
+                color="logoText"
+                _hover
+                mr={3}
+                onClick={handleAddToFavorites}
+              >
+                Add to favorites
+              </Button>
                 <Button
                   borderColor="logoText"
                   borderWidth="3px"

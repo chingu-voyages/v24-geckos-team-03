@@ -36,6 +36,7 @@ function Homepage() {
           : `Movies starring ${personName}`}
       </h1>
       <NavBar />
+      <FilterSidebar />
       <Grid />
     </Box>
   );

@@ -15,6 +15,15 @@ function ContextProvider(props) {
   const [personName, setPersonName] = useState("");
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
+//Create a LOCAL DATABASE using localbase imported. 
+  let db = new Localbase('db');
+  const [allFavMovies, setAllFavMovies] = useState([]);
+//Get data from the DB and store all favotired movies to an array
+  useEffect(() => {
+    db.collection('favoriteMovies').get().then(movies =>{
+      setAllFavMovies(movies);
+    });
+  }, []);
   // check if the actor query string is populated
   //const params = new URLSearchParams(window.location.search);
   //const person_id = params.get("actor");
@@ -80,6 +89,8 @@ function ContextProvider(props) {
         isSearch,
         setIsSearch,
         APIKEY,
+        db,
+        allFavMovies,
         setDefaultMovies,
         personName,
         setPersonId
