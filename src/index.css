@@ -74,6 +74,9 @@ body {
   margin-right: 65px;
 }
 
+.search input:focus::placeholder {
+  color: transparent;
+}
 .search input::placeholder{
   color: #888;
   opacity: 1; /* ONLY FOR MOZILLA USERS */

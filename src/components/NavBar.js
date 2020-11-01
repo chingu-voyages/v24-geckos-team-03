@@ -15,9 +15,7 @@ const NavBar = () => {
   return (
     <Box className="nav-bar" bg="primaryBackground" w="100%" px={5} py={2}>
       <Stack isInline justifyContent="space-between">
-        {" "}
-        <Link to="/"></Link>
-          {" "}
+        <Link as={RouterLink} to="/">
           <Stack isInline onClick={clicked}>
             <Image
               src="https://cdn1.iconfinder.com/data/icons/media-colorful-1/48/film_roll-512.png"
@@ -27,6 +25,7 @@ const NavBar = () => {
               Daily Flix
             </Heading>
           </Stack>
+          </Link>
           <Stack isInline>
             <Searchbar />
             <Switch size="sm" ml={2}/>
