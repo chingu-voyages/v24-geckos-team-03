@@ -12,7 +12,7 @@ const App = () => {
         </Route>
       </Switch>
       <Switch>
-        <Route path="/:movieId">
+        <Route path="/moviedetailspage/:movieId">
           <MovieDetailsPage />
         </Route>
       </Switch>

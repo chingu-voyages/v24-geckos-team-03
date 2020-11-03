@@ -200,7 +200,7 @@ function MovieDetails(props) {
               </ModalBody>
 
               <ModalFooter>
-                <Link to={`/${id}`}>
+                <Link to={`/moviedetailspage/${id}`}>
                   {" "}
                   <Button
                     borderColor="logoText"
@@ -213,18 +213,18 @@ function MovieDetails(props) {
                   >
                     More Details
                   </Button>
-                  <Button
-                    borderColor="logoText"
-                    borderWidth="3px"
-                    backgroundColor="primaryBackground"
-                    color="logoText"
-                    _hover
-                    mr={3}
-                    onClick={onClose}
-                  >
-                    Close
-                  </Button>
                 </Link>
+                <Button
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor="primaryBackground"
+                  color="logoText"
+                  _hover
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Close
+                </Button>
               </ModalFooter>
             </ModalContent>
           )}
