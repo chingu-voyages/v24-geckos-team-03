@@ -21,7 +21,14 @@ const NavBar = () => {
     console.log("hello");
   };
   return (
-    <Box className="nav-bar" bg="primaryBackground" w="100%" px={5} py={2}>
+    <Box
+      className="nav-bar"
+      style={{ top: 0 }}
+      bg="primaryBackground"
+      w="100%"
+      px={5}
+      py={2}
+    >
       <Stack isInline justifyContent="space-between">
         {" "}
         <Links to="/">

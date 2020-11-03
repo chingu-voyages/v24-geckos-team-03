@@ -40,9 +40,10 @@ function Search() {
         console.log(err);
       }
     }
+
+    console.log(searchResults);
   }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
 
-  console.log(searchResults);
   return (
     <div className="search-bar">
       <form onSubmit={searchSubmit}>

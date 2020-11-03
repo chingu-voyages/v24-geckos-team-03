@@ -5,11 +5,12 @@ const Context = React.createContext();
 
 function ContextProvider(props) {
   const ImageUrl = "https://image.tmdb.org/t/p/w400";
-  // state checks wheither favorite movies are displaying or not
+
   const [isSearch, setIsSearch] = useState(false);
-  const [defaultMovies, setDefaultMovies] = useState(true);
-  const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [defaultMovies, setDefaultMovies] = useState(true); // state checks wheither favorite movies are displaying or not
+  const [search, setSearch] = useState(""); // save search input
+  const [searchResults, setSearchResults] = useState([]); // saves search results
+
   const [personId, setPersonId] = useState(null);
   const [personName, setPersonName] = useState("");
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
@@ -30,7 +31,7 @@ function ContextProvider(props) {
               // retrieve actor's name based on personId
               `https://api.themoviedb.org/3/person/${personId}?api_key=${APIKEY}`
             )
-            .then((res) => {
+            .then(res => {
               setPersonName(res.data.name);
             });
 
@@ -39,7 +40,7 @@ function ContextProvider(props) {
               `https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${APIKEY}`
               // note: although this api is different from trending movies, it contains the id, title, poster fields we use
             )
-            .then((res) => {
+            .then(res => {
               setIsSearch(false); // need to clear this so heading shows up
               setSearchResults(res.data.cast);
               setDefaultMovies(true);
@@ -57,7 +58,7 @@ function ContextProvider(props) {
             .get(
               `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
             )
-            .then((res) => {
+            .then(res => {
               setSearchResults(res.data.results);
               setDefaultMovies(true);
             });
