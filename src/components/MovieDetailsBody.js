@@ -4,6 +4,8 @@ import { Context } from "../Context";
 import { Box, Heading, Image, Text, Flex } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 
+import Slider from "react-slick";
+
 function MovieDetailsBody(props) {
   const { APIKEY, ImageUrl, setPersonId } = useContext(Context);
 
@@ -23,37 +25,36 @@ function MovieDetailsBody(props) {
     const numberOfActorsDisplayed = 10;
     // the code beloe takes the first X objects in the movie credit array
     // for each of these, a Box is generated with a headshot, actor name, and character
-    castList = movieCast
-      .slice(0, numberOfActorsDisplayed)
-      .map((castMember, index) => {
-        const {
-          cast_id,
-          character,
-          name,
-          profile_path,
-          id: person_id
-        } = castMember;
+    castList = movieCast.map((castMember, index) => {
+      const {
+        cast_id,
+        character,
+        name,
+        profile_path,
+        id: person_id
+      } = castMember;
 
-        return (
-          <Box key={cast_id} textAlign="center">
-            <Image
-              m="0 auto"
-              // onClick={() => searchByActor(person_id)} Will implement in next week MVP
-              cursor="pointer"
-              rounded="lg"
-              src={ImageUrl + profile_path}
-              h="80px"
-              objectFit="cover"
-            />
-            <Box p="7px">
-              {name} <br />{" "}
-              <Text fontSize="0.9em" fontStyle="italic">
-                {character}
-              </Text>
-            </Box>
+      return (
+        <Box key={cast_id} textAlign="center" marginRight="60px">
+          <Image
+            m="0 auto"
+            // onClick={() => searchByActor(person_id)} Will implement in next week MVP
+            cursor="pointer"
+            rounded="lg"
+            src={ImageUrl + profile_path}
+            objectFit="cover"
+            width="100px"
+            maxWidth="none"
+          />
+          <Box p="7px">
+            {name} <br />{" "}
+            <Text fontSize="0.9em" fontStyle="italic">
+              {character}
+            </Text>
           </Box>
-        );
-      });
+        </Box>
+      );
+    });
   }
 
   // movie trailer box creator
@@ -72,6 +73,14 @@ function MovieDetailsBody(props) {
       );
     });
   }
+  // Carousel settiings
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  };
 
   // Id is passed from MovieDetails component
   const { movieId } = props;
@@ -118,7 +127,8 @@ function MovieDetailsBody(props) {
   const detailBody = {
     backgroundColor: "#333333",
     height: "100vh",
-    width: "100vw"
+    width: "100vw",
+    overflowY: "scroll"
   };
 
   const imageContainer = {
@@ -175,7 +185,10 @@ function MovieDetailsBody(props) {
 
           <Box paddingY="30px">
             <Heading pb="10px"> Cast</Heading>
-            <Flex>{castList}</Flex>
+
+            <Flex wrap="nowrap" overflowX="auto">
+              {castList}
+            </Flex>
           </Box>
 
           <Box paddingTop="30px">
