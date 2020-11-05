@@ -1,10 +1,9 @@
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
-import { Context } from "../Context";
-import { Box, Heading, Image, Text, Flex } from "@chakra-ui/core";
+import { Context } from "./../../Context";
+import { Box, Heading, Image, Text, Flex, Spinner } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-
-import Slider from "react-slick";
+import "./MovieDetailsBody.css";
 
 function MovieDetailsBody(props) {
   const { APIKEY, ImageUrl, setPersonId } = useContext(Context);
@@ -12,11 +11,15 @@ function MovieDetailsBody(props) {
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
   const [movieTrailers, setMovieTrailers] = useState([]);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   function searchByActor(person_id) {
     setPersonId(person_id);
   }
 
+  setTimeout(() => {
+    setIsPageLoaded(true);
+  }, 2000);
   const youtubeLink = `https://www.youtube.com/embed/`;
   let castList = []; // Holds all the movie cast headshots/name/
 
@@ -135,8 +138,7 @@ function MovieDetailsBody(props) {
     height: "100vh",
     width: "100vw",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${movieData.backdrop_path})`,
-    backgroundSize: "cover",
-    position: "relative"
+    backgroundSize: "cover"
   };
 
   const container = {
@@ -144,8 +146,30 @@ function MovieDetailsBody(props) {
     margin: "0 auto",
     color: "white"
   };
+
+  const pageSpinner = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+
+    transform: "translate(-50%, -50%)"
+  };
   return (
     <>
+      <div>
+        {isPageLoaded ? null : (
+          <div className="loadingScreen">
+            <Spinner
+              style={pageSpinner}
+              thickness="3px"
+              speed="0.7s"
+              emptyColor="gray.200"
+              color="black"
+              size="100px"
+            />
+          </div>
+        )}
+      </div>
       <div style={imageContainer}>
         <div
           style={{
