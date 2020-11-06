@@ -7,7 +7,7 @@ import FilterSidebar from "../components/FilterSidebar";
 import { Context } from "../Context";
 
 function Homepage() {
-  const { isSearch } = useContext(Context);
+  const { isSearch, searchResults } = useContext(Context);
 
   const headerStyles = {
     position: "absolute",
@@ -30,7 +30,7 @@ function Homepage() {
       <h1 style={headerStyles}>{isSearch ? null : "Popular Movies"}</h1>
       <NavBar />
       <FilterSidebar />
-      <Grid />
+      <Grid searchResults={searchResults} />
     </Box>
   );
 }

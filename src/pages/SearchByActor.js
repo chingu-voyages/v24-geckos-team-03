@@ -1,19 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Box } from "@chakra-ui/core";
+import { Box, Image, Grid as ChakraGrid } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
-import FilterSidebar from "../components/FilterSidebar";
+//import FilterSidebar from "../components/FilterSidebar";
 import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
 
 function SearchByActor() {
-  const { APIKEY, setSearchResults} = useContext(Context);
+  const { APIKEY, ImageUrl } = useContext(Context);
 
   const { personId } = useParams();
-  //const personId = 1813;
 
-  const [personName, setPersonName] = useState("");
+  const [personDetails, setPersonDetails] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (personId !== null) {
@@ -24,7 +24,7 @@ function SearchByActor() {
             `https://api.themoviedb.org/3/person/${personId}?api_key=${APIKEY}`
           )
           .then((res) => {
-            setPersonName(res.data.name);
+            setPersonDetails(res.data);
           });
 
         axios
@@ -59,12 +59,41 @@ function SearchByActor() {
         overflow: "scroll",
       }}
     >
-      <h1 style={headerStyles}>
-        {`Movies starring ${personName}`}
-      </h1>
       <NavBar />
-      <FilterSidebar />
-      <Grid />
+
+      {personDetails !== null && (
+        <>
+          <h1
+            style={headerStyles}
+          >{`${personDetails.name}`}</h1>
+          <br />
+          <br />
+          <br />
+          <br />
+          <ChakraGrid
+            m="100px"
+            borderWidth="1px"
+            borderColor="primaryBorder"
+            rounded="lg"
+            templateColumns="auto auto"
+          >
+            <Image
+              m="10px"
+              src={ImageUrl + personDetails.profile_path}
+              h="220px"
+              objectFit="cover"
+              rounded="lg"
+            />
+            <Box
+              m="10px"
+              color="primaryText"
+              fontSize="0.8em"
+              >{personDetails.biography}</Box>
+          </ChakraGrid>
+
+          {searchResults.length > 0 && <Grid searchResults={searchResults} />}
+        </>
+      )}
     </Box>
   );
 }
