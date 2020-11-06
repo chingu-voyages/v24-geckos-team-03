@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className="App">
       <Switch>
-      <Route path="/moviedetails/:movieId">
+      <Route path="/moviedetailspage/:movieId">
           <MovieDetailsPage />
         </Route>
         <Route path="/actor/:personId">
