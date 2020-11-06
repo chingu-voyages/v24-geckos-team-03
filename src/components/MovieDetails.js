@@ -14,23 +14,17 @@ import {
   Box,
   Grid,
   Image,
-  Text
+  Text,
 } from "@chakra-ui/core";
 import axios from "axios";
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl, setPersonId, setDefaultMovies } = useContext(
+  const { APIKEY, ImageUrl } = useContext(
     Context
   );
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
-
-  function searchByActor(person_id) {
-    setPersonId(person_id);
-    setDefaultMovies(true);
-    onClose();
-  }
 
   useEffect(() => {
     if (id !== null) {
@@ -42,7 +36,7 @@ function MovieDetails(props) {
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`
           )
-          .then(res => {
+          .then((res) => {
             setMovieDetails(res.data);
           });
       } catch (err) {
@@ -55,7 +49,7 @@ function MovieDetails(props) {
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}`
           )
-          .then(res => {
+          .then((res) => {
             setMovieCredits(res.data.cast);
           });
       } catch (err) {
@@ -72,7 +66,7 @@ function MovieDetails(props) {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   });
 
   let castList = [];
@@ -89,7 +83,7 @@ function MovieDetails(props) {
           character,
           name,
           profile_path,
-          id: person_id
+          id: person_id,
         } = castMember;
 
         return (
@@ -102,14 +96,15 @@ function MovieDetails(props) {
               templateColumns="30% 70%"
               columnGap="3px"
             >
-              <Image
-                onClick={() => searchByActor(person_id)}
-                cursor="pointer"
-                rounded="lg"
-                src={ImageUrl + profile_path}
-                h="80px"
-                objectFit="cover"
-              />
+              <Link to={`/actor/${person_id}`}>
+                <Image
+                  cursor="pointer"
+                  rounded="lg"
+                  src={ImageUrl + profile_path}
+                  h="80px"
+                  objectFit="cover"
+                />
+              </Link>
               <Box p="7px">
                 {name} <br />{" "}
                 <Text fontSize="0.9em" fontStyle="italic">
@@ -127,7 +122,7 @@ function MovieDetails(props) {
       <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         {movieDetails !== null &&
-        movieCredits !== null && ( // boolean && will only execute what comes next if true
+          movieCredits !== null && ( // boolean && will only execute what comes next if true
             <ModalContent bg="primaryBackground" color="primaryText">
               <ModalHeader>{movieDetails.title}</ModalHeader>
               <ModalCloseButton />
@@ -200,7 +195,7 @@ function MovieDetails(props) {
               </ModalBody>
 
               <ModalFooter>
-                <Link to={`/${id}`}>
+                <Link to={`/moviedetailspage/${id}`}>
                   {" "}
                   <Button
                     borderColor="logoText"
@@ -213,18 +208,18 @@ function MovieDetails(props) {
                   >
                     More Details
                   </Button>
-                  <Button
-                    borderColor="logoText"
-                    borderWidth="3px"
-                    backgroundColor="primaryBackground"
-                    color="logoText"
-                    _hover
-                    mr={3}
-                    onClick={onClose}
-                  >
-                    Close
-                  </Button>
                 </Link>
+                <Button
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor="primaryBackground"
+                  color="logoText"
+                  _hover
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Close
+                </Button>
               </ModalFooter>
             </ModalContent>
           )}
