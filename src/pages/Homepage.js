@@ -7,8 +7,7 @@ import FilterSidebar from "../components/FilterSidebar";
 import { Context } from "../Context";
 
 function Homepage() {
-  const { isSearch, personName } = useContext(Context);
-  // personName is needed to update the heading when searching by actor
+  const { isSearch } = useContext(Context);
 
   const headerStyles = {
     position: "absolute",
@@ -28,13 +27,7 @@ function Homepage() {
         overflow: "scroll",
       }}
     >
-      <h1 style={headerStyles}>
-        {isSearch
-          ? null
-          : personName === ""
-          ? "Popular Movies"
-          : `Movies starring ${personName}`}
-      </h1>
+      <h1 style={headerStyles}>{isSearch ? null : "Popular Movies"}</h1>
       <NavBar />
       <FilterSidebar />
       <Grid />
