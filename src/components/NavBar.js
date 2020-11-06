@@ -20,8 +20,6 @@ const NavBar = () => {
 
   }
 
-
-
   return (
          <Box bg="primaryBackground" 
           w="100%" 

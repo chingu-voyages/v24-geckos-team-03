@@ -4,7 +4,10 @@ import Movieboxes from "../components/Movieboxes";
 
 const FavoriteMovies = () => {
     const {allFavMovies} = useContext(Context);
+    
+      //Check for duplicate entries on the database before adding a movie.
 
+    //styles for the grid
     const gridStyles = {
         maxWidth: "1200px",
         marginTop: "10%",

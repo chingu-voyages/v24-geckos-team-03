@@ -10,7 +10,9 @@ function FilterSidebar() {
   const [submit, setSubmit] = useState(false);
   const inputEl = useRef(null);
   const selectEl = useRef(null);
-  const { setSearchResults, APIKEY, setDefaultMovies } = useContext(Context);
+  const { setSearchResults, APIKEY, setDefaultMovies, setSearch } = useContext(
+    Context
+  );
 
   function formSubmit(e) {
     e.preventDefault();
@@ -22,7 +24,6 @@ function FilterSidebar() {
   useEffect(() => {
     //   Checks wheither if correct selections are submitted
     if (genre != "Genre" && year != "Year") {
-      console.log("hello");
       try {
         axios
           .get(
@@ -32,6 +33,7 @@ function FilterSidebar() {
             setSearchResults(res.data.results);
             setDefaultMovies(false);
             setSubmit(false);
+            setSearch("");
           });
       } catch (err) {
         console.log(err);
@@ -72,13 +74,13 @@ function FilterSidebar() {
     color: "#fff",
     cursor: "pointer"
   };
-
+  console.log("filter");
   return (
     <div style={sidebar}>
       <Heading color="white">Find Movies By</Heading>
       <form onSubmit={formSubmit}>
         <select ref={inputEl} style={selectStyles}>
-          <option selected disabled>
+          <option value disabled>
             Genre
           </option>
           <option value="28">Action</option>
@@ -102,7 +104,7 @@ function FilterSidebar() {
         </select>
 
         <select ref={selectEl} style={selectStyles}>
-          <option selected disabled>
+          <option value disabled>
             Year
           </option>
           <option>2020</option>
