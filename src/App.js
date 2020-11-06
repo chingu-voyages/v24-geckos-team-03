@@ -7,13 +7,12 @@ const App = () => {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/">
-          <Homepage />
-        </Route>
-      </Switch>
-      <Switch>
         <Route path="/moviedetailspage/:movieId">
           <MovieDetailsPage />
+        </Route>
+
+        <Route path="/">
+          <Homepage />
         </Route>
       </Switch>
     </div>

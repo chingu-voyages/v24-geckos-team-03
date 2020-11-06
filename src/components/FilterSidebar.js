@@ -80,9 +80,7 @@ function FilterSidebar() {
       <Heading color="white">Find Movies By</Heading>
       <form onSubmit={formSubmit}>
         <select ref={inputEl} style={selectStyles}>
-          <option value disabled>
-            Genre
-          </option>
+          <option>Genre</option>
           <option value="28">Action</option>
 
           <option value="12">Adventure</option>
@@ -104,9 +102,7 @@ function FilterSidebar() {
         </select>
 
         <select ref={selectEl} style={selectStyles}>
-          <option value disabled>
-            Year
-          </option>
+          <option>Year</option>
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>

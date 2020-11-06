@@ -12,14 +12,26 @@ function MovieDetailsBody(props) {
   const [movieCast, setMovieCast] = useState([]);
   const [movieTrailers, setMovieTrailers] = useState([]);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [right, setRight] = useState(0);
 
   function searchByActor(person_id) {
     setPersonId(person_id);
   }
 
+  function leftarr() {
+    if (right < 0) {
+      setRight(right + 278);
+    }
+  }
+  function castArrow() {
+    setRight(right - 278);
+  }
+
+  console.log(right);
+
   setTimeout(() => {
     setIsPageLoaded(true);
-  }, 2000);
+  }, 2500);
   const youtubeLink = `https://www.youtube.com/embed/`;
   let castList = []; // Holds all the movie cast headshots/name/
 
@@ -38,7 +50,14 @@ function MovieDetailsBody(props) {
       } = castMember;
 
       return (
-        <Box key={cast_id} textAlign="center" marginRight="60px">
+        <Box
+          key={cast_id}
+          textAlign="center"
+          marginRight="60px"
+          marginLeft="60px"
+          transform={`translateX(${right}px)}`}
+          transition=".5s"
+        >
           <Image
             m="0 auto"
             // onClick={() => searchByActor(person_id)} Will implement in next week MVP
@@ -124,21 +143,20 @@ function MovieDetailsBody(props) {
       console.log(err);
     }
   }, []);
-  console.log(movieTrailers);
 
   // styling varibles
   const detailBody = {
     backgroundColor: "#333333",
-    height: "100vh",
-    width: "100vw",
+    height: "100%",
+    width: "100%",
     overflowY: "scroll"
   };
 
   const imageContainer = {
-    height: "100vh",
     width: "100vw",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${movieData.backdrop_path})`,
-    backgroundSize: "cover"
+    backgroundSize: "cover",
+    backgroundPosition: "top"
   };
 
   const container = {
@@ -156,9 +174,9 @@ function MovieDetailsBody(props) {
   };
   return (
     <>
-      <div>
+      <Box>
         {isPageLoaded ? null : (
-          <div className="loadingScreen">
+          <Box className="loadingScreen">
             <Spinner
               style={pageSpinner}
               thickness="3px"
@@ -167,11 +185,15 @@ function MovieDetailsBody(props) {
               color="black"
               size="100px"
             />
-          </div>
+          </Box>
         )}
-      </div>
-      <div style={imageContainer}>
-        <div
+      </Box>
+      <Box
+        style={imageContainer}
+        height={["200px", "200px", "100vh", "100vh"]}
+        position={["relative", "relative", "static", "static"]}
+      >
+        <Box
           style={{
             position: "absolute",
             top: "0",
@@ -181,27 +203,23 @@ function MovieDetailsBody(props) {
             backgroundColor: "rgba(0,0,0,0.5)"
           }}
         >
-          <div style={container}>
-            <Heading position="absolute" top="50%" color="white">
+          <Box style={container}>
+            <Heading
+              position="absolute"
+              top="50%"
+              color="white"
+              fontSize={["20px", "22px", "30px", "35px"]}
+            >
               {movieData.original_title}
             </Heading>
             <Link to="/">
-              <span
-                style={{
-                  color: "white",
-                  fontSize: "80px",
-                  position: "absolute",
-                  top: "50px"
-                }}
-              >
-                &#8592;
-              </span>
+              <span className="responsiveArrow">&#8592;</span>
             </Link>
-          </div>
-        </div>
-      </div>
-      <div style={detailBody}>
-        <div style={container}>
+          </Box>
+        </Box>
+      </Box>
+      <Box style={detailBody}>
+        <Box style={container}>
           <Box paddingY="30px">
             <Heading pb="10px">Summary</Heading>
             <p>{movieData.overview}</p>
@@ -209,10 +227,11 @@ function MovieDetailsBody(props) {
 
           <Box paddingY="30px">
             <Heading pb="10px"> Cast</Heading>
-
-            <Flex wrap="nowrap" overflowX="auto">
+            <span onClick={leftarr}>&#8592;</span>
+            <Flex wrap="nowrap" overflowX="auto" justifyContent="space-between">
               {castList}
             </Flex>
+            <span onClick={castArrow}>&#8594;</span>
           </Box>
 
           <Box paddingTop="30px">
@@ -221,8 +240,8 @@ function MovieDetailsBody(props) {
               {movieTrailersboxes}
             </Flex>
           </Box>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 }
