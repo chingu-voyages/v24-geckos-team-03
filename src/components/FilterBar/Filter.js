@@ -4,7 +4,7 @@ import axios from "axios";
 import { Context } from "../../Context";
 import { Heading, Button, Select } from "@chakra-ui/core";
 
-function FilterSidebar() {
+function Filter() {
   const [genre, setGenre] = useState("Genre");
   const [year, setYear] = useState("Year");
   const genreOption = useRef(null);
@@ -132,4 +132,4 @@ function FilterSidebar() {
   );
 }
 
-export default FilterSidebar;
+export default Filter;

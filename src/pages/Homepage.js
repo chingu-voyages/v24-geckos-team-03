@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Box } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
-import FilterSidebar from "../components/FilterBar/FilterSidebar";
+import Filter from "../components/FilterBar/Filter";
 
 import { Context } from "../Context";
 
@@ -29,7 +29,7 @@ function Homepage() {
     >
       <h1 style={headerStyles}>{isSearch ? null : "Popular Movies"}</h1>
       <NavBar />
-      <FilterSidebar />
+      <Filter />
       <Grid searchResults={searchResults} />
     </Box>
   );
