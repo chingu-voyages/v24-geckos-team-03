@@ -1,6 +1,7 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
 import MovieDetailsPage from "./pages/MovieDetails";
+import SearchByActor from "./pages/SearchByActor";
 import { Switch, Route } from "react-router-dom";
 
 const App = () => {
@@ -11,6 +12,9 @@ const App = () => {
           <MovieDetailsPage />
         </Route>
 
+        <Route path="/actor/:personId">
+          <SearchByActor />
+        </Route>
         <Route path="/">
           <Homepage />
         </Route>

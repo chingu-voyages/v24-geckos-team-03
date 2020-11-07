@@ -6,28 +6,12 @@ import { Link } from "react-router-dom";
 import "./MovieDetailsBody.css";
 
 function MovieDetailsBody(props) {
-  const { APIKEY, ImageUrl, setPersonId } = useContext(Context);
+  const { APIKEY, ImageUrl } = useContext(Context);
 
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
   const [movieTrailers, setMovieTrailers] = useState([]);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
-  const [right, setRight] = useState(0);
-
-  function searchByActor(person_id) {
-    setPersonId(person_id);
-  }
-
-  function leftarr() {
-    if (right < 0) {
-      setRight(right + 278);
-    }
-  }
-  function castArrow() {
-    setRight(right - 278);
-  }
-
-  console.log(right);
 
   setTimeout(() => {
     setIsPageLoaded(true);
@@ -55,19 +39,18 @@ function MovieDetailsBody(props) {
           textAlign="center"
           marginRight="60px"
           marginLeft="60px"
-          transform={`translateX(${right}px)}`}
-          transition=".5s"
         >
-          <Image
-            m="0 auto"
-            // onClick={() => searchByActor(person_id)} Will implement in next week MVP
-            cursor="pointer"
-            rounded="lg"
-            src={ImageUrl + profile_path}
-            objectFit="cover"
-            width="100px"
-            maxWidth="none"
-          />
+          <Link to={`/actor/${person_id}`}>
+            <Image
+              m="0 auto"
+              cursor="pointer"
+              rounded="lg"
+              src={ImageUrl + profile_path}
+              objectFit="cover"
+              width="100px"
+              maxWidth="none"
+            />
+          </Link>
           <Box p="7px">
             {name} <br />{" "}
             <Text fontSize="0.9em" fontStyle="italic">
@@ -87,6 +70,7 @@ function MovieDetailsBody(props) {
       return (
         <Box mr="10px" key={trailer.id}>
           <iframe
+            title={trailer.original_title}
             width="420"
             height="345"
             src={`${youtubeLink}${trailer.key}`}
@@ -227,11 +211,10 @@ function MovieDetailsBody(props) {
 
           <Box paddingY="30px">
             <Heading pb="10px"> Cast</Heading>
-            <span onClick={leftarr}>&#8592;</span>
+
             <Flex wrap="nowrap" overflowX="auto" justifyContent="space-between">
               {castList}
             </Flex>
-            <span onClick={castArrow}>&#8594;</span>
           </Box>
 
           <Box paddingTop="30px">

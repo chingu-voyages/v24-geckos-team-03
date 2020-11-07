@@ -4,8 +4,10 @@ import Movieboxes from "./Movieboxes";
 import { useDisclosure } from "@chakra-ui/core";
 import MovieDetails from "./MovieDetails";
 
-function Grid() {
-  const { searchResults, ImageUrl } = useContext(Context);
+function Grid(props) {
+  const {searchResults} = props;
+
+  const { ImageUrl } = useContext(Context);
 
   const [movieId, setMovieId] = useState(null);
 
