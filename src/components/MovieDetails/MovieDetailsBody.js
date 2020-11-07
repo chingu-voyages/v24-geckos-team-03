@@ -74,6 +74,7 @@ function MovieDetailsBody(props) {
             width="420"
             height="345"
             src={`${youtubeLink}${trailer.key}`}
+            className="movieTrailerBoxes"
           ></iframe>
         </Box>
       );

@@ -7,6 +7,13 @@
   height: 100%;
 }
 
+.loadingScreen {
+  -webkit-animation: fadeOut 2.5s; /* Safari 4+ */
+  -moz-animation: fadeOut 2.5s; /* Fx 5+ */
+  -o-animation: fadeOut 2.5s; /* Opera 12+ */
+  animation: fadeOut 2.5s; /* IE 10+, Fx 29+ */
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
@@ -22,23 +29,21 @@
   }
 }
 
-.loadingScreen {
-  -webkit-animation: fadeOut 2.5s; /* Safari 4+ */
-  -moz-animation: fadeOut 2.5s; /* Fx 5+ */
-  -o-animation: fadeOut 2.5s; /* Opera 12+ */
-  animation: fadeOut 2.5s; /* IE 10+, Fx 29+ */
-}
-
 .responsiveArrow {
   color: white;
   font-size: 80px;
   position: absolute;
   top: 50px;
 }
+
 @media screen and (min-width: 300px) {
   .responsiveArrow {
     font-size: 30px;
     top: 20px;
+  }
+
+  .movieTrailerBoxes {
+    width: 300px;
   }
 }
 
@@ -47,12 +52,20 @@
     font-size: 40px;
     top: 25px;
   }
+
+  .movieTrailerBoxes {
+    width: 350px;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .responsiveArrow {
     font-size: 50px;
     top: 30px;
+  }
+
+  .movieTrailerBoxes {
+    width: 540px;
   }
 }
 
