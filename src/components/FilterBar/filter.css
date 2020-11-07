@@ -18,10 +18,3 @@
     justify-content: center;
   }
 }
-
-@media screen and (min-width: 992px) {
-  .responsiveArrow {
-    font-size: 80px;
-    top: 50px;
-  }
-}
