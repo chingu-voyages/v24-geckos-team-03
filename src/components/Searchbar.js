@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
-import { Button } from "@chakra-ui/core";
+
 import { Link, useHistory } from "react-router-dom";
 
 function Search() {
@@ -23,8 +23,10 @@ function Search() {
     setSearch(inputEl.current.value);
 
     setIsSearch(true);
+
     history.push("/searchPage"); // Routes to search page on submit
   }
+  console.log(search);
 
   useEffect(() => {
     if (search.length > 0) {
@@ -47,15 +49,39 @@ function Search() {
     console.log(searchResults);
   }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
 
+  const buttonStyle = {
+    borderRadius: "0.25rem",
+    fontWeight: 600,
+    display: "inline-flex",
+    appearance: "none",
+    WebkitBoxAlign: "center",
+    alignItems: "center",
+    WebkitBoxPack: "center",
+    justifyContent: "center",
+    transition: "all 250ms ease 0s",
+    userSelect: "none",
+    position: "relative",
+    whiteSpace: "nowrap",
+    verticalAlign: "middle",
+    lineHeight: 1.2,
+    outline: "none",
+    height: "2em",
+    minWidth: "2.5rem",
+    fontSize: "1rem",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
+    backgroundColor: "rgb(237, 242, 247)",
+    marginLeft: "5px",
+    marginRight: "5px"
+  };
   return (
     <div className="search-bar">
       <form onSubmit={searchSubmit}>
         <input type="text" ref={inputEl}></input>
-        <Link to="/searchPage">
-          <Button mx="5px" h="2em">
-            Search Movies
-          </Button>
-        </Link>
+
+        <button style={buttonStyle}>
+          <Link to="/searchPage">Search Movies</Link>
+        </button>
       </form>
     </div>
   );

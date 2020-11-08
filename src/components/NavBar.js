@@ -1,22 +1,15 @@
 import React, { useContext } from "react";
 import Searchbar from "./Searchbar";
-import { Link as Links} from "react-router-dom";
+import { Link as Links } from "react-router-dom";
 import { Context } from "../Context";
-import {
-  Box,
-  Image,
-  Link,
-  Switch,
-  Heading,
-  Stack
-} from "@chakra-ui/core";
+import { Box, Image, Link, Switch, Heading, Stack } from "@chakra-ui/core";
 
 const NavBar = () => {
-  const { setDefaultMovies, defaultMovies } = useContext(Context);
+  const { setDefaultMovies, defaultMovies, setSearchResults } = useContext(
+    Context
+  );
   const clicked = () => {
     setDefaultMovies(true);
-    console.log(defaultMovies);
-    console.log("hello");
   };
   return (
     <Box

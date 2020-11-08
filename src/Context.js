@@ -6,7 +6,7 @@ const Context = React.createContext();
 function ContextProvider(props) {
   const ImageUrl = "https://image.tmdb.org/t/p/w400";
 
-  const [isSearch, setIsSearch] = useState(false);
+  const [isSearch, setIsSearch] = useState(false); // state that holds wheither a user has submitted a search or not
   const [defaultMovies, setDefaultMovies] = useState(true); // state checks wheither favorite movies are displaying or not
   const [search, setSearch] = useState(""); // save search input
   const [searchResults, setSearchResults] = useState([]); // saves search results
