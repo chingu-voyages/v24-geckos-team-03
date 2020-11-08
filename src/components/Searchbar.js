@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 
 function Search() {
   const history = useHistory();
+  console.log(history);
   const {
     setSearch,
     setSearchResults,
@@ -26,7 +27,6 @@ function Search() {
 
     history.push("/searchPage"); // Routes to search page on submit
   }
-  console.log(search);
 
   useEffect(() => {
     if (search.length > 0) {

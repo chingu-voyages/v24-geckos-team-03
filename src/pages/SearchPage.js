@@ -5,7 +5,7 @@ import { Heading, Box } from "@chakra-ui/core";
 import { Context } from "../Context";
 
 function SearchPage() {
-  const { search, searchResults } = useContext(Context);
+  const { search, searchResults, isSearch } = useContext(Context);
   console.log(search);
   return (
     <Box
@@ -17,7 +17,7 @@ function SearchPage() {
       }}
     >
       <Heading paddingY="80px" textAlign="center" color="white">
-        Search Results for {search}
+        {isSearch ? `Search Results for ${search}` : `Search For Movie`}
       </Heading>
       <Navbar />
       <Grid searchResults={searchResults} />

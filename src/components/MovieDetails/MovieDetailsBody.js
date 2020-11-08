@@ -2,10 +2,11 @@ import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { Context } from "./../../Context";
 import { Box, Heading, Image, Text, Flex, Spinner } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./MovieDetailsBody.css";
 
 function MovieDetailsBody(props) {
+  const history = useHistory();
   const { APIKEY, ImageUrl } = useContext(Context);
 
   const [movieData, setMovieData] = useState([]);
@@ -197,8 +198,10 @@ function MovieDetailsBody(props) {
             >
               {movieData.original_title}
             </Heading>
-            <Link to="/">
-              <span className="responsiveArrow">&#8592;</span>
+            <Link>
+              <span className="responsiveArrow" onClick={history.goBack}>
+                &#8592;
+              </span>
             </Link>
           </Box>
         </Box>
