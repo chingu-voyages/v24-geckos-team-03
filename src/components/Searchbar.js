@@ -2,8 +2,10 @@ import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
 import { Button } from "@chakra-ui/core";
+import { Link, useHistory } from "react-router-dom";
 
 function Search() {
+  const history = useHistory();
   const {
     setSearch,
     setSearchResults,
@@ -21,6 +23,7 @@ function Search() {
     setSearch(inputEl.current.value);
 
     setIsSearch(true);
+    history.push("/searchPage"); // Routes to search page on submit
   }
 
   useEffect(() => {
@@ -48,9 +51,11 @@ function Search() {
     <div className="search-bar">
       <form onSubmit={searchSubmit}>
         <input type="text" ref={inputEl}></input>
-        <Button mx="5px" h="2em">
-          Search Movies
-        </Button>
+        <Link to="/searchPage">
+          <Button mx="5px" h="2em">
+            Search Movies
+          </Button>
+        </Link>
       </form>
     </div>
   );

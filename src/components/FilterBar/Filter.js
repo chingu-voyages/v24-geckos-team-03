@@ -12,9 +12,12 @@ function Filter() {
   const [submit, setSubmit] = useState(false);
   const inputEl = useRef(null);
   const selectEl = useRef(null);
-  const { setSearchResults, APIKEY, setDefaultMovies, setSearch } = useContext(
-    Context
-  );
+  const {
+    APIKEY,
+    setDefaultMovies,
+    setSearch,
+    setHomePageResults
+  } = useContext(Context);
 
   function formSubmit(e) {
     e.preventDefault();
@@ -35,7 +38,7 @@ function Filter() {
             `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}`
           )
           .then(res => {
-            setSearchResults(res.data.results);
+            setHomePageResults(res.data.results);
             setDefaultMovies(false);
             setSubmit(false);
             setSearch("");
