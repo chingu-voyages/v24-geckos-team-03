@@ -41,7 +41,6 @@ function Filter() {
             setHomePageResults(res.data.results);
             setDefaultMovies(false);
             setSubmit(false);
-            setSearch("");
           });
       } catch (err) {
         console.log(err);

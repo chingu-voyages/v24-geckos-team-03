@@ -5,12 +5,16 @@ import { Context } from "../Context";
 import { Box, Image, Link, Switch, Heading, Stack } from "@chakra-ui/core";
 
 const NavBar = () => {
-  const { setDefaultMovies, defaultMovies, setSearchResults } = useContext(
-    Context
-  );
+  const {
+    setDefaultMovies,
+    defaultMovies,
+    setSearchResults,
+    search
+  } = useContext(Context);
   const clicked = () => {
     setDefaultMovies(true);
   };
+
   return (
     <Box
       className="nav-bar"
