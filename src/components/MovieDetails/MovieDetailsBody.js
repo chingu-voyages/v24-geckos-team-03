@@ -7,7 +7,7 @@ import "./MovieDetailsBody.css";
 
 function MovieDetailsBody(props) {
   const history = useHistory();
-  const { APIKEY, ImageUrl } = useContext(Context);
+  const { APIKEY, ImageUrl, setDefaultMovies } = useContext(Context);
 
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
@@ -17,6 +17,11 @@ function MovieDetailsBody(props) {
   setTimeout(() => {
     setIsPageLoaded(true);
   }, 2500);
+
+  const goBack = () => {
+    history.goBack();
+    setDefaultMovies(true);
+  };
   const youtubeLink = `https://www.youtube.com/embed/`;
   let castList = []; // Holds all the movie cast headshots/name/
 
@@ -198,8 +203,8 @@ function MovieDetailsBody(props) {
             >
               {movieData.original_title}
             </Heading>
-            <Link>
-              <span className="responsiveArrow" onClick={history.goBack}>
+            <Link to="/">
+              <span className="responsiveArrow" onClick={goBack}>
                 &#8592;
               </span>
             </Link>
