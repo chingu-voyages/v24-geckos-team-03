@@ -5,7 +5,7 @@ import { useDisclosure } from "@chakra-ui/core";
 import MovieDetails from "./MovieDetails";
 
 function Grid(props) {
-  const {searchResults} = props;
+  const { searchResults } = props;
 
   const { ImageUrl } = useContext(Context);
 
@@ -38,6 +38,7 @@ function Grid(props) {
   function onHandleMovieClick(id) {
     setMovieId(id);
     onOpen();
+    console.log(id);
   }
 
   return (

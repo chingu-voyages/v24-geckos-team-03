@@ -1,13 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import axios from "axios";
 import { Box } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
-import FilterSidebar from "../components/FilterSidebar";
+import Filter from "../components/FilterBar/Filter";
 
 import { Context } from "../Context";
 
 function Homepage() {
-  const { isSearch, searchResults } = useContext(Context);
+  const {
+    isSearch,
+    searchResults,
+    homePageResults,
+    setHomePageResults,
+    defaultMovies,
+    setDefaultMovies,
+    APIKEY
+  } = useContext(Context);
+
+  useEffect(() => {
+    if (defaultMovies === true) {
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
+          )
+          .then(res => {
+            setHomePageResults(res.data.results);
+            setDefaultMovies(true);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [defaultMovies]);
 
   const headerStyles = {
     position: "absolute",
@@ -15,7 +41,7 @@ function Homepage() {
     color: "white",
     left: "150px",
     fontSize: "25px",
-    fontWeight: "100",
+    fontWeight: "100"
   };
 
   return (
@@ -24,13 +50,13 @@ function Homepage() {
       h="100vh"
       w="100vw"
       style={{
-        overflow: "scroll",
+        overflow: "scroll"
       }}
     >
       <h1 style={headerStyles}>{isSearch ? null : "Popular Movies"}</h1>
       <NavBar />
-      <FilterSidebar />
-      <Grid searchResults={searchResults} />
+      <Filter />
+      <Grid searchResults={homePageResults} />
     </Box>
   );
 }

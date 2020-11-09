@@ -1,24 +1,32 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
+import "./filter.css";
 import axios from "axios";
-import { Context } from "../Context";
-import { Heading } from "@chakra-ui/core";
-import { Button } from "@chakra-ui/core";
+import { Context } from "../../Context";
+import { Heading, Button, Select } from "@chakra-ui/core";
 
-function FilterSidebar() {
+function Filter() {
   const [genre, setGenre] = useState("Genre");
   const [year, setYear] = useState("Year");
+  const genreOption = useRef(null);
+  const yearOption = useRef(null);
   const [submit, setSubmit] = useState(false);
   const inputEl = useRef(null);
   const selectEl = useRef(null);
-  const { setSearchResults, APIKEY, setDefaultMovies, setSearch } = useContext(
-    Context
-  );
+  const {
+    APIKEY,
+    setDefaultMovies,
+    setSearch,
+    setHomePageResults
+  } = useContext(Context);
 
   function formSubmit(e) {
     e.preventDefault();
     setSubmit(true);
     setGenre(inputEl.current.value);
     setYear(selectEl.current.value);
+    genreOption.current.disabled = true;
+
+    yearOption.current.disabled = true;
   }
 
   useEffect(() => {
@@ -30,10 +38,9 @@ function FilterSidebar() {
             `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}`
           )
           .then(res => {
-            setSearchResults(res.data.results);
+            setHomePageResults(res.data.results);
             setDefaultMovies(false);
             setSubmit(false);
-            setSearch("");
           });
       } catch (err) {
         console.log(err);
@@ -41,7 +48,7 @@ function FilterSidebar() {
     }
   }, [submit]);
 
-  const sidebar = {
+  const filterbar = {
     marginTop: "250px",
     textAlign: "center"
   };
@@ -74,15 +81,17 @@ function FilterSidebar() {
     color: "#fff",
     cursor: "pointer"
   };
-  console.log("filter");
+
   return (
-    <div style={sidebar}>
+    <div style={filterbar}>
       <Heading color="white">Find Movies By</Heading>
-      <form onSubmit={formSubmit}>
-        <select ref={inputEl} style={selectStyles}>
-          <option value disabled>
-            Genre
-          </option>
+      <form
+        className="form"
+        onSubmit={formSubmit}
+        style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+      >
+        <Select ref={inputEl} style={selectStyles} w="20em">
+          <option ref={genreOption}>Genre</option>
           <option value="28">Action</option>
 
           <option value="12">Adventure</option>
@@ -101,12 +110,10 @@ function FilterSidebar() {
           <option value="10770">Tv Movie</option>
           <option value="53">Thriller</option>
           <option value="10752">War</option>
-        </select>
+        </Select>
 
-        <select ref={selectEl} style={selectStyles}>
-          <option value disabled>
-            Year
-          </option>
+        <Select ref={selectEl} style={selectStyles} w="20em">
+          <option ref={yearOption}>Year</option>
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>
@@ -119,7 +126,7 @@ function FilterSidebar() {
           <option>2011</option>
           <option>2010</option>
           <option>2009</option>
-        </select>
+        </Select>
 
         <button style={filterButton}>Submit</button>
       </form>
@@ -127,4 +134,4 @@ function FilterSidebar() {
   );
 }
 
-export default FilterSidebar;
+export default Filter;
