@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Box } from "@chakra-ui/core";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Box, Heading } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
 import FilterSidebar from "../components/FilterSidebar";
@@ -7,29 +7,40 @@ import FilterSidebar from "../components/FilterSidebar";
 import { Context } from "../Context";
 
 function Homepage() {
-  const { isSearch, searchResults } = useContext(Context);
+  const { isSearch, searchResults, setNavShadow, navShadow } = useContext(
+    Context
+  );
 
-  const headerStyles = {
-    position: "absolute",
-    top: "100px",
-    color: "white",
-    left: "150px",
-    fontSize: "25px",
-    fontWeight: "100",
-  };
+  const myRef = React.createRef();
+
+  function onScroll() {
+    const scrollTop = myRef.current.scrollTop;
+    if (!navShadow && scrollTop > 0) setNavShadow(true);
+    else if (navShadow && scrollTop === 0) setNavShadow(false);
+  }
 
   return (
     <Box
+      ref={myRef}
       bg="primaryBackground"
       h="100vh"
       w="100vw"
       style={{
         overflow: "scroll",
       }}
+      onScroll={onScroll}
     >
-      <h1 style={headerStyles}>{isSearch ? null : "Popular Movies"}</h1>
       <NavBar />
       <FilterSidebar />
+      <Heading
+        as="h3"
+        size="lg"
+        marginTop="10px"
+        marginLeft="5%"
+        color="primaryText"
+      >
+        {isSearch ? null : "Popular Movies"}
+      </Heading>
       <Grid searchResults={searchResults} />
     </Box>
   );

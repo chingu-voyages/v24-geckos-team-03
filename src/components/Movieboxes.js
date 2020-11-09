@@ -1,23 +1,32 @@
 import React from "react";
-import { Box, Image } from "@chakra-ui/core";
+import { Box, Image, PseudoBox } from "@chakra-ui/core";
 
 function Movieboxes(props) {
-  const { imageSrc, title, onClick } = props;
+  const { imageSrc, title, onClick, year } = props;
 
   return (
-    <Box
+    <PseudoBox
       onClick={() => onClick()}
-      bg="primaryBackground"
-      w="170px"
+      bg="cardBackground"
+      w="15vw"
+      minW="150px"
       m={4}
       color="primaryText"
-      fontSize={"16px"}
       cursor="pointer"
+      borderWidth="1px"
+      borderColor="primaryBorder"
+      rounded="lg"
+      fontSize="0.8em"
+      p="5px"
+      opacity="0.75"
+      _hover={{ borderColor: "#666", opacity: "1" }}
     >
-      <Image src={imageSrc} w="170px" h={"220px"} objectFit="cover" />
+      <Image rounded="lg" src={imageSrc} objectFit="cover" />
 
-      <h1>{title}</h1>
-    </Box>
+      <Box m="5px" textAlign="center">
+        {`${title} (${year})`}
+      </Box>
+    </PseudoBox>
   );
 }
 

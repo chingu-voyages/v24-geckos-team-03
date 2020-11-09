@@ -15,10 +15,8 @@ function Grid(props) {
 
   const gridStyles = {
     maxWidth: "1200px",
-
     margin: "0 auto",
-
-    marginTop: "5%",
+    marginTop: "15px",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-evenly"
@@ -30,6 +28,7 @@ function Grid(props) {
         key={movie.id}
         title={movie.original_title}
         imageSrc={ImageUrl + movie.poster_path}
+        year={new Date(movie.release_date).getFullYear()}
         onClick={() => onHandleMovieClick(movie.id)}
       />
     );

@@ -1,18 +1,11 @@
 import React, { useContext } from "react";
 import Searchbar from "./Searchbar";
-import { Link as Links} from "react-router-dom";
+import { Link as Links } from "react-router-dom";
 import { Context } from "../Context";
-import {
-  Box,
-  Image,
-  Link,
-  Switch,
-  Heading,
-  Stack
-} from "@chakra-ui/core";
+import { Box, Image, Link, Switch, Heading, Stack } from "@chakra-ui/core";
 
 const NavBar = () => {
-  const { setDefaultMovies, defaultMovies } = useContext(Context);
+  const { setDefaultMovies, defaultMovies, navShadow } = useContext(Context);
   const clicked = () => {
     setDefaultMovies(true);
     console.log(defaultMovies);
@@ -26,6 +19,12 @@ const NavBar = () => {
       w="100%"
       px={5}
       py={2}
+      zIndex="1000"
+      boxShadow={
+        navShadow
+          ? "0px 6px 6px 3px rgba(0, 0, 0, 0.25)"
+          : "0px 6px 6px 3px rgba(0, 0, 0, 0)"
+      }
     >
       <Stack isInline justifyContent="space-between">
         {" "}
