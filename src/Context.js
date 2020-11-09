@@ -14,23 +14,6 @@ function ContextProvider(props) {
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
-  // useEffect(() => {
-  //   if (defaultMovies === true) {
-  //     try {
-  //       axios
-  //         .get(
-  //           `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
-  //         )
-  //         .then(res => {
-  //           setSearchResults(res.data.results);
-  //           setDefaultMovies(true);
-  //         });
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // }, [defaultMovies]);
-
   return (
     <Context.Provider
       value={{
