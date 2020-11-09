@@ -1,19 +1,26 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Box, Image, Grid as ChakraGrid } from "@chakra-ui/core";
+import { Box, Image, Grid as ChakraGrid, Heading } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
-//import FilterSidebar from "../components/FilterSidebar";
 import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
 
 function SearchByActor() {
-  const { APIKEY, ImageUrl } = useContext(Context);
+  const { APIKEY, ImageUrl, setNavShadow, navShadow } = useContext(Context);
 
   const { personId } = useParams();
 
   const [personDetails, setPersonDetails] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
+
+  const myRef = React.createRef(); //need so that we can access scrolling position of div on scroll event
+
+  function onScroll() {
+    const scrollTop = myRef.current.scrollTop;
+    if (!navShadow && scrollTop > 0) setNavShadow(true);
+    else if (navShadow && scrollTop === 0) setNavShadow(false);
+  }
 
   useEffect(() => {
     if (personId !== null) {
@@ -41,37 +48,33 @@ function SearchByActor() {
     }
   }, [APIKEY, personId, setSearchResults]);
 
-  const headerStyles = {
-    position: "absolute",
-    top: "100px",
-    color: "white",
-    left: "150px",
-    fontSize: "25px",
-    fontWeight: "100",
-  };
-
   return (
     <Box
+      ref={myRef}
       bg="primaryBackground"
       h="100vh"
       w="100vw"
       style={{
         overflow: "scroll",
       }}
+      onScroll={onScroll}
     >
       <NavBar />
 
       {personDetails !== null && (
         <>
-          <h1
-            style={headerStyles}
-          >{`${personDetails.name}`}</h1>
-          <br />
-          <br />
-          <br />
-          <br />
+          <Heading
+            as="h3"
+            size="lg"
+            marginTop="100px"
+            marginLeft="5%"
+            color="primaryText"
+          >
+            {personDetails.name}
+          </Heading>
           <ChakraGrid
-            m="100px"
+            mx="125px"
+            my="50px"
             borderWidth="1px"
             borderColor="primaryBorder"
             rounded="lg"
@@ -84,11 +87,9 @@ function SearchByActor() {
               objectFit="cover"
               rounded="lg"
             />
-            <Box
-              m="10px"
-              color="primaryText"
-              fontSize="0.8em"
-              >{personDetails.biography}</Box>
+            <Box m="10px" color="primaryText" fontSize="0.8em">
+              Actor Biography: {personDetails.biography}
+            </Box>
           </ChakraGrid>
 
           {searchResults.length > 0 && <Grid searchResults={searchResults} />}

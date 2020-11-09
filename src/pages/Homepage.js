@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext } from "react";
 import { Box, Heading } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
@@ -11,7 +11,7 @@ function Homepage() {
     Context
   );
 
-  const myRef = React.createRef();
+  const myRef = React.createRef(); //need so that we can access scrolling position of div on scroll event
 
   function onScroll() {
     const scrollTop = myRef.current.scrollTop;
