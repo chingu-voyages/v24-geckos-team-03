@@ -154,7 +154,7 @@ function MovieDetails(props) {
                         ? "?"
                         : `${movieDetails.runtime} minutes`}
                     </Box>
-                    <Box>Popularity: {movieDetails.popularity}</Box>
+                    <Box>Rating: {movieDetails.vote_average}</Box>
                     <Box>Status: {movieDetails.status}</Box>
                     <Box>
                       Release Date:{" "}

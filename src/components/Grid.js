@@ -29,6 +29,7 @@ function Grid(props) {
         title={movie.original_title}
         imageSrc={ImageUrl + movie.poster_path}
         year={new Date(movie.release_date).getFullYear()}
+        rating={movie.vote_average}
         onClick={() => onHandleMovieClick(movie.id)}
       />
     );
