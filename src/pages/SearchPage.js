@@ -5,8 +5,10 @@ import { Heading, Box } from "@chakra-ui/core";
 import { Context } from "../Context";
 
 function SearchPage() {
-  const { search, searchResults, isSearch } = useContext(Context);
-  console.log(search);
+  const { searchQuery, searchResults, isSearch } = useContext(Context);
+
+  console.log(searchQuery.length);
+
   return (
     <Box
       bg="primaryBackground"
@@ -16,11 +18,13 @@ function SearchPage() {
         overflow: "scroll"
       }}
     >
-       <Navbar />
+      <Navbar />
       <Heading paddingY="80px" marginY="50px" textAlign="center" color="white">
-        {isSearch ? `Search Results for ${search}` : `Search For Movie`}
+        {searchQuery.length > 0
+          ? `Search Results for ${searchQuery}`
+          : `Search For Movie`}
       </Heading>
-     
+
       <Grid searchResults={searchResults} />
     </Box>
   );

@@ -16,7 +16,7 @@ function Homepage() {
     setHomePageResults,
     defaultMovies,
     setDefaultMovies,
-    APIKEY,
+    APIKEY
   } = useContext(Context);
 
   const myRef = React.createRef(); //need so that we can access scrolling position of div on scroll event
@@ -34,7 +34,7 @@ function Homepage() {
           .get(
             `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
           )
-          .then((res) => {
+          .then(res => {
             setHomePageResults(res.data.results);
             setDefaultMovies(true);
           });
@@ -51,7 +51,7 @@ function Homepage() {
       h="100vh"
       w="100vw"
       style={{
-        overflow: "scroll",
+        overflow: "scroll"
       }}
       onScroll={onScroll}
     >
@@ -64,7 +64,7 @@ function Homepage() {
         marginLeft="5%"
         color="primaryText"
       >
-        {isSearch ? null : "Popular Movies"}
+        {defaultMovies ? "Popular Movies" : null}
       </Heading>
       <Grid searchResults={homePageResults} />
     </Box>

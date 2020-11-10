@@ -6,9 +6,9 @@ function Search() {
   const history = useHistory();
   console.log(history);
   const {
-    setSearch,
     setSearchResults,
-    search,
+    searchQuery,
+    setSearchQuery,
     searchResults,
     setIsSearch,
     APIKEY,
@@ -19,7 +19,8 @@ function Search() {
 
   function searchSubmit(e) {
     e.preventDefault();
-    setSearch(inputEl.current.value);
+
+    setSearchQuery(inputEl.current.value);
 
     setIsSearch(true);
 
@@ -27,11 +28,11 @@ function Search() {
   }
 
   useEffect(() => {
-    if (search.length > 0) {
+    if (searchQuery.length > 0) {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${search}`
+            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${searchQuery}`
           )
           .then(res => {
             setSearchResults(res.data.results);
@@ -44,7 +45,7 @@ function Search() {
     }
 
     console.log(searchResults);
-  }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
+  }, [searchQuery, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
 
   const buttonStyle = {
     borderRadius: "0.25rem",
@@ -74,16 +75,19 @@ function Search() {
   return (
     <div className="search">
       <form onSubmit={searchSubmit}>
-        <input type="text" name="search" ref={inputEl} placeholder="Search movie here!"></input>
+        <input
+          type="text"
+          name="search"
+          ref={inputEl}
+          placeholder="Search movie here!"
+        ></input>
         <button type="submit" name="button">
           <i className="fas fa-search"></i>
-        {/* <input type="text" ref={inputEl}></input> */}
+          {/* <input type="text" ref={inputEl}></input> */}
         </button>
       </form>
     </div>
-    );
+  );
 }
-
-
 
 export default Search;
