@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Localbase from 'localbase';
-
 const Context = React.createContext();
 
 function ContextProvider(props) {
@@ -15,7 +14,6 @@ function ContextProvider(props) {
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
-<<<<<<< HEAD
 //Create a LOCAL DATABASE using localbase imported. 
 let db = new Localbase('db');
 const [allFavMovies, setAllFavMovies] = useState([]);
@@ -27,30 +25,6 @@ const [allFavMovies, setAllFavMovies] = useState([]);
       });
     },[]);
 
-
-  // check if the actor query string is populated
-  //const params = new URLSearchParams(window.location.search);
-  //const person_id = params.get("actor");
-
-  useEffect(() => {
-    if (defaultMovies === true) {
-      try {
-        axios
-          .get(
-            `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
-          )
-          .then((res) => {
-            setSearchResults(res.data.results);
-            setDefaultMovies(true);
-          });
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }, [defaultMovies]);
-
-=======
->>>>>>> 4cad04af6a60b09f689517a45cc51f79cce15df8
   return (
     <Context.Provider
       value={{

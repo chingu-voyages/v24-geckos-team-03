@@ -1,9 +1,7 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
-
 import { Link, useHistory } from "react-router-dom";
-
 function Search() {
   const history = useHistory();
   console.log(history);
@@ -76,20 +74,16 @@ function Search() {
   return (
     <div className="search">
       <form onSubmit={searchSubmit}>
-<<<<<<< HEAD
         <input type="text" name="search" ref={inputEl} placeholder="Search movie here!"></input>
         <button type="submit" name="button">
           <i className="fas fa-search"></i>
-=======
-        <input type="text" ref={inputEl}></input>
-
-        <button style={buttonStyle}>
-          <Link to="/searchPage">Search Movies</Link>
->>>>>>> 4cad04af6a60b09f689517a45cc51f79cce15df8
+        {/* <input type="text" ref={inputEl}></input> */}
         </button>
       </form>
     </div>
     );
 }
+
+
 
 export default Search;
