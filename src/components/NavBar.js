@@ -1,24 +1,26 @@
 import React, { useContext } from "react";
+<<<<<<< HEAD
 import Searchbar from './Searchbar';
 import { Link as RouterLink } from "react-router-dom";
+=======
+import Searchbar from "./Searchbar";
+import { Link as Links } from "react-router-dom";
+>>>>>>> 4cad04af6a60b09f689517a45cc51f79cce15df8
 import { Context } from "../Context";
-import {
-  Box,
-  Image,
-  Link,
-  Switch,
-  Heading,
-  Stack
-} from "@chakra-ui/core";
+import { Box, Image, Link, Switch, Heading, Stack } from "@chakra-ui/core";
 
 const NavBar = () => {
-  const { setDefaultMovies, defaultMovies } = useContext(Context);
+  const {
+    setDefaultMovies,
+    defaultMovies,
+    setSearchResults,
+    search
+  } = useContext(Context);
   const clicked = () => {
     setDefaultMovies(true);
-    console.log(defaultMovies);
-    console.log("hello");
   };
 
+<<<<<<< HEAD
   const stickyNav = {
     position : "fixed",
     boxShadow : "0 2px 2px #49c3fd",
@@ -26,6 +28,8 @@ const NavBar = () => {
 
   }
 
+=======
+>>>>>>> 4cad04af6a60b09f689517a45cc51f79cce15df8
   return (
          <Box bg="primaryBackground" 
           w="100%" 

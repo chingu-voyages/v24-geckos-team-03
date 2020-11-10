@@ -5,8 +5,15 @@ import { useDisclosure } from "@chakra-ui/core";
 import MovieDetails from "./MovieDetails";
 
 function Grid(props) {
+<<<<<<< HEAD
   const {searchResults} = props;
   const { ImageUrl , FavoriteMovies} = useContext(Context);
+=======
+  const { searchResults } = props;
+
+  const { ImageUrl } = useContext(Context);
+
+>>>>>>> 4cad04af6a60b09f689517a45cc51f79cce15df8
   const [movieId, setMovieId] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -33,6 +40,7 @@ function Grid(props) {
   function onHandleMovieClick(id) {
     setMovieId(id);
     onOpen();
+    console.log(id);
   }
 
   return (
