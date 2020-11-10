@@ -1,23 +1,31 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
+import "./filter.css";
 import axios from "axios";
-import { Context } from "../Context";
-import { Button, Box } from "@chakra-ui/core";
+import { Context } from "../../Context";
+import { Heading, Button, Select, Box } from "@chakra-ui/core";
 
-function FilterSidebar() {
+function Filter() {
   const [genre, setGenre] = useState("Genre");
   const [year, setYear] = useState("Year");
+  const genreOption = useRef(null);
+  const yearOption = useRef(null);
   const [submit, setSubmit] = useState(false);
   const inputEl = useRef(null);
   const selectEl = useRef(null);
-  const { setSearchResults, APIKEY, setDefaultMovies, setSearch } = useContext(
-    Context
-  );
+  const {
+    APIKEY,
+    setDefaultMovies,
+    setHomePageResults
+  } = useContext(Context);
 
   function formSubmit(e) {
     e.preventDefault();
     setSubmit(true);
     setGenre(inputEl.current.value);
     setYear(selectEl.current.value);
+    genreOption.current.disabled = true;
+
+    yearOption.current.disabled = true;
   }
 
   useEffect(() => {
@@ -28,11 +36,10 @@ function FilterSidebar() {
           .get(
             `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}`
           )
-          .then((res) => {
-            setSearchResults(res.data.results);
+          .then(res => {
+            setHomePageResults(res.data.results);
             setDefaultMovies(false);
             setSubmit(false);
-            setSearch("");
           });
       } catch (err) {
         console.log(err);
@@ -41,8 +48,8 @@ function FilterSidebar() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submit]);
 
-  const sidebar = {
-    marginTop: "100px",
+  const filterbar = {
+    marginTop: "125px",
     textAlign: "center",
   };
   const filterButton = {
@@ -57,7 +64,6 @@ function FilterSidebar() {
   };
 
   const selectStyles = {
-    marginRight: "10px",
     position: "relative",
     width: "10em",
     height: "2.2em",
@@ -70,17 +76,19 @@ function FilterSidebar() {
     paddingLeft: "15px",
     fontSize: "0.8em",
   };
-  console.log("filter");
+
   return (
-    <div style={sidebar}>
-      <form onSubmit={formSubmit}>
-        <Box d="inline" color="primaryText" fontSize="0.9em" marginRight="10px">
+    <div style={filterbar}>
+      <form
+        className="form"
+        onSubmit={formSubmit}
+        style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
+      >
+        <Box d="inline" color="primaryText" fontSize="1em" mx="7px" my="5px">
           Find Movies By
         </Box>
-        <select ref={inputEl} style={selectStyles}>
-          <option value disabled>
-            Genre
-          </option>
+        <Select ref={inputEl} style={selectStyles} w="8em" mx="7px" my="7px">
+          <option ref={genreOption}>Genre</option>
           <option value="28">Action</option>
 
           <option value="12">Adventure</option>
@@ -94,30 +102,27 @@ function FilterSidebar() {
           <option value="10402">Music</option>
           <option value="9648">Mystery</option>
           <option value="10749">Romance</option>
-
           <option value="878">Science Fiction</option>
           <option value="10770">Tv Movie</option>
           <option value="53">Thriller</option>
           <option value="10752">War</option>
-        </select>
+        </Select>
 
-        <select ref={selectEl} style={selectStyles}>
-          <option value disabled>
-            Year
-          </option>
+        <Select ref={selectEl} style={selectStyles} w="8em" mx="7px" my="7px">
+          <option ref={yearOption}>Year</option>
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>
           <option>2017</option>
           <option>2016</option>
-          <option>2016</option>
           <option>2015</option>
+          <option>2014</option>
           <option>2013</option>
           <option>2012</option>
           <option>2011</option>
           <option>2010</option>
           <option>2009</option>
-        </select>
+        </Select>
 
         <Button
           backgroundColor="primaryBackground"
@@ -126,6 +131,8 @@ function FilterSidebar() {
           style={filterButton}
           _hover={{ backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
           type="submit"
+          mx="7px" 
+          my="7px"
         >
           Submit
         </Button>
@@ -134,4 +141,4 @@ function FilterSidebar() {
   );
 }
 
-export default FilterSidebar;
+export default Filter;

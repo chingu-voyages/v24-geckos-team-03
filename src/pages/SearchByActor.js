@@ -6,6 +6,7 @@ import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
 
+
 function SearchByActor() {
   const { APIKEY, ImageUrl, setNavShadow, navShadow } = useContext(Context);
 
@@ -87,7 +88,7 @@ function SearchByActor() {
               objectFit="cover"
               rounded="lg"
             />
-            <Box m="10px" color="primaryText" fontSize="0.8em">
+            <Box m="10px" color="primaryText" fontSize="0.9em">
               Actor Biography: {personDetails.biography}
             </Box>
           </ChakraGrid>

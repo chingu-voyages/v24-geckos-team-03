@@ -8,8 +8,8 @@ function Movieboxes(props) {
     <PseudoBox
       onClick={() => onClick()}
       bg="cardBackground"
-      w="15vw"
-      minW="150px"
+      w="13vw"
+      minW="175px"
       m={4}
       color="primaryText"
       cursor="pointer"
@@ -40,7 +40,7 @@ function Movieboxes(props) {
       </Box>
       <Image rounded="lg" src={imageSrc} objectFit="cover" />
 
-      <Box m="5px" textAlign="center">
+      <Box m="5px" textAlign="center" fontSize="1.1em">
         {`${title} (${year})`}
       </Box>
     </PseudoBox>
