@@ -36,7 +36,7 @@ function Movieboxes(props) {
         <Box d="inline">
           {rating}
         </Box>
-        <Icon name="star" paddingLeft="2px" paddingBottom="3px"/>
+        <Icon name="star" paddingLeft="2px" paddingBottom="3px" color="#ffff00"/>
       </Box>
       <Image rounded="lg" src={imageSrc} objectFit="cover" />
 
