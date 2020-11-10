@@ -15,9 +15,9 @@ const App = () => {
         <Route exact path="/">
           <Homepage />
         </Route>  
-        <Route path="/favorites" component={FavoriteMoviespage} />
-      </Switch>
-      <Switch>
+        <Route path="/favorites">
+          <FavoriteMoviespage />
+        </Route>
         <Route path="/moviedetailspage/:movieId">
           <MovieDetailsPage />
         </Route>
