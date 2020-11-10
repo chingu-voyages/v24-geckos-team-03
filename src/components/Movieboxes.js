@@ -22,26 +22,31 @@ function Movieboxes(props) {
       _hover={{ borderColor: "#666", opacity: "1" }}
       position="relative"
     >
-      <Box
-        position="absolute"
-        top="8px"
-        right="8px"
-        backgroundColor="rgb(0,0,0,0.6)"
-        p="0.5em"
-        lineHeight="1em"
-        borderRadius="1em"
-        h="2em"
-        color="primaryText"
-      >
-        <Box d="inline">
-          {rating}
+      {rating !== null && (
+        <Box
+          position="absolute"
+          top="8px"
+          right="8px"
+          backgroundColor="rgb(0,0,0,0.6)"
+          p="0.5em"
+          lineHeight="1em"
+          borderRadius="1em"
+          h="2em"
+          color="primaryText"
+        >
+          <Box d="inline">{rating}</Box>
+          <Icon
+            name="star"
+            paddingLeft="2px"
+            paddingBottom="3px"
+            color="#ffff00"
+          />
         </Box>
-        <Icon name="star" paddingLeft="2px" paddingBottom="3px" color="#ffff00"/>
-      </Box>
+      )}
       <Image rounded="lg" src={imageSrc} objectFit="cover" />
 
       <Box m="5px" textAlign="center" fontSize="1.1em">
-        {`${title} (${year})`}
+        {`${title} ${year !== null ? `(${year})` : ""}`}
       </Box>
     </PseudoBox>
   );

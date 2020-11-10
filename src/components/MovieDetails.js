@@ -46,6 +46,8 @@ const handleAddToFavorites = () => {
       id: movieDetails.id,
       movieImage: ImageUrl + movieDetails.poster_path,
       movieTitle: movieDetails.title,
+      movieReleaseDate: movieDetails.release_date,
+      movieRating: movieDetails.vote_average,
     })
   
   }
