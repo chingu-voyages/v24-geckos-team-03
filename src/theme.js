@@ -6,6 +6,7 @@ export const customTheme = {
     colors: {
       ...theme.colors,
       primaryBackground: "#333",
+      cardBackground: "#333",
       primaryBorder: "#555",
       logoText: "#49c3fd",
       primaryText: "#fff",

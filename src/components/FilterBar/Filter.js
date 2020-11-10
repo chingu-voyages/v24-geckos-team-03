@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
-import { Heading, Button, Select } from "@chakra-ui/core";
+import { Heading, Button, Select, Box } from "@chakra-ui/core";
 
 function Filter() {
   const [genre, setGenre] = useState("Genre");
@@ -15,7 +15,6 @@ function Filter() {
   const {
     APIKEY,
     setDefaultMovies,
-    setSearch,
     setHomePageResults
   } = useContext(Context);
 
@@ -31,7 +30,7 @@ function Filter() {
 
   useEffect(() => {
     //   Checks wheither if correct selections are submitted
-    if (genre != "Genre" && year != "Year") {
+    if (genre !== "Genre" && year !== "Year") {
       try {
         axios
           .get(
@@ -46,51 +45,49 @@ function Filter() {
         console.log(err);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submit]);
 
   const filterbar = {
-    marginTop: "250px",
-    textAlign: "center"
+    marginTop: "125px",
+    textAlign: "center",
   };
   const filterButton = {
-    border: "none",
-    color: "black",
-    padding: "8px 32px",
+    height: "2em",
+    borderWidth: "2px",
     textAlign: "center",
     textDecoration: "none",
     display: "inlineBlock",
-    fontSize: "16px",
-    margin: "4px 2px",
+    fontSize: "0.9em",
     cursor: "pointer",
-    backgroundColor: "#2c3e50",
-    borderRadius: "30px",
-    outline: "none"
+    borderRadius: "1em",
   };
 
   const selectStyles = {
-    marginRight: "10px",
     position: "relative",
-
-    width: "20em",
-    height: "3em",
-    lineHeight: "3",
-    background: "#2c3e50",
+    width: "10em",
+    height: "2.2em",
+    lineHeight: "2em",
+    background: "#444", //"#2c3e50",
     overflow: "hidden",
-    borderRadius: ".25em",
-    padding: "0 .5em",
+    borderRadius: "1em",
     color: "#fff",
-    cursor: "pointer"
+    cursor: "pointer",
+    paddingLeft: "15px",
+    fontSize: "0.8em",
   };
 
   return (
     <div style={filterbar}>
-      <Heading color="white">Find Movies By</Heading>
       <form
         className="form"
         onSubmit={formSubmit}
         style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
       >
-        <Select ref={inputEl} style={selectStyles} w="20em">
+        <Box d="inline" color="primaryText" fontSize="1em" mx="7px" my="5px">
+          Find Movies By
+        </Box>
+        <Select ref={inputEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={genreOption}>Genre</option>
           <option value="28">Action</option>
 
@@ -105,22 +102,21 @@ function Filter() {
           <option value="10402">Music</option>
           <option value="9648">Mystery</option>
           <option value="10749">Romance</option>
-
           <option value="878">Science Fiction</option>
           <option value="10770">Tv Movie</option>
           <option value="53">Thriller</option>
           <option value="10752">War</option>
         </Select>
 
-        <Select ref={selectEl} style={selectStyles} w="20em">
+        <Select ref={selectEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={yearOption}>Year</option>
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>
           <option>2017</option>
           <option>2016</option>
-          <option>2016</option>
           <option>2015</option>
+          <option>2014</option>
           <option>2013</option>
           <option>2012</option>
           <option>2011</option>
@@ -128,7 +124,18 @@ function Filter() {
           <option>2009</option>
         </Select>
 
-        <button style={filterButton}>Submit</button>
+        <Button
+          backgroundColor="primaryBackground"
+          borderColor="logoText"
+          color="logoText"
+          style={filterButton}
+          _hover={{ backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
+          type="submit"
+          mx="7px" 
+          my="7px"
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );

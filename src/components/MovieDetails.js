@@ -46,6 +46,8 @@ const handleAddToFavorites = () => {
       id: movieDetails.id,
       movieImage: ImageUrl + movieDetails.poster_path,
       movieTitle: movieDetails.title,
+      movieReleaseDate: movieDetails.release_date,
+      movieRating: movieDetails.vote_average,
     })
   
   }
@@ -207,7 +209,7 @@ const [isFaved, setisFaved] = useState();
                         ? "?"
                         : `${movieDetails.runtime} minutes`}
                     </Box>
-                    <Box>Popularity: {movieDetails.popularity}</Box>
+                    <Box>Rating: {movieDetails.vote_average}</Box>
                     <Box>Status: {movieDetails.status}</Box>
                     <Box>
                       Release Date:{" "}

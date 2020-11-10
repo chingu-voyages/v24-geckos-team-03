@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Localbase from 'localbase';
 const Context = React.createContext();
 
@@ -10,6 +9,7 @@ function ContextProvider(props) {
   const [defaultMovies, setDefaultMovies] = useState(true); // state checks wheither favorite movies are displaying or not
   const [search, setSearch] = useState(""); // save search input
   const [searchResults, setSearchResults] = useState([]); // saves search results
+  const [navShadow, setNavShadow] = useState(false);
   const [homePageResults, setHomePageResults] = useState([]); // saves popular movies or filtered results
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
@@ -41,6 +41,8 @@ const [allFavMovies, setAllFavMovies] = useState([]);
         db,
         allFavMovies,
         setDefaultMovies,
+        navShadow,
+        setNavShadow,
         defaultMovies
       }}
     >
