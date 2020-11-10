@@ -1,13 +1,19 @@
 import React, { useContext } from "react";
 import Searchbar from './Searchbar';
 import { Link as RouterLink } from "react-router-dom";
-import { ThemeProvider, Box, Flex, Link, Image,  Switch , Heading, Stack} from "@chakra-ui/core";
 import { Context } from "../Context";
+import {
+  Box,
+  Image,
+  Link,
+  Switch,
+  Heading,
+  Stack
+} from "@chakra-ui/core";
 
 const NavBar = () => {
-  const { setDefaultMovies, defaultMovies, setPersonId } = useContext(Context);
+  const { setDefaultMovies, defaultMovies } = useContext(Context);
   const clicked = () => {
-    setPersonId(null);
     setDefaultMovies(true);
     console.log(defaultMovies);
     console.log("hello");

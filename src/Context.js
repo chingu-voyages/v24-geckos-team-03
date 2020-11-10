@@ -12,19 +12,19 @@ function ContextProvider(props) {
   const [search, setSearch] = useState(""); // save search input
   const [searchResults, setSearchResults] = useState([]); // saves search results
 
-  const [personId, setPersonId] = useState(null);
-  const [personName, setPersonName] = useState("");
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
 //Create a LOCAL DATABASE using localbase imported. 
-  let db = new Localbase('db');
-  const [allFavMovies, setAllFavMovies] = useState([]);
+let db = new Localbase('db');
+const [allFavMovies, setAllFavMovies] = useState([]);
   //Get data from the DB and store all favotired movies to an array
     useEffect(() => {
       db.collection('favoriteMovies').get().then(movies =>{
         setAllFavMovies(movies);
+        console.log(db);
       });
-    }, []);
+    },[]);
+
 
   // check if the actor query string is populated
   //const params = new URLSearchParams(window.location.search);
@@ -32,53 +32,20 @@ function ContextProvider(props) {
 
   useEffect(() => {
     if (defaultMovies === true) {
-      let searchByActorFailed = false;
-
-      // if a person_id was passed, then search for the movies that have that actor
-      if (personId !== null) {
-        try {
-          axios
-            .get(
-              // retrieve actor's name based on personId
-              `https://api.themoviedb.org/3/person/${personId}?api_key=${APIKEY}`
-            )
-            .then(res => {
-              setPersonName(res.data.name);
-            });
-
-          axios
-            .get(
-              `https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=${APIKEY}`
-              // note: although this api is different from trending movies, it contains the id, title, poster fields we use
-            )
-            .then(res => {
-              setIsSearch(false); // need to clear this so heading shows up
-              setSearchResults(res.data.cast);
-              setDefaultMovies(true);
-            });
-        } catch (err) {
-          console.log(err);
-          // if search by actor doesn't work, then try to grab the trending movies
-          searchByActorFailed = true;
-        }
-      }
-      if (searchByActorFailed || personId === null) {
-        setPersonName(""); // clear name if personId is null
-        try {
-          axios
-            .get(
-              `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
-            )
-            .then(res => {
-              setSearchResults(res.data.results);
-              setDefaultMovies(true);
-            });
-        } catch (err) {
-          console.log(err);
-        }
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
+          )
+          .then((res) => {
+            setSearchResults(res.data.results);
+            setDefaultMovies(true);
+          });
+      } catch (err) {
+        console.log(err);
       }
     }
-  }, [defaultMovies, personId]);
+  }, [defaultMovies]);
 
   return (
     <Context.Provider
@@ -94,8 +61,6 @@ function ContextProvider(props) {
         db,
         allFavMovies,
         setDefaultMovies,
-        personName,
-        setPersonId
       }}
     >
       {props.children}

@@ -1,8 +1,10 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
-import {BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
+import {BrowserRouter, Switch, Route } from "react-router-dom";
 import FavoriteMoviespage from './pages/FavoriteMoviespage';
 import MovieDetailsPage from "./pages/MovieDetailsPage";
+import SearchByActor from "./pages/SearchByActor";
+
 
 const App = () => {
   return (
@@ -15,8 +17,14 @@ const App = () => {
         <Route path="/favorites" component={FavoriteMoviespage} />
       </Switch>
       <Switch>
-        <Route path="/:movieId">
+      <Route path="/moviedetailspage/:movieId">
           <MovieDetailsPage />
+        </Route>
+        <Route path="/actor/:personId">
+          <SearchByActor />
+        </Route>
+        <Route path="/">
+          <Homepage />
         </Route>
       </Switch>
     </div>

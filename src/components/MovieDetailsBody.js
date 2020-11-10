@@ -5,15 +5,11 @@ import { Box, Heading, Image, Text, Flex } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
 
 function MovieDetailsBody(props) {
-  const { APIKEY, ImageUrl, setPersonId } = useContext(Context);
+  const { APIKEY, ImageUrl } = useContext(Context);
 
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
   const [movieTrailers, setMovieTrailers] = useState([]);
-
-  function searchByActor(person_id) {
-    setPersonId(person_id);
-  }
 
   const youtubeLink = `https://www.youtube.com/embed/`;
   let castList = []; // Holds all the movie cast headshots/name/
@@ -31,20 +27,21 @@ function MovieDetailsBody(props) {
           character,
           name,
           profile_path,
-          id: person_id
+          id: person_id,
         } = castMember;
 
         return (
           <Box key={cast_id} textAlign="center">
-            <Image
-              m="0 auto"
-              // onClick={() => searchByActor(person_id)} Will implement in next week MVP
-              cursor="pointer"
-              rounded="lg"
-              src={ImageUrl + profile_path}
-              h="80px"
-              objectFit="cover"
-            />
+            <Link to={`/actor/${person_id}`}>
+              <Image
+                m="0 auto"
+                cursor="pointer"
+                rounded="lg"
+                src={ImageUrl + profile_path}
+                h="80px"
+                objectFit="cover"
+              />
+            </Link>
             <Box p="7px">
               {name} <br />{" "}
               <Text fontSize="0.9em" fontStyle="italic">
@@ -60,10 +57,11 @@ function MovieDetailsBody(props) {
 
   let movieTrailersboxes = [];
   if (movieTrailers.length > 0) {
-    movieTrailersboxes = movieTrailers.map(trailer => {
+    movieTrailersboxes = movieTrailers.map((trailer) => {
       return (
         <Box mr="10px" key={trailer.id}>
           <iframe
+            title={trailer.original_title}
             width="420"
             height="345"
             src={`${youtubeLink}${trailer.key}`}
@@ -80,7 +78,7 @@ function MovieDetailsBody(props) {
     try {
       axios
         .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${APIKEY}`)
-        .then(res => {
+        .then((res) => {
           // stores movie data using movie ID
           setMovieData(res.data);
         });
@@ -92,7 +90,7 @@ function MovieDetailsBody(props) {
         .get(
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=${APIKEY}&append_to_response=videos`
         )
-        .then(res => {
+        .then((res) => {
           // stores all movie trailers keys
           setMovieTrailers(res.data.videos.results);
         });
@@ -104,21 +102,21 @@ function MovieDetailsBody(props) {
         .get(
           `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${APIKEY}`
         )
-        .then(res => {
+        .then((res) => {
           // stores cast data using movie ID
           setMovieCast(res.data.cast);
         });
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [APIKEY, movieId]);
   console.log(movieTrailers);
 
   // styling varibles
   const detailBody = {
     backgroundColor: "#333333",
     height: "100vh",
-    width: "100vw"
+    width: "100vw",
   };
 
   const imageContainer = {
@@ -126,13 +124,13 @@ function MovieDetailsBody(props) {
     width: "100vw",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${movieData.backdrop_path})`,
     backgroundSize: "cover",
-    position: "relative"
+    position: "relative",
   };
 
   const container = {
     maxWidth: "80%",
     margin: "0 auto",
-    color: "white"
+    color: "white",
   };
   return (
     <>
@@ -144,7 +142,7 @@ function MovieDetailsBody(props) {
             left: "0",
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0,0,0,0.5)"
+            backgroundColor: "rgba(0,0,0,0.5)",
           }}
         >
           <div style={container}>
@@ -157,7 +155,7 @@ function MovieDetailsBody(props) {
                   color: "white",
                   fontSize: "80px",
                   position: "absolute",
-                  top: "50px"
+                  top: "50px",
                 }}
               >
                 &#8592;

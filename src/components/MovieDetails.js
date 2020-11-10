@@ -14,60 +14,60 @@ import {
   Box,
   Grid,
   Image,
-  Text
+  Text,
 } from "@chakra-ui/core";
 import axios from "axios";
 import FavoriteMovies from './FavoriteMovies';
+import Movieboxes from './Movieboxes';
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl, setPersonId, setDefaultMovies, allFavMovies, db} = useContext(
+  const { APIKEY, ImageUrl, allFavMovies, db} = useContext(
     Context
   );
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
 
+
 //create a handler for "add to favorites" button on the Modal.
-  const handleAddToFavorites = () => {
+const [isFavorited, setisFavorited] = useState();
+
+
+const handleAddToFavorites = () => {
     //Check for duplicate entries on the database before adding a movie.
     for (let i = 0; i < allFavMovies.length; i++) {
-        if (allFavMovies[i].id === movieDetails.id) {
-          console.log('Movie exists');
-          return null;
-        }
+      if (allFavMovies[i].id === movieDetails.id) {
+        console.log('movie exists')
+        return null;
+      }
   }
     //add image and title of movies clicked to the DB
-  db.collection('favoriteMovies').add({
-    id: movieDetails.id,
-    movieImage: ImageUrl + movieDetails.poster_path,
-    movieTitle: movieDetails.title,
-  })
+    db.collection('favoriteMovies').add({
+      id: movieDetails.id,
+      movieImage: ImageUrl + movieDetails.poster_path,
+      movieTitle: movieDetails.title,
+    })
   
   }
  
 
-const RemoveFavButton = () => {
-    return (
-      <Button
-        borderColor="logoText"
-        borderWidth="3px"
-        backgroundColor="primaryBackground"
-        color="logoText"
-        _hover
-        mr={3} 
-    >
-      Remove from favorites
-    </Button>
-    )
-}
 
-function searchByActor(person_id) {
-  setPersonId(person_id);
-  setDefaultMovies(true);
-  onClose();
-}
+// function searchByActor(person_id) {
+//   setPersonId(person_id);
+//   setDefaultMovies(true);
+//   onClose();
+// }
 
+const [isFave, setisFave] = useState(false);
+//check if a movie is favorited;
   useEffect(() => {
+    setisFave(false);
+    allFavMovies.forEach(movie => {
+      if (movie.id === id) {
+        setisFave(true);
+      }
+    })
+  
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
       setMovieCredits(null);
@@ -77,7 +77,7 @@ function searchByActor(person_id) {
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`
           )
-          .then(res => {
+          .then((res) => {
             setMovieDetails(res.data);
           });
       } catch (err) {
@@ -90,7 +90,7 @@ function searchByActor(person_id) {
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}`
           )
-          .then(res => {
+          .then((res) => {
             setMovieCredits(res.data.cast);
           });
       } catch (err) {
@@ -107,7 +107,7 @@ function searchByActor(person_id) {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   });
 
   let castList = [];
@@ -124,7 +124,7 @@ function searchByActor(person_id) {
           character,
           name,
           profile_path,
-          id: person_id
+          id: person_id,
         } = castMember;
 
         return (
@@ -137,14 +137,15 @@ function searchByActor(person_id) {
               templateColumns="30% 70%"
               columnGap="3px"
             >
-              <Image
-                onClick={() => searchByActor(person_id)}
-                cursor="pointer"
-                rounded="lg"
-                src={ImageUrl + profile_path}
-                h="80px"
-                objectFit="cover"
-              />
+              <Link to={`/actor/${person_id}`}>
+                <Image
+                  cursor="pointer"
+                  rounded="lg"
+                  src={ImageUrl + profile_path}
+                  h="80px"
+                  objectFit="cover"
+                />
+              </Link>
               <Box p="7px">
                 {name} <br />{" "}
                 <Text fontSize="0.9em" fontStyle="italic">
@@ -156,86 +157,102 @@ function searchByActor(person_id) {
         );
       });
   }
-      return (
-        <>
-          <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            {movieDetails !== null &&
-            movieCredits !== null && ( // boolean && will only execute what comes next if true
-                <ModalContent bg="primaryBackground" color="primaryText">
-                  <ModalHeader>{movieDetails.title}</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    <Stack>
-                      <Box>Summary</Box>
-                      <Box
-                        p="10px"
-                        borderWidth="1px"
-                        borderColor="primaryBorder"
-                        rounded="lg"
-                        fontSize="0.9em"
-                      >
-                        {movieDetails.overview}
+
+//Check if movie is favorited 
+const [isFaved, setisFaved] = useState();
+// const checkFavorited = () => {
+//     let favorited = "";
+//     for (let i = 0; i < allFavMovies.length; i++) {
+//       if (allFavMovies[i].id === movieDetails.id) {
+//         setisFaved(movieDetails.id)
+//         console.log(isFaved);
+//       }
+//   }
+// }
+
+  return (
+    <>
+      <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        {movieDetails !== null &&
+          movieCredits !== null && ( // boolean && will only execute what comes next if true
+            <ModalContent bg="primaryBackground" color="primaryText">
+              <ModalHeader>{movieDetails.title}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Stack>
+                  <Box>Summary</Box>
+                  <Box
+                    p="10px"
+                    borderWidth="1px"
+                    borderColor="primaryBorder"
+                    rounded="lg"
+                    fontSize="0.9em"
+                  >
+                    {movieDetails.overview}
+                  </Box>
+                  <Box mt="15px">Details</Box>
+                  <Grid
+                    p="10px"
+                    borderWidth="1px"
+                    borderColor="primaryBorder"
+                    rounded="lg"
+                    templateColumns="50% 50%"
+                    columnGap="10px"
+                    fontSize="0.8em"
+                  >
+                    <Box>
+                      Runtime:{" "}
+                      {movieDetails.runtime === 0
+                        ? "?"
+                        : `${movieDetails.runtime} minutes`}
+                    </Box>
+                    <Box>Popularity: {movieDetails.popularity}</Box>
+                    <Box>Status: {movieDetails.status}</Box>
+                    <Box>
+                      Release Date:{" "}
+                      {new Date(movieDetails.release_date).toLocaleDateString()}
+                    </Box>
+                    {movieDetails.budget !== 0 && (
+                      <Box>Budget: {formatter.format(movieDetails.budget)}</Box>
+                    )}
+                    {movieDetails.revenue !== 0 && (
+                      <Box>
+                        Revenue: {formatter.format(movieDetails.revenue)}
                       </Box>
-                      <Box mt="15px">Details</Box>
-                      <Grid
-                        p="10px"
-                        borderWidth="1px"
-                        borderColor="primaryBorder"
-                        rounded="lg"
-                        templateColumns="50% 50%"
-                        columnGap="10px"
-                        fontSize="0.8em"
-                      >
-                        <Box>
-                          Runtime:{" "}
-                          {movieDetails.runtime === 0
-                            ? "?"
-                            : `${movieDetails.runtime} minutes`}
-                        </Box>
-                        <Box>Popularity: {movieDetails.popularity}</Box>
-                        <Box>Status: {movieDetails.status}</Box>
-                        <Box>
-                          Release Date:{" "}
-                          {new Date(movieDetails.release_date).toLocaleDateString()}
-                        </Box>
-                        {movieDetails.budget !== 0 && (
-                          <Box>Budget: {formatter.format(movieDetails.budget)}</Box>
-                        )}
-                        {movieDetails.revenue !== 0 && (
-                          <Box>
-                            Revenue: {formatter.format(movieDetails.revenue)}
-                          </Box>
-                        )}
-                      </Grid>
-                      <Box mt="15px">Cast</Box>
-    
-                      {movieCredits !== null && (
-                        <Grid
-                          templateColumns="50% 50%"
-                          columnGap="10px"
-                          rowGap="10px"
-                          fontSize="0.7em"
-                        >
-                          {castList}
-                        </Grid>
-                      )}
-    
-                      <Box
-                        p="10px"
-                        textAlign="center"
-                        color="logoText"
-                        fontStyle="italic"
-                        fontSize="1.1em"
-                      >
-                        {movieDetails.tagline}
-                      </Box>
-                    </Stack>
-                  </ModalBody>
-    
-                  <ModalFooter>
-                     {/* Added an Add to Favorites buttom - Erion */}
-                <Button
+                    )}
+                  </Grid>
+                  <Box mt="15px">Cast</Box>
+
+                  {movieCredits !== null && (
+                    <Grid
+                      templateColumns="50% 50%"
+                      columnGap="10px"
+                      rowGap="10px"
+                      fontSize="0.7em"
+                    >
+                      {castList}
+                    </Grid>
+                  )}
+
+                  <Box
+                    p="10px"
+                    textAlign="center"
+                    color="logoText"
+                    fontStyle="italic"
+                    fontSize="1.1em"
+                  >
+                    {movieDetails.tagline}
+                  </Box>
+                </Stack>
+              </ModalBody>
+
+              <ModalFooter>  
+              {isFave
+              ? <Button>Remove</Button>
+              : <Button onClick={handleAddToFavorites}>Add</Button>}
+         
+            {/* <Button
                     borderColor="logoText"
                     borderWidth="3px"
                     backgroundColor="primaryBackground"
@@ -243,40 +260,39 @@ function searchByActor(person_id) {
                     _hover
                     mr={3} 
                     onClick={handleAddToFavorites}
-                  >
+              >
                     Add to favorites
+              </Button>   */}
+              <Link to={`/moviedetailspage/${id}`}>
+                  {" "}
+                  <Button
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3}
+                    onClick={onClose}
+                  >
+                    More Details
                   </Button>
-                    <Button
-                      borderColor="logoText"
-                      borderWidth="3px"
-                      backgroundColor="primaryBackground"
-                      color="logoText"
-                      _hover
-                      mr={3}
-                      onClick={onClose}
-                    >
-                      Close
-                    </Button>
-                    <Link to={`/${id}`}>
-                      {" "}
-                      <Button
-                        borderColor="logoText"
-                        borderWidth="3px"
-                        backgroundColor="primaryBackground"
-                        color="logoText"
-                        _hover
-                        mr={3}
-                        onClick={onClose}
-                      >
-                        More Details
-                      </Button>
-       
-                    </Link>
-                  </ModalFooter>
-                </ModalContent>
-              )}
-          </Modal>
-        </>
-      )
+                </Link>
+                <Button
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor="primaryBackground"
+                  color="logoText"
+                  _hover
+                  mr={3}
+                  onClick={onClose}
+                >
+                  Close
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          )}
+      </Modal>
+    </>
+  );
 }
 export default MovieDetails;

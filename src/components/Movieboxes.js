@@ -12,6 +12,7 @@ function Movieboxes(props) {
       m={4}
       color="primaryText"
       fontSize={"16px"}
+      cursor="pointer"
     >
       <Image src={imageSrc} w="170px" h={"220px"} objectFit="cover" />
 

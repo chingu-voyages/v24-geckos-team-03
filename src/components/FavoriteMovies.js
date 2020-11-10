@@ -1,11 +1,22 @@
 import React, { useContext, useEffect, useState} from "react";
 import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
+import MovieDetails from "./MovieDetails";
+import { useDisclosure } from "@chakra-ui/core";
 
 const FavoriteMovies = () => {
-    const {allFavMovies} = useContext(Context);
+    const [movieId, setMovieId] = useState(null);
     
-      //Check for duplicate entries on the database before adding a movie.
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    function onHandleMovieClick(id) {
+        setMovieId(id);
+        onOpen();
+      }
+
+    const {allFavMovies} = useContext(Context);
+
+
 
     //styles for the grid
     const gridStyles = {
@@ -26,12 +37,13 @@ const FavoriteMovies = () => {
                                 key={movie.id}
                                 title={movie.movieTitle}
                                 imageSrc={movie.movieImage}
-                            
+                                onClick={() => onHandleMovieClick(movie.id)}
                             />
                         )
                         
                     })}
             </div>
+            <MovieDetails isOpen={isOpen} onClose={onClose} id={movieId} />
         </>
     )
                       
