@@ -7,6 +7,7 @@ import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
 
+
 function SearchByActor() {
   const { APIKEY, ImageUrl } = useContext(Context);
 

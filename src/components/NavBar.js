@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import Searchbar from "./Searchbar";
+import Searchbar from './Searchbar';
+import { Link as RouterLink } from "react-router-dom";
 import { Link as Links } from "react-router-dom";
 import { Context } from "../Context";
 import { Box, Image, Link, Switch, Heading, Stack } from "@chakra-ui/core";
@@ -15,48 +16,53 @@ const NavBar = () => {
     setDefaultMovies(true);
   };
 
+  const stickyNav = {
+    position : "fixed",
+    boxShadow : "0 2px 2px #49c3fd",
+    zIndex : "9999"
+
+  }
+
   return (
-    <Box
-      className="nav-bar"
-      style={{ top: 0 }}
-      bg="primaryBackground"
-      w="100%"
-      px={5}
-      py={2}
-    >
+         <Box bg="primaryBackground" 
+          w="100%" 
+          px={5} 
+          py={5}
+          paddingBottom="10px" 
+          style={stickyNav}
+
+          >
+
       <Stack isInline justifyContent="space-between">
-        {" "}
-        <Links to="/">
-          {" "}
+        <Link as={RouterLink} to="/">
           <Stack isInline onClick={clicked}>
             <Image
               src="https://cdn1.iconfinder.com/data/icons/media-colorful-1/48/film_roll-512.png"
-              size={30}
-            />{" "}
-            <Heading as="h3" size="lg" color="logoText">
-              Daily Flix
+              size={46}
+            />
+            <Heading as="h3" size="xl" fontWeight="200" color="#49c3fd" fontFamily="Gugi, cursive">
+              DAILY FLIX
             </Heading>
           </Stack>
-        </Links>
-        <Stack isInline>
-          <Searchbar />
-          <Switch size="sm" ml={2} />
+          </Link>
+          <Stack isInline>
+            <Searchbar />
+            <Switch size="sm" ml={2}/>
+          </Stack>
         </Stack>
-      </Stack>
-
-      <Box float="right" mr={10}>
-        <Link px={2} color="primaryText" className="link">
-          My Favorites
-        </Link>
-        <Link px={2} color="primaryText" className="link">
-          Watched
-        </Link>
-        <Link px={2} color="primaryText" className="link">
-          Watch List
-        </Link>
+        <Box float="right" marginRight="198px">
+            {/* Use RouterLink as written in ChakraUI docs */}
+            <Link textDecoration="none" _hover={{color : "#49c3fd"}} as={RouterLink} to="/favorites" px={2} color="#fff" className="link">My Favorites</Link>
+            <Link _hover={{color : "#49c3fd"}} className="navbar-links" px={2} color="#fff" className="link">Watch List</Link>
+        </Box>
       </Box>
-    </Box>
-  );
-};
+
+ 
+      
+    )
+}
+
 
 export default NavBar;
+
+

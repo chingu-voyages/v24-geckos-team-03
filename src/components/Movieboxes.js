@@ -16,7 +16,7 @@ function Movieboxes(props) {
     >
       <Image src={imageSrc} w="170px" h={"220px"} objectFit="cover" />
 
-      <h1>{title}</h1>
+      <h1 className="movie-titles">{title}</h1>
     </Box>
   );
 }

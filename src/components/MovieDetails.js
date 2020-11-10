@@ -17,16 +17,57 @@ import {
   Text,
 } from "@chakra-ui/core";
 import axios from "axios";
+import FavoriteMovies from './FavoriteMovies';
+import Movieboxes from './Movieboxes';
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl } = useContext(
+  const { APIKEY, ImageUrl, allFavMovies, db} = useContext(
     Context
   );
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
 
+
+//create a handler for "add to favorites" button on the Modal.
+const [isFavorited, setisFavorited] = useState();
+
+
+const handleAddToFavorites = () => {
+    //Check for duplicate entries on the database before adding a movie.
+    for (let i = 0; i < allFavMovies.length; i++) {
+      if (allFavMovies[i].id === movieDetails.id) {
+        console.log('movie exists')
+        return null;
+      }
+  }
+    //add image and title of movies clicked to the DB
+    db.collection('favoriteMovies').add({
+      id: movieDetails.id,
+      movieImage: ImageUrl + movieDetails.poster_path,
+      movieTitle: movieDetails.title,
+    })
+  
+  }
+ 
+
+
+// function searchByActor(person_id) {
+//   setPersonId(person_id);
+//   setDefaultMovies(true);
+//   onClose();
+// }
+
+const [isFave, setisFave] = useState(false);
+//check if a movie is favorited;
   useEffect(() => {
+    setisFave(false);
+    allFavMovies.forEach(movie => {
+      if (movie.id === id) {
+        setisFave(true);
+      }
+    })
+  
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
       setMovieCredits(null);
@@ -117,6 +158,18 @@ function MovieDetails(props) {
       });
   }
 
+//Check if movie is favorited 
+const [isFaved, setisFaved] = useState();
+// const checkFavorited = () => {
+//     let favorited = "";
+//     for (let i = 0; i < allFavMovies.length; i++) {
+//       if (allFavMovies[i].id === movieDetails.id) {
+//         setisFaved(movieDetails.id)
+//         console.log(isFaved);
+//       }
+//   }
+// }
+
   return (
     <>
       <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
@@ -194,8 +247,23 @@ function MovieDetails(props) {
                 </Stack>
               </ModalBody>
 
-              <ModalFooter>
-                <Link to={`/moviedetailspage/${id}`}>
+              <ModalFooter>  
+              {isFave
+              ? <Button>Remove</Button>
+              : <Button onClick={handleAddToFavorites}>Add</Button>}
+         
+            {/* <Button
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3} 
+                    onClick={handleAddToFavorites}
+              >
+                    Add to favorites
+              </Button>   */}
+              <Link to={`/moviedetailspage/${id}`}>
                   {" "}
                   <Button
                     borderColor="logoText"
@@ -227,5 +295,4 @@ function MovieDetails(props) {
     </>
   );
 }
-
 export default MovieDetails;

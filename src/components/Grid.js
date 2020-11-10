@@ -5,19 +5,16 @@ import { useDisclosure } from "@chakra-ui/core";
 import MovieDetails from "./MovieDetails";
 
 function Grid(props) {
-  const { searchResults } = props;
+  const {searchResults} = props;
 
   const { ImageUrl } = useContext(Context);
 
   const [movieId, setMovieId] = useState(null);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const gridStyles = {
     maxWidth: "1200px",
-
     margin: "0 auto",
-
     marginTop: "5%",
     display: "flex",
     flexWrap: "wrap",
@@ -46,7 +43,6 @@ function Grid(props) {
       <div className="container" style={gridStyles}>
         {searchResults.length > 0 ? movieBoxes : null}
       </div>
-
       <MovieDetails isOpen={isOpen} onClose={onClose} id={movieId} />
     </>
   );

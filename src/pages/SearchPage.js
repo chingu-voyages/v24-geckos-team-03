@@ -16,10 +16,11 @@ function SearchPage() {
         overflow: "scroll"
       }}
     >
-      <Heading paddingY="80px" textAlign="center" color="white">
+       <Navbar />
+      <Heading paddingY="80px" marginY="50px" textAlign="center" color="white">
         {isSearch ? `Search Results for ${search}` : `Search For Movie`}
       </Heading>
-      <Navbar />
+     
       <Grid searchResults={searchResults} />
     </Box>
   );

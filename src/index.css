@@ -8,13 +8,106 @@
 body {
   width: 100%;
   height: 100%;
-}
-.nav-bar {
-  position: fixed;
-  margin-bottom: 5%;
+ 
 }
 
+/* Navbar styles */
 .link {
-  font-size: 80%;
-  font-weight: 300;
+  font-size: 90%;
+  font-weight: 400;
+}
+
+
+/* Page Headings styles -Favorites Page*/
+.page-heading {
+  color: white;
+  font-size: 200%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 135px;
+  margin-bottom: 2%;
+  display: block;
+  text-transform: uppercase;
+  padding: 0 20px;
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+.page-heading::before {
+  content: '';
+  background: white;
+  height: 1px;
+  position: absolute;
+  width: 100%;
+  max-width: 800px;
+  left: 0;
+  top: 50%;
+  z-index: -1;
+}
+.page-heading::after {
+  content: '';
+  background: #333;
+  position: absolute;
+  width: 52%;
+  height: 100%;
+  max-width: 800px;
+  left: 24%;
+  top: 0;
+  z-index: -1;
+}
+
+/* Movie Titles */
+.movie-titles {
+  padding-top: 5px;
+  text-align: left;
+}
+
+/* SEARCH BUTTON styles */
+.search input {
+  width: 300px;
+  height: 35px;
+  border-radius: 30px;
+  outline: none;
+  padding-left: 15px;
+  background: #fff;
+  border: 2px solid #49c3fd;
+  color: #888; 
+  margin-right: 65px;
+}
+
+.search input:focus::placeholder {
+  color: transparent;
+}
+.search input::placeholder{
+  color: #888;
+  opacity: 1; /* ONLY FOR MOZILLA USERS */
+}
+
+.search button {
+  width: 75px;
+  height: 35px;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  background: #49c3fd;
+  transition-property: all;
+  transition-duration: 0.5s;
+  position: absolute;
+  right: 90px;
+  outline: none;
+}
+
+.search button:hover {
+  background: #379fcf;;
+}
+
+.search button i {
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+.search button:hover i {
+  transform: scale(1.5);
+  transition-property: all;
+  transition-duration: 0.5s;
 }

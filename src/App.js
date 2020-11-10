@@ -1,14 +1,23 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
-import MovieDetailsPage from "./pages/MovieDetails";
+import {BrowserRouter, Switch, Route } from "react-router-dom";
+import FavoriteMoviespage from './pages/FavoriteMoviespage';
+import MovieDetailsPage from "./pages/MovieDetailsPage";
 import SearchByActor from "./pages/SearchByActor";
+
 import SearchPage from "./pages/SearchPage";
-import { Switch, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="App">
+    <BrowserRouter>
+        <div className="App">
       <Switch>
+        <Route exact path="/">
+          <Homepage />
+        </Route>  
+        <Route path="/favorites">
+          <FavoriteMoviespage />
+        </Route>
         <Route path="/moviedetailspage/:movieId">
           <MovieDetailsPage />
         </Route>
@@ -24,6 +33,8 @@ const App = () => {
         </Route>
       </Switch>
     </div>
+    </BrowserRouter>
+
   );
 };
 
