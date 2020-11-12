@@ -2,21 +2,18 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
-import { Heading, Button, Select, Box } from "@chakra-ui/core";
+import { Button, Select, Box } from "@chakra-ui/core";
 
 function Filter() {
   const [genre, setGenre] = useState("Genre");
   const [year, setYear] = useState("Year");
+  const [page, setPage] = useState(1);
   const genreOption = useRef(null);
   const yearOption = useRef(null);
   const [submit, setSubmit] = useState(false);
   const inputEl = useRef(null);
   const selectEl = useRef(null);
-  const {
-    APIKEY,
-    setDefaultMovies,
-    setHomePageResults
-  } = useContext(Context);
+  const { APIKEY, setDefaultMovies, setHomePageResults } = useContext(Context);
 
   function formSubmit(e) {
     e.preventDefault();
@@ -28,13 +25,36 @@ function Filter() {
     yearOption.current.disabled = true;
   }
 
+  function add() {
+    setPage(prevPage => prevPage + 1);
+  }
+
+  console.log(page);
+
   useEffect(() => {
     //   Checks wheither if correct selections are submitted
-    if (genre !== "Genre" && year !== "Year") {
+    if (genre !== "Genre") {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&with_genres=${genre}&page=${page}`
+          )
+          .then(res => {
+            setHomePageResults(res.data.results);
+            console.log(res);
+            setDefaultMovies(false);
+            setSubmit(false);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    if (year !== "Year") {
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}`
           )
           .then(res => {
             setHomePageResults(res.data.results);
@@ -45,12 +65,12 @@ function Filter() {
         console.log(err);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submit, page]);
 
   const filterbar = {
     marginTop: "125px",
-    textAlign: "center",
+    textAlign: "center"
   };
   const filterButton = {
     height: "2em",
@@ -60,7 +80,7 @@ function Filter() {
     display: "inlineBlock",
     fontSize: "0.9em",
     cursor: "pointer",
-    borderRadius: "1em",
+    borderRadius: "1em"
   };
 
   const selectStyles = {
@@ -74,7 +94,7 @@ function Filter() {
     color: "#fff",
     cursor: "pointer",
     paddingLeft: "15px",
-    fontSize: "0.8em",
+    fontSize: "0.8em"
   };
 
   return (
@@ -89,6 +109,7 @@ function Filter() {
         </Box>
         <Select ref={inputEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={genreOption}>Genre</option>
+          <option>Off</option>
           <option value="28">Action</option>
 
           <option value="12">Adventure</option>
@@ -110,6 +131,7 @@ function Filter() {
 
         <Select ref={selectEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={yearOption}>Year</option>
+          <option>Off</option>
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>
@@ -129,14 +151,21 @@ function Filter() {
           borderColor="logoText"
           color="logoText"
           style={filterButton}
-          _hover={{ backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
+          _hover={{
+            backgroundColor: "logoText",
+            color: "primaryBackground",
+            fontWeight: "900"
+          }}
           type="submit"
-          mx="7px" 
+          mx="7px"
           my="7px"
         >
           Submit
         </Button>
       </form>
+
+      {/* <button onClick={add}>{page > 1 ? `page `:`page2` } </button>
+      <button onClick={add}></button> */}
     </div>
   );
 }

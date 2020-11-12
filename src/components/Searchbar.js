@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function Search() {
   const history = useHistory();
-  console.log(history);
+
   const {
     setSearchResults,
     searchQuery,
@@ -45,33 +45,15 @@ function Search() {
     }
 
     console.log(searchResults);
-  }, [searchQuery, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
+  }, [
+    searchQuery,
+    setSearchResults,
+    APIKEY,
+    setIsSearch,
+    setDefaultMovies,
+    searchResults
+  ]);
 
-  const buttonStyle = {
-    borderRadius: "0.25rem",
-    fontWeight: 600,
-    display: "inline-flex",
-    appearance: "none",
-    WebkitBoxAlign: "center",
-    alignItems: "center",
-    WebkitBoxPack: "center",
-    justifyContent: "center",
-    transition: "all 250ms ease 0s",
-    userSelect: "none",
-    position: "relative",
-    whiteSpace: "nowrap",
-    verticalAlign: "middle",
-    lineHeight: 1.2,
-    outline: "none",
-    height: "2em",
-    minWidth: "2.5rem",
-    fontSize: "1rem",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
-    backgroundColor: "rgb(237, 242, 247)",
-    marginLeft: "5px",
-    marginRight: "5px"
-  };
   return (
     <div className="search">
       <form onSubmit={searchSubmit}>

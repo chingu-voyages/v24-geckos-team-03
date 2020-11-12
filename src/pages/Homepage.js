@@ -9,7 +9,6 @@ import { Context } from "../Context";
 
 function Homepage() {
   const {
-    isSearch,
     setNavShadow,
     navShadow,
     homePageResults,

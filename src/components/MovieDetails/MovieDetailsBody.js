@@ -8,6 +8,7 @@ import "./MovieDetailsBody.css";
 function MovieDetailsBody(props) {
   const history = useHistory();
   const { APIKEY, ImageUrl, setDefaultMovies } = useContext(Context);
+  const [page, setPage] = useState(1);
 
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
@@ -27,7 +28,6 @@ function MovieDetailsBody(props) {
 
   // movie cast card creator
   if (movieCast !== null) {
-    const numberOfActorsDisplayed = 10;
     // the code beloe takes the first X objects in the movie credit array
     // for each of these, a Box is generated with a headshot, actor name, and character
     castList = movieCast.map((castMember, index) => {
@@ -133,7 +133,7 @@ function MovieDetailsBody(props) {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [APIKEY, movieId]);
 
   // styling varibles
   const detailBody = {
