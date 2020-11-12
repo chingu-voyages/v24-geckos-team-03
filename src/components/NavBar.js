@@ -8,7 +8,6 @@ const NavBar = () => {
   const { setDefaultMovies, navShadow, searchQuery } = useContext(Context);
   const clicked = () => {
     setDefaultMovies(true);
-    console.log(searchQuery.length);
   };
 
   return (

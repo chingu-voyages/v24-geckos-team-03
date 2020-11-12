@@ -229,7 +229,9 @@ function MovieDetailsBody(props) {
           <Box paddingTop="30px">
             <Heading pb="10px">Trailers</Heading>
             <Flex wrap="nowrap" overflowX="auto" justifyContent="center">
-              {movieTrailersboxes}
+              {movieTrailers.length > 0
+                ? movieTrailersboxes
+                : "No Trailers Available"}
             </Flex>
           </Box>
         </Box>

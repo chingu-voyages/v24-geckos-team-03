@@ -35,7 +35,6 @@ function Homepage() {
           )
           .then(res => {
             setHomePageResults(res.data.results);
-            setDefaultMovies(true);
           });
       } catch (err) {
         console.log(err);

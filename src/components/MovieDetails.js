@@ -14,62 +14,55 @@ import {
   Box,
   Grid,
   Image,
-  Text,
+  Text
 } from "@chakra-ui/core";
 import axios from "axios";
-import FavoriteMovies from './FavoriteMovies';
-import Movieboxes from './Movieboxes';
+import FavoriteMovies from "./FavoriteMovies";
+import Movieboxes from "./Movieboxes";
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl, allFavMovies, db} = useContext(
-    Context
-  );
+  const { APIKEY, ImageUrl, allFavMovies, db } = useContext(Context);
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
 
+  //create a handler for "add to favorites" button on the Modal.
+  const [isFavorited, setisFavorited] = useState();
 
-//create a handler for "add to favorites" button on the Modal.
-const [isFavorited, setisFavorited] = useState();
-
-
-const handleAddToFavorites = () => {
+  const handleAddToFavorites = () => {
     //Check for duplicate entries on the database before adding a movie.
     for (let i = 0; i < allFavMovies.length; i++) {
       if (allFavMovies[i].id === movieDetails.id) {
-        console.log('movie exists')
+        console.log("movie exists");
         return null;
       }
-  }
+    }
     //add image and title of movies clicked to the DB
-    db.collection('favoriteMovies').add({
+    db.collection("favoriteMovies").add({
       id: movieDetails.id,
       movieImage: ImageUrl + movieDetails.poster_path,
       movieTitle: movieDetails.title,
       movieReleaseDate: movieDetails.release_date,
-      movieRating: movieDetails.vote_average,
-    })
-  
-  }
- 
+      movieRating: movieDetails.vote_average
+    });
+  };
 
+  // function searchByActor(person_id) {
+  //   setPersonId(person_id);
+  //   setDefaultMovies(true);
+  //   onClose();
+  // }
 
-// function searchByActor(person_id) {
-//   setPersonId(person_id);
-//   setDefaultMovies(true);
-//   onClose();
-// }
-
-const [isFave, setisFave] = useState(false);
-//check if a movie is favorited;
+  const [isFave, setisFave] = useState(false);
+  //check if a movie is favorited;
   useEffect(() => {
     setisFave(false);
     allFavMovies.forEach(movie => {
       if (movie.id === id) {
         setisFave(true);
       }
-    })
-  
+    });
+
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
       setMovieCredits(null);
@@ -79,7 +72,7 @@ const [isFave, setisFave] = useState(false);
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`
           )
-          .then((res) => {
+          .then(res => {
             setMovieDetails(res.data);
           });
       } catch (err) {
@@ -92,7 +85,7 @@ const [isFave, setisFave] = useState(false);
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}`
           )
-          .then((res) => {
+          .then(res => {
             setMovieCredits(res.data.cast);
           });
       } catch (err) {
@@ -109,7 +102,7 @@ const [isFave, setisFave] = useState(false);
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    maximumFractionDigits: 0
   });
 
   let castList = [];
@@ -126,7 +119,7 @@ const [isFave, setisFave] = useState(false);
           character,
           name,
           profile_path,
-          id: person_id,
+          id: person_id
         } = castMember;
 
         return (
@@ -160,24 +153,24 @@ const [isFave, setisFave] = useState(false);
       });
   }
 
-//Check if movie is favorited 
-const [isFaved, setisFaved] = useState();
-// const checkFavorited = () => {
-//     let favorited = "";
-//     for (let i = 0; i < allFavMovies.length; i++) {
-//       if (allFavMovies[i].id === movieDetails.id) {
-//         setisFaved(movieDetails.id)
-//         console.log(isFaved);
-//       }
-//   }
-// }
+  //Check if movie is favorited
+  const [isFaved, setisFaved] = useState();
+  // const checkFavorited = () => {
+  //     let favorited = "";
+  //     for (let i = 0; i < allFavMovies.length; i++) {
+  //       if (allFavMovies[i].id === movieDetails.id) {
+  //         setisFaved(movieDetails.id)
+  //         console.log(isFaved);
+  //       }
+  //   }
+  // }
 
   return (
     <>
       <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         {movieDetails !== null &&
-          movieCredits !== null && ( // boolean && will only execute what comes next if true
+        movieCredits !== null && ( // boolean && will only execute what comes next if true
             <ModalContent bg="primaryBackground" color="primaryText">
               <ModalHeader>{movieDetails.title}</ModalHeader>
               <ModalCloseButton />
@@ -249,12 +242,14 @@ const [isFaved, setisFaved] = useState();
                 </Stack>
               </ModalBody>
 
-              <ModalFooter>  
-              {isFave
-              ? <Button>Remove</Button>
-              : <Button onClick={handleAddToFavorites}>Add</Button>}
-         
-            {/* <Button
+              <ModalFooter>
+                {isFave ? (
+                  <Button>Remove</Button>
+                ) : (
+                  <Button onClick={handleAddToFavorites}>Add</Button>
+                )}
+
+                {/* <Button
                     borderColor="logoText"
                     borderWidth="3px"
                     backgroundColor="primaryBackground"
@@ -265,7 +260,7 @@ const [isFaved, setisFaved] = useState();
               >
                     Add to favorites
               </Button>   */}
-              <Link to={`/moviedetailspage/${id}`}>
+                <Link to={`/moviedetailspage/${id}`}>
                   {" "}
                   <Button
                     borderColor="logoText"

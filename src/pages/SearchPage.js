@@ -5,9 +5,8 @@ import { Heading, Box } from "@chakra-ui/core";
 import { Context } from "../Context";
 
 function SearchPage() {
-  const { searchQuery, searchResults, isSearch } = useContext(Context);
-
-  console.log(searchQuery.length);
+  const { searchQuery, searchResults } = useContext(Context);
+  console.log(searchQuery);
 
   return (
     <Box

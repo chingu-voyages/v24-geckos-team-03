@@ -25,6 +25,7 @@ function Search() {
     setIsSearch(true);
 
     history.push("/searchPage"); // Routes to search page on submit
+    console.log(searchQuery);
   }
 
   useEffect(() => {
@@ -37,22 +38,12 @@ function Search() {
           .then(res => {
             setSearchResults(res.data.results);
             setIsSearch(true);
-            setDefaultMovies(false);
           });
       } catch (err) {
         console.log(err);
       }
     }
-
-    console.log(searchResults);
-  }, [
-    searchQuery,
-    setSearchResults,
-    APIKEY,
-    setIsSearch,
-    setDefaultMovies,
-    searchResults
-  ]);
+  }, [searchQuery]);
 
   return (
     <div className="search">
