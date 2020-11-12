@@ -251,8 +251,27 @@ const [isFaved, setisFaved] = useState();
 
               <ModalFooter>  
               {isFave
-              ? <Button>Remove</Button>
-              : <Button onClick={handleAddToFavorites}>Add</Button>}
+              ? <Button
+                  variant="outline"
+                  width="350px"
+                  borderWidth="2px"
+                  backgroundColor="#db291d"
+                  color="white"
+                  _hover
+                  mr={3}
+                  >Remove From Favorites
+                </Button>
+              : <Button 
+                  onClick={handleAddToFavorites}
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor="primaryBackground"
+                  color="logoText"
+                  _hover
+                  mr={3}
+                  
+                  >Add To Favorites
+                </Button>}
          
             {/* <Button
                     borderColor="logoText"
