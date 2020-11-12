@@ -301,30 +301,6 @@ const [isWatchListed, setisWatchListed] = useState(false);
                   
                   >Add To Favorites
                 </Button>}
-                {/* If a movie is in the watch list show remove from watch list button */}
-                {isWatchListed
-              ? <Button
-                  variant="outline"
-                  width="350px"
-                  borderWidth="2px"
-                  backgroundColor="#db291d"
-                  color="white"
-                  _hover
-                  mr={3}
-                  onClick={handleRemoveFromWatchList}
-                  >Remove From WatchList
-                </Button>
-                // Otherwise show the add to watch list button
-              : <Button  
-                  borderColor="logoText"
-                  borderWidth="3px"
-                  backgroundColor="primaryBackground"
-                  color="logoText"
-                  _hover
-                  mr={3}
-                  onClick={handleAddToWatchList}
-                  >Add To Watch List
-                </Button>}
               <Link to={`/moviedetailspage/${id}`}>
                   {" "}
                   <Button
@@ -350,6 +326,33 @@ const [isWatchListed, setisWatchListed] = useState(false);
                 >
                   Close
                 </Button>
+              </ModalFooter>
+              {/* Watch List Buttons */}
+              <ModalFooter>
+               {/* If a movie is in the watch list show remove from watch list button */}
+               {isWatchListed
+              ? <Button
+                  variant="outline"
+                  width="350px"
+                  borderWidth="2px"
+                  backgroundColor="#db291d"
+                  color="white"
+                  _hover
+                  mr={3}
+                  onClick={handleRemoveFromWatchList}
+                  >Remove From WatchList
+                </Button>
+                // Otherwise show the add to watch list button
+              : <Button  
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor="primaryBackground"
+                  color="logoText"
+                  _hover
+                  mr={3}
+                  onClick={handleAddToWatchList}
+                  >Add To Watch List
+                </Button>}
               </ModalFooter>
             </ModalContent>
           )}
