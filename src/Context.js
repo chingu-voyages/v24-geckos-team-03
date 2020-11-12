@@ -14,14 +14,21 @@ function ContextProvider(props) {
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
-//Create a LOCAL DATABASE using localbase imported. 
+//Create a LOCAL DATABASE for FAVORITE MOVIES using localbase imported. 
 let db = new Localbase('db');
 const [allFavMovies, setAllFavMovies] = useState([]);
   //Get data from the DB and store all favotired movies to an array
     useEffect(() => {
       db.collection('favoriteMovies').get().then(movies =>{
         setAllFavMovies(movies);
-        console.log(db);
+      });
+    },[]);
+
+const [allWatchListMovies, setallWatchListMovies] = useState([]);
+//  Get data from the DB and store all watch list movies to an array
+    useEffect(() => {
+      db.collection('watchListMovies').get().then(movies =>{
+        setallWatchListMovies(movies);
       });
     },[]);
 
@@ -40,6 +47,7 @@ const [allFavMovies, setAllFavMovies] = useState([]);
         APIKEY,
         db,
         allFavMovies,
+        allWatchListMovies,
         setDefaultMovies,
         navShadow,
         setNavShadow,

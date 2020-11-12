@@ -6,6 +6,7 @@ import MovieDetailsPage from "./pages/MovieDetailsPage";
 import SearchByActor from "./pages/SearchByActor";
 
 import SearchPage from "./pages/SearchPage";
+import WatchListpage from './pages/WatchListpage';
 
 const App = () => {
   return (
@@ -17,6 +18,9 @@ const App = () => {
         </Route>  
         <Route path="/favorites">
           <FavoriteMoviespage />
+        </Route>
+        <Route path="/watchList">
+          <WatchListpage />
         </Route>
         <Route path="/moviedetailspage/:movieId">
           <MovieDetailsPage />

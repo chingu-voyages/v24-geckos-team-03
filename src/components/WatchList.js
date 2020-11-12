@@ -4,7 +4,7 @@ import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
 
-const FavoriteMovies = () => {
+const WatchList = () => {
   const [movieId, setMovieId] = useState(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,8 +13,8 @@ const FavoriteMovies = () => {
     onOpen();
   }
 
-  const { allFavMovies } = useContext(Context);
-
+  const { allWatchListMovies } = useContext(Context);
+console.log(allWatchListMovies);
   //styles for the grid
   const gridStyles = {
     maxWidth: "1200px",
@@ -28,7 +28,7 @@ const FavoriteMovies = () => {
   return (
     <>
       <div className="container" style={gridStyles}>
-        {allFavMovies.map((movie) => {
+        {allWatchListMovies.map((movie) => {
           return (
             <Movieboxes
               key={movie.id}
@@ -53,4 +53,4 @@ const FavoriteMovies = () => {
 };
 
 
-export default FavoriteMovies;
+export default WatchList;

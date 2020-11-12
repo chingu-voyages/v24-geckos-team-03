@@ -17,8 +17,7 @@ import {
   Text,
 } from "@chakra-ui/core";
 import axios from "axios";
-import FavoriteMovies from './FavoriteMovies';
-import Movieboxes from './Movieboxes';
+
 
 function MovieDetails(props) {
   const { APIKEY, ImageUrl, allFavMovies, db} = useContext(
@@ -38,7 +37,7 @@ const handleAddToFavorites = () => {
         return null;
       }
   }
-    //add image and title of movies clicked to the DB
+    //add image, title, releaseDate and rating of movies clicked to the DB
     db.collection('favoriteMovies').add({
       id: movieDetails.id,
       movieImage: ImageUrl + movieDetails.poster_path,
@@ -51,8 +50,22 @@ const handleAddToFavorites = () => {
  
 //create a handler for RemoveFromFavorites button on the Modal
 const handleRemoveFromFavorites = () => {
+  //remove the clicked movie by ID
   db.collection('favoriteMovies').doc({id : id}).delete()
 }
+
+//Create a handler for "Add to watchlist" button on the Modal
+const handleAddToWatchList = () => {
+     //add image, title, releaseDate and rating of movies clicked to the DB
+     db.collection('watchListMovies').add({
+      id: movieDetails.id,
+      movieImage: ImageUrl + movieDetails.poster_path,
+      movieTitle: movieDetails.title,
+      movieReleaseDate: movieDetails.release_date,
+      movieRating: movieDetails.vote_average,
+    })
+}
+
 
 
 
@@ -156,17 +169,6 @@ const [isFave, setisFave] = useState(false);
       });
   }
 
-//Check if movie is favorited 
-const [isFaved, setisFaved] = useState();
-// const checkFavorited = () => {
-//     let favorited = "";
-//     for (let i = 0; i < allFavMovies.length; i++) {
-//       if (allFavMovies[i].id === movieDetails.id) {
-//         setisFaved(movieDetails.id)
-//         console.log(isFaved);
-//       }
-//   }
-// }
 
   return (
     <>
@@ -269,18 +271,9 @@ const [isFaved, setisFaved] = useState();
                   
                   >Add To Favorites
                 </Button>}
-         
-            {/* <Button
-                    borderColor="logoText"
-                    borderWidth="3px"
-                    backgroundColor="primaryBackground"
-                    color="logoText"
-                    _hover
-                    mr={3} 
-                    onClick={handleAddToFavorites}
-              >
-                    Add to favorites
-              </Button>   */}
+                <Button onClick={handleAddToWatchList}>
+                  Add to WatchList
+                </Button>
               <Link to={`/moviedetailspage/${id}`}>
                   {" "}
                   <Button
