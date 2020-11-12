@@ -18,16 +18,6 @@ function ContextProvider(props) {
   //Create a LOCAL DATABASE using localbase imported.
   let db = new Localbase("db");
   const [allFavMovies, setAllFavMovies] = useState([]);
-  // const [allFavMovies, setAllFavMovies] = useState([]);
-  // //Get data from the DB and store all favotired movies to an array
-  // useEffect(() => {
-  //   db.collection("favoriteMovies")
-  //     .get()
-  //     .then(movies => {
-  //       setAllFavMovies(movies);
-  //       console.log(db);
-  //     });
-  // }, []);
 
   return (
     <Context.Provider
