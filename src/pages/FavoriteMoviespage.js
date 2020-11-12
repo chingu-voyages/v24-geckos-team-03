@@ -26,7 +26,7 @@ const FavoriteMoviespage = () => {
     >
       <NavBar />
       <Box>
-        <h1 className="page-heading">Favorite Movies</h1>
+        <h1 className="page-heading favorites-list">Favorite Movies</h1>
       </Box>
       <Box className="movie-grid">
         <FavoriteMovies />

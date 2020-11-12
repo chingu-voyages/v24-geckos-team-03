@@ -56,6 +56,12 @@ body {
   z-index: -1;
 }
 
+.watch-list {
+  color: red;
+}
+
+
+
 /* Movie Titles */
 .movie-titles {
   padding-top: 5px;
