@@ -30,9 +30,6 @@ function MovieDetails(props) {
 
 
 //create a handler for "add to favorites" button on the Modal.
-const [isFavorited, setisFavorited] = useState();
-
-
 const handleAddToFavorites = () => {
     //Check for duplicate entries on the database before adding a movie.
     for (let i = 0; i < allFavMovies.length; i++) {
@@ -52,13 +49,12 @@ const handleAddToFavorites = () => {
   
   }
  
+//create a handler for RemoveFromFavorites button on the Modal
+const handleRemoveFromFavorites = () => {
+  db.collection('favoriteMovies').doc({id : id}).delete()
+}
 
 
-// function searchByActor(person_id) {
-//   setPersonId(person_id);
-//   setDefaultMovies(true);
-//   onClose();
-// }
 
 const [isFave, setisFave] = useState(false);
 //check if a movie is favorited;
@@ -251,8 +247,28 @@ const [isFaved, setisFaved] = useState();
 
               <ModalFooter>  
               {isFave
-              ? <Button>Remove</Button>
-              : <Button onClick={handleAddToFavorites}>Add</Button>}
+              ? <Button
+                  variant="outline"
+                  width="350px"
+                  borderWidth="2px"
+                  backgroundColor="#db291d"
+                  color="white"
+                  _hover
+                  mr={3}
+                  onClick={handleRemoveFromFavorites}
+                  >Remove From Favorites
+                </Button>
+              : <Button 
+                  onClick={handleAddToFavorites}
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor="primaryBackground"
+                  color="logoText"
+                  _hover
+                  mr={3}
+                  
+                  >Add To Favorites
+                </Button>}
          
             {/* <Button
                     borderColor="logoText"
