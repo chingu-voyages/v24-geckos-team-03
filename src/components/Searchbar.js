@@ -44,7 +44,7 @@ function Search() {
     }
 
     console.log(searchResults);
-  }, [search, setSearchResults, APIKEY, setIsSearch, setDefaultMovies]);
+  }, [search]);
 
   const buttonStyle = {
     borderRadius: "0.25rem",
@@ -74,16 +74,19 @@ function Search() {
   return (
     <div className="search">
       <form onSubmit={searchSubmit}>
-        <input type="text" name="search" ref={inputEl} placeholder="Search movie here!"></input>
+        <input
+          type="text"
+          name="search"
+          ref={inputEl}
+          placeholder="Search movie here!"
+        ></input>
         <button type="submit" name="button">
           <i className="fas fa-search"></i>
-        {/* <input type="text" ref={inputEl}></input> */}
+          {/* <input type="text" ref={inputEl}></input> */}
         </button>
       </form>
     </div>
-    );
+  );
 }
-
-
 
 export default Search;
