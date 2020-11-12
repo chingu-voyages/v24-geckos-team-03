@@ -22,13 +22,13 @@ const FavoriteMovies = () => {
     margin: "0 auto",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-evenly",
+    justifyContent: "space-evenly"
   };
 
   return (
     <>
       <div className="container" style={gridStyles}>
-        {allFavMovies.map((movie) => {
+        {allFavMovies.map(movie => {
           return (
             <Movieboxes
               key={movie.id}
