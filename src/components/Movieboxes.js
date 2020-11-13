@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, Image, PseudoBox, Icon } from "@chakra-ui/core";
+import { FaHeart } from "react-icons/fa";
 
 function Movieboxes(props) {
-  const { imageSrc, title, onClick, year, rating } = props;
+  const { imageSrc, title, onClick, year, rating, isFavorite } = props;
 
   return (
     <PseudoBox
@@ -43,8 +44,23 @@ function Movieboxes(props) {
           />
         </Box>
       )}
-      <Image rounded="lg" src={imageSrc} objectFit="cover" />
 
+      {isFavorite !== null && (
+        <Box
+          position="absolute"
+          top="4px"
+          left="5px"
+          p="0.5em"
+          lineHeight="1em"
+          borderRadius="1em"
+          h="2em"
+          color="primaryText"
+        >
+          {isFavorite && <FaHeart size="20px" color="#ff0000" />}
+        </Box>
+      )}
+
+      <Image rounded="lg" src={imageSrc} objectFit="cover" />
       <Box m="5px" textAlign="center" fontSize="1.1em">
         {`${title} ${year !== null ? `(${year})` : ""}`}
       </Box>
