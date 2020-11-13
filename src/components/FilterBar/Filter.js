@@ -29,6 +29,8 @@ function Filter() {
     setPage(prevPage => prevPage + 1);
   }
 
+  console.log(inputEl.current);
+
   useEffect(() => {
     //   Checks wheither if correct selections are submitted
     if (genre !== "Genre") {

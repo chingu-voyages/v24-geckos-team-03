@@ -11,22 +11,13 @@ function ContextProvider(props) {
   const [searchResults, setSearchResults] = useState([]); // saves search results
   const [navShadow, setNavShadow] = useState(false);
   const [homePageResults, setHomePageResults] = useState([]); // saves popular movies or filtered results
+  const [added, setAdded] = useState(0);
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
   //Create a LOCAL DATABASE using localbase imported.
   let db = new Localbase("db");
-  console.log(db);
   const [allFavMovies, setAllFavMovies] = useState([]);
-  //Get data from the DB and store all favotired movies to an array
-  useEffect(() => {
-    db.collection("favoriteMovies")
-      .get()
-      .then(movies => {
-        setAllFavMovies(movies);
-        console.log(db);
-      });
-  }, []);
 
   return (
     <Context.Provider
@@ -44,10 +35,13 @@ function ContextProvider(props) {
         APIKEY,
         db,
         allFavMovies,
+        setAllFavMovies,
         setDefaultMovies,
         navShadow,
         setNavShadow,
-        defaultMovies
+        defaultMovies,
+        added,
+        setAdded
       }}
     >
       {props.children}

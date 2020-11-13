@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
@@ -13,7 +14,17 @@ const FavoriteMovies = () => {
     onOpen();
   }
 
-  const { allFavMovies } = useContext(Context);
+  const { db, allFavMovies, setAllFavMovies } = useContext(Context);
+
+  //Get data from the DB and store all favotired movies to an array
+  useEffect(() => {
+    db.collection("favoriteMovies")
+      .get()
+      .then(movies => {
+        setAllFavMovies(movies);
+        console.log(db);
+      });
+  }, []);
 
   //styles for the grid
   const gridStyles = {

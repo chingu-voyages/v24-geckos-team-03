@@ -10,6 +10,7 @@ function Grid(props) {
   const { ImageUrl } = useContext(Context);
 
   const [movieId, setMovieId] = useState(null);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const gridStyles = {
@@ -36,8 +37,8 @@ function Grid(props) {
 
   function onHandleMovieClick(id) {
     setMovieId(id);
+
     onOpen();
-    console.log(id);
   }
 
   return (

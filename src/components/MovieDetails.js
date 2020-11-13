@@ -21,13 +21,12 @@ import FavoriteMovies from "./FavoriteMovies";
 import Movieboxes from "./Movieboxes";
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl, allFavMovies, db } = useContext(Context);
+  const { APIKEY, ImageUrl, db, allFavMovies, setAllFavMovies } = useContext(
+    Context
+  );
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
-
-  //create a handler for "add to favorites" button on the Modal.
-  const [isFavorited, setisFavorited] = useState();
 
   //create a handler for "add to favorites" button on the Modal.
   const handleAddToFavorites = () => {
@@ -157,15 +156,15 @@ function MovieDetails(props) {
 
   //Check if movie is favorited
   const [isFaved, setisFaved] = useState();
-  // const checkFavorited = () => {
-  //     let favorited = "";
-  //     for (let i = 0; i < allFavMovies.length; i++) {
-  //       if (allFavMovies[i].id === movieDetails.id) {
-  //         setisFaved(movieDetails.id)
-  //         console.log(isFaved);
-  //       }
-  //   }
-  // }
+  const checkFavorited = () => {
+    let favorited = "";
+    for (let i = 0; i < allFavMovies.length; i++) {
+      if (allFavMovies[i].id === movieDetails.id) {
+        setisFaved(movieDetails.id);
+        console.log(isFaved);
+      }
+    }
+  };
 
   return (
     <>
