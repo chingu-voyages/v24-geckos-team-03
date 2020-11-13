@@ -5,11 +5,13 @@ import { useDisclosure } from "@chakra-ui/core";
 import MovieDetails from "./MovieDetails";
 
 function Grid(props) {
-  const {searchResults} = props;
+  const { searchResults } = props;
 
   const { ImageUrl } = useContext(Context);
 
   const [movieId, setMovieId] = useState(null);
+  const [movieImage, setMovieImage] = useState("");
+  const [movieTitle, setMovieTitle] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const gridStyles = {
@@ -29,15 +31,25 @@ function Grid(props) {
         imageSrc={ImageUrl + movie.poster_path}
         year={new Date(movie.release_date).getFullYear()}
         rating={movie.vote_average}
-        onClick={() => onHandleMovieClick(movie.id)}
+        onClick={() =>
+          onHandleMovieClick(
+            movie.id,
+            movie.backdrop_path,
+            movie.original_title
+          )
+        }
       />
     );
   });
 
-  function onHandleMovieClick(id) {
+  function onHandleMovieClick(id, movieImage, movieName) {
     setMovieId(id);
+    setMovieImage(movieImage);
+    setMovieTitle(movieName);
     onOpen();
     console.log(id);
+    console.log(movieImage);
+    console.log(movieName);
   }
 
   return (
@@ -45,7 +57,13 @@ function Grid(props) {
       <div className="container" style={gridStyles}>
         {searchResults.length > 0 ? movieBoxes : null}
       </div>
-      <MovieDetails isOpen={isOpen} onClose={onClose} id={movieId} />
+      <MovieDetails
+        isOpen={isOpen}
+        onClose={onClose}
+        id={movieId}
+        movieImage={movieImage}
+        movieTitle={movieTitle}
+      />
     </>
   );
 }
