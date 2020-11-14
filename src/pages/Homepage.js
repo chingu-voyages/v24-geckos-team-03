@@ -4,8 +4,8 @@ import axios from "axios";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
 import Filter from "../components/FilterBar/Filter";
-
 import { Context } from "../Context";
+import Footer from './../components/Footer';
 
 function Homepage() {
   const {
@@ -67,7 +67,10 @@ function Homepage() {
         {isSearch ? null : "Popular Movies"}
       </Heading>
       <Grid searchResults={homePageResults} />
+      <Footer />
     </Box>
+
+   
   );
 }
 
