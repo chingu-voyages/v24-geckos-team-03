@@ -1,9 +1,12 @@
 import React from "react";
-import { Box, Image, PseudoBox, Icon } from "@chakra-ui/core";
+import { Box, Image, PseudoBox, Icon, useColorMode } from "@chakra-ui/core";
 import { FaHeart } from "react-icons/fa";
 
 function Movieboxes(props) {
   const { imageSrc, title, onClick, year, rating, isFavorite } = props;
+
+//toggle Colors
+const {colorMode} = useColorMode();
 
   return (
     <PseudoBox

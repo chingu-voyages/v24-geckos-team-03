@@ -56,7 +56,7 @@ const movieDB_logo = 'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_squar
             <Divider mt="-4px" orientation="vertical"/>
             <Flex className="project-repo">
               <Link color={colorMode === 'light' ? "#333" : '#fff'} w="100%" ml="20px" _hover={{color : "#49c3fd"}} href="https://github.com/chingu-voyages/v24-geckos-team-03" isExternal mt={-2}><span className="repo-name">Project Repo</span></Link>
-              <FaGithub size="45px" className="repo-git-icon"/>
+              <Link href="https://github.com/chingu-voyages/v24-geckos-team-03"><FaGithub size="30px" className="repo-git-icon"/></Link>
             </Flex>
           </Flex>
     
