@@ -14,11 +14,9 @@ import {
   Box,
   Grid,
   Image,
-  Text
+  Text,
 } from "@chakra-ui/core";
 import axios from "axios";
-import FavoriteMovies from "./FavoriteMovies";
-import Movieboxes from "./Movieboxes";
 
 function MovieDetails(props) {
   const { APIKEY, ImageUrl, db, allFavMovies, setAllFavMovies } = useContext(
@@ -27,6 +25,15 @@ function MovieDetails(props) {
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
+
+  const updateFavorites = () => {
+    db.collection("favoriteMovies")
+      .get()
+      .then((movies) => {
+        setAllFavMovies(movies);
+      });
+    console.log("Favorites Updated");
+  };
 
   //create a handler for "add to favorites" button on the Modal.
   const handleAddToFavorites = () => {
@@ -38,32 +45,41 @@ function MovieDetails(props) {
       }
     }
     //add image and title of movies clicked to the DB
-    db.collection("favoriteMovies").add({
-      id: movieDetails.id,
-      movieImage: ImageUrl + movieDetails.poster_path,
-      movieTitle: movieDetails.title,
-      movieReleaseDate: movieDetails.release_date,
-      movieRating: movieDetails.vote_average
-    });
+    db.collection("favoriteMovies")
+      .add({
+        id: movieDetails.id,
+        movieImage: ImageUrl + movieDetails.poster_path,
+        movieTitle: movieDetails.title,
+        movieReleaseDate: movieDetails.release_date,
+        movieRating: movieDetails.vote_average,
+      })
+      .then(() => {
+        updateFavorites();
+      });
   };
 
   //create a handler for RemoveFromFavorites button on the Modal
   const handleRemoveFromFavorites = () => {
     db.collection("favoriteMovies")
       .doc({ id: id })
-      .delete();
+      .delete()
+      .then(() => {
+        updateFavorites();
+      });
   };
 
   const [isFave, setisFave] = useState(false);
   //check if a movie is favorited;
   useEffect(() => {
     setisFave(false);
-    allFavMovies.forEach(movie => {
+    allFavMovies.forEach((movie) => {
       if (movie.id === id) {
         setisFave(true);
       }
     });
+  }, [allFavMovies, id]);
 
+  useEffect(() => {
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
       setMovieCredits(null);
@@ -73,7 +89,7 @@ function MovieDetails(props) {
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}`
           )
-          .then(res => {
+          .then((res) => {
             setMovieDetails(res.data);
           });
       } catch (err) {
@@ -86,7 +102,7 @@ function MovieDetails(props) {
             // retrieve credits object based on movie id
             `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${APIKEY}`
           )
-          .then(res => {
+          .then((res) => {
             setMovieCredits(res.data.cast);
           });
       } catch (err) {
@@ -103,7 +119,7 @@ function MovieDetails(props) {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 0
+    maximumFractionDigits: 0,
   });
 
   let castList = [];
@@ -120,7 +136,7 @@ function MovieDetails(props) {
           character,
           name,
           profile_path,
-          id: person_id
+          id: person_id,
         } = castMember;
 
         return (
@@ -154,7 +170,8 @@ function MovieDetails(props) {
       });
   }
 
-  //Check if movie is favorited
+  //Check if movie is favorited -- remove?
+  /*
   const [isFaved, setisFaved] = useState();
   const checkFavorited = () => {
     let favorited = "";
@@ -165,13 +182,14 @@ function MovieDetails(props) {
       }
     }
   };
+  */
 
   return (
     <>
       <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         {movieDetails !== null &&
-        movieCredits !== null && ( // boolean && will only execute what comes next if true
+          movieCredits !== null && ( // boolean && will only execute what comes next if true
             <ModalContent bg="primaryBackground" color="primaryText">
               <ModalHeader>{movieDetails.title}</ModalHeader>
               <ModalCloseButton />

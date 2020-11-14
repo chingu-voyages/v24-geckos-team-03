@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route, HashRouter } from "react-router-dom";
 import FavoriteMoviespage from "./pages/FavoriteMoviespage";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 import SearchByActor from "./pages/SearchByActor";
+import FilterPage from "./pages/FilterPage";
 
 import SearchPage from "./pages/SearchPage";
 
@@ -28,7 +29,10 @@ const App = () => {
           <Route path="/searchPage">
             <SearchPage />
           </Route>
-          <Route path="/">
+          <Route path="/filterPage">
+            <FilterPage />
+          </Route>
+          <Route exact path="/">
             <Homepage />
           </Route>
         </Switch>

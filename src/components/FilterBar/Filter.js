@@ -2,18 +2,25 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
-import { Button, Select, Box } from "@chakra-ui/core";
+import { Button, Select, Box, Input } from "@chakra-ui/core";
+import { Link } from "react-router-dom";
 
-function Filter() {
+function Filter(props) {
   const [genre, setGenre] = useState("Genre");
   const [year, setYear] = useState("Year");
   const [page, setPage] = useState(1);
   const genreOption = useRef(null);
   const yearOption = useRef(null);
   const [submit, setSubmit] = useState(false);
+
   const inputEl = useRef(null);
   const selectEl = useRef(null);
-  const { APIKEY, setDefaultMovies, setHomePageResults } = useContext(Context);
+  const {
+    APIKEY,
+    setDefaultMovies,
+    filterdResults,
+    setFilteredResults
+  } = useContext(Context);
 
   function formSubmit(e) {
     e.preventDefault();
@@ -25,12 +32,6 @@ function Filter() {
     yearOption.current.disabled = true;
   }
 
-  function add() {
-    setPage(prevPage => prevPage + 1);
-  }
-
-  console.log(inputEl.current);
-
   useEffect(() => {
     //   Checks wheither if correct selections are submitted
     if (genre !== "Genre") {
@@ -40,7 +41,7 @@ function Filter() {
             `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&with_genres=${genre}&page=${page}`
           )
           .then(res => {
-            setHomePageResults(res.data.results);
+            setFilteredResults(res.data.results);
             console.log(res);
             setDefaultMovies(false);
             setSubmit(false);
@@ -57,7 +58,7 @@ function Filter() {
             `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}`
           )
           .then(res => {
-            setHomePageResults(res.data.results);
+            setFilteredResults(res.data.results);
             setDefaultMovies(false);
             setSubmit(false);
           });
@@ -67,6 +68,8 @@ function Filter() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submit, page]);
+
+  console.log(filterdResults);
 
   const filterbar = {
     marginTop: "125px",
@@ -104,6 +107,7 @@ function Filter() {
         onSubmit={formSubmit}
         style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
       >
+        >
         <Box d="inline" color="primaryText" fontSize="1em" mx="7px" my="5px">
           Find Movies By
         </Box>
@@ -128,7 +132,6 @@ function Filter() {
           <option value="53">Thriller</option>
           <option value="10752">War</option>
         </Select>
-
         <Select ref={selectEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={yearOption}>Year</option>
           <option>Off</option>
@@ -145,23 +148,24 @@ function Filter() {
           <option>2010</option>
           <option>2009</option>
         </Select>
-
-        <Button
-          backgroundColor="primaryBackground"
-          borderColor="logoText"
-          color="logoText"
-          style={filterButton}
-          _hover={{
-            backgroundColor: "logoText",
-            color: "primaryBackground",
-            fontWeight: "900"
-          }}
-          type="submit"
-          mx="7px"
-          my="7px"
-        >
-          Submit
-        </Button>
+        <Link to="/filterPage">
+          <Button
+            backgroundColor="primaryBackground"
+            borderColor="logoText"
+            color="logoText"
+            style={filterButton}
+            _hover={{
+              backgroundColor: "logoText",
+              color: "primaryBackground",
+              fontWeight: "900"
+            }}
+            type="submit"
+            mx="7px"
+            my="7px"
+          >
+            Submit
+          </Button>
+        </Link>
       </form>
 
       {/* <button onClick={add}>{page > 1 ? `page `:`page2` } </button>
