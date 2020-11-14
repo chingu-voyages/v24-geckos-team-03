@@ -3,9 +3,10 @@ import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
 import { Button, Select, Box, Input } from "@chakra-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Filter(props) {
+  const history = useHistory();
   const [genre, setGenre] = useState("Genre");
   const [year, setYear] = useState("Year");
   const [page, setPage] = useState(1);
@@ -30,11 +31,14 @@ function Filter(props) {
     genreOption.current.disabled = true;
 
     yearOption.current.disabled = true;
+    history.push("/filterPage"); // Routes to search page on submit
   }
 
   useEffect(() => {
     //   Checks wheither if correct selections are submitted
     if (genre !== "Genre") {
+      console.log(genre);
+      console.log("hh");
       try {
         axios
           .get(
@@ -67,7 +71,7 @@ function Filter(props) {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submit, page]);
+  }, [submit, page, genre]);
 
   console.log(filterdResults);
 
@@ -148,24 +152,22 @@ function Filter(props) {
           <option>2010</option>
           <option>2009</option>
         </Select>
-        <Link to="/filterPage">
-          <Button
-            backgroundColor="primaryBackground"
-            borderColor="logoText"
-            color="logoText"
-            style={filterButton}
-            _hover={{
-              backgroundColor: "logoText",
-              color: "primaryBackground",
-              fontWeight: "900"
-            }}
-            type="submit"
-            mx="7px"
-            my="7px"
-          >
-            Submit
-          </Button>
-        </Link>
+        <Button
+          backgroundColor="primaryBackground"
+          borderColor="logoText"
+          color="logoText"
+          style={filterButton}
+          _hover={{
+            backgroundColor: "logoText",
+            color: "primaryBackground",
+            fontWeight: "900"
+          }}
+          type="submit"
+          mx="7px"
+          my="7px"
+        >
+          Submit
+        </Button>
       </form>
 
       {/* <button onClick={add}>{page > 1 ? `page `:`page2` } </button>
