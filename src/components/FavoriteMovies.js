@@ -5,6 +5,7 @@ import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
 import { Link, useHistory } from "react-router-dom";
+import "./MovieDetails/MovieDetailsBody.css";
 
 const FavoriteMovies = () => {
   const [movieId, setMovieId] = useState(null);
@@ -44,15 +45,19 @@ const FavoriteMovies = () => {
 
   const responsiveArrow = {
     color: "white",
-    fontSize: "80px",
+
     position: "absolute",
-    top: "140px",
-    left: "80px",
+    top: "170px",
+    left: "70px",
     cursor: "pointer"
   };
   return (
     <>
-      <span style={responsiveArrow} onClick={goBack}>
+      <span
+        style={responsiveArrow}
+        className="responsiveArrow"
+        onClick={goBack}
+      >
         &#8592;
       </span>
 
