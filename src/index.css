@@ -117,3 +117,46 @@ body {
   transition-property: all;
   transition-duration: 0.5s;
 }
+
+
+/* NAVBAR Responsive Styles */
+@media screen and (max-width: 640px) {
+  .nav-lists {
+    margin-top: -28px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+
+  .logo {
+    width: 50px;
+    margin-top: -4px;
+  }
+  .logo-name {
+    display: none;
+  }
+  
+  .nav-lists {
+    margin: 0 auto;
+    margin-top: 1px;
+  }
+
+  .search-bar-section {
+    justify-content: flex-end;
+    margin-left: 10px;
+  }
+
+  .search button {
+    margin-right: -20px;
+  }
+  
+}
+
+  @media screen and (max-width: 500px) {
+    .nav-lists {
+      background-color: red;
+    }
+
+
+  
+  }
