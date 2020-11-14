@@ -147,16 +147,19 @@ body {
   }
 
   .search button {
-    margin-right: -20px;
+    margin-right: -13px;
   }
   
 }
 
   @media screen and (max-width: 500px) {
     .nav-lists {
-      background-color: red;
+      width: 65%;
     }
-
-
+    .switch-button {
+      margin-right: 5%;
+      margin-left: -5%;
+    }
+  
   
   }

@@ -44,7 +44,7 @@ const NavBar = () => {
           </Link>
           <Flex isInline className="search-bar-section">
             <Searchbar />
-            <Switch size="sm" ml={2} className="switch-button"/>
+            <Switch size="sm" className="switch-button"/>
           </Flex>
         </Flex>
         <Flex justifyContent="flex-end" marginRight="198px" className="nav-lists">
