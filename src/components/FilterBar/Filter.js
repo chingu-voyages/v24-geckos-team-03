@@ -2,9 +2,13 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
-import { Heading, Button, Select, Box } from "@chakra-ui/core";
+import { Heading, Button, Select, Box , useColorMode} from "@chakra-ui/core";
 
 function Filter() {
+//color mode 
+const {colorMode} = useColorMode();
+
+
   const [genre, setGenre] = useState("Genre");
   const [year, setYear] = useState("Year");
   const genreOption = useRef(null);
@@ -68,10 +72,8 @@ function Filter() {
     width: "10em",
     height: "2.2em",
     lineHeight: "2em",
-    background: "#444", //"#2c3e50",
     overflow: "hidden",
     borderRadius: "1em",
-    color: "#fff",
     cursor: "pointer",
     paddingLeft: "15px",
     fontSize: "0.8em",
@@ -84,10 +86,10 @@ function Filter() {
         onSubmit={formSubmit}
         style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
       >
-        <Box d="inline" color="primaryText" fontSize="1em" mx="7px" my="5px">
+        <Box d="inline" color={colorMode === 'light' ? "#333" : 'primaryText'} fontSize="1em" mx="7px" my="5px">
           Find Movies By
         </Box>
-        <Select ref={inputEl} style={selectStyles} w="8em" mx="7px" my="7px">
+        <Select ref={inputEl} style={selectStyles}  color= {colorMode === 'light' ? "#333" : '#fff'} bg={colorMode === 'light' ? "white" : '#444'} w="8em" mx="7px" my="7px">
           <option ref={genreOption}>Genre</option>
           <option value="28">Action</option>
 
@@ -125,9 +127,9 @@ function Filter() {
         </Select>
 
         <Button
-          backgroundColor="primaryBackground"
-          borderColor="logoText"
-          color="logoText"
+          backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'}
+          borderColor={colorMode === 'light' ? "#333" : 'logoText'}
+          color={colorMode === 'light' ? "#333" : 'logoText'}
           style={filterButton}
           _hover={{ backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
           type="submit"

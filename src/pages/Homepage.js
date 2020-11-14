@@ -7,7 +7,11 @@ import Filter from "../components/FilterBar/Filter";
 import { Context } from "../Context";
 import Footer from './../components/Footer';
 
+
 function Homepage() {
+
+//color Mode 
+const {colorMode} = useColorMode();
   const {
     isSearch,
     setNavShadow,
@@ -47,7 +51,7 @@ function Homepage() {
   return (
     <Box
       ref={myRef}
-      bg="primaryBackground"
+      bg={colorMode === 'light' ? "white" : 'primaryBackground'}
       h="100vh"
       w="100vw"
       style={{
@@ -62,7 +66,7 @@ function Homepage() {
         size="lg"
         marginTop="10px"
         marginLeft="5%"
-        color="primaryText"
+        color={colorMode === 'light' ? "#333" : 'primaryText'}
       >
         {isSearch ? null : "Popular Movies"}
       </Heading>

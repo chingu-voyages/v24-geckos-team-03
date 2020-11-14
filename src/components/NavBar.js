@@ -22,7 +22,7 @@ const {colorMode, toggleColorMode} = useColorMode();
       className="nav-bar"
       style={{ top: 0 }}
       position="absolute"
-      bg={colorMode === 'light' ? 'white' : 'primaryBackground'}
+      bg={colorMode === 'light' ? "white" : 'primaryBackground'}
       w="100%"
       px={5}
       py={5}
@@ -41,7 +41,7 @@ const {colorMode, toggleColorMode} = useColorMode();
               src="https://cdn1.iconfinder.com/data/icons/media-colorful-1/48/film_roll-512.png"
               size={46}
             />
-            <Heading as="h3" size="xl" fontWeight="200" color="#49c3fd" fontFamily="Gugi, cursive">
+            <Heading as="h3" size="xl" fontWeight="200" color={colorMode === 'light' ? "#333" : 'logoText'} fontFamily="Gugi, cursive">
               DAILY FLIX
             </Heading>
           </Stack>
@@ -53,8 +53,8 @@ const {colorMode, toggleColorMode} = useColorMode();
         </Stack>
         <Box float="right" marginRight="198px">
             {/* Use RouterLink as written in ChakraUI docs */}
-            <Link textDecoration="none" _hover={{color : "#49c3fd"}} as={RouterLink} to="/favorites" px={2} color="#fff" className="link">My Favorites</Link>
-            <Link _hover={{color : "#49c3fd"}} className="navbar-links" as={RouterLink} to="/watchList" px={2} color="#fff">Watch List</Link>
+            <Link textDecoration="none" _hover={{color : "#49c3fd"}} as={RouterLink} to="/favorites" px={2} color={colorMode === 'light' ? "#333" : 'primaryText'} className="link">My Favorites</Link>
+            <Link _hover={{color : "#49c3fd"}} className="navbar-links" as={RouterLink} to="/watchList" px={2} color={colorMode === 'light' ? "#333" : 'primaryText'}>Watch List</Link>
         </Box>
       </Box>
 
