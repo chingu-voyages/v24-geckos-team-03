@@ -8,12 +8,16 @@ import { Link, useHistory } from "react-router-dom";
 function Filter(props) {
   const genreOption = useRef(null);
   const yearOption = useRef(null);
+  const [submit, setSubmit] = useState(false);
 
   const history = useHistory();
 
   const inputEl = useRef(null);
   const selectEl = useRef(null);
   const [page, setPage] = useState(1);
+  const [genre, setGenre] = useState("Genre");
+  const [year, setYear] = useState("Year");
+
   const {
     APIKEY,
     setDefaultMovies,
@@ -22,19 +26,22 @@ function Filter(props) {
   } = useContext(Context);
 
   function formSubmit(e) {
-    console.log("hello");
     e.preventDefault();
-
-    const genre = inputEl.current.value;
-    const year = selectEl.current.value;
-
+    setGenre(inputEl.current.value);
+    setYear(selectEl.current.value);
     if (genre === "Genre" && year === "Year") {
       setDefaultMovies(true);
       history.push("/");
+    } else {
+      history.push("/filterPage");
     }
 
-    //   Checks wheither if correct selections are submitted
+    setSubmit(true);
+  }
 
+  useEffect(() => {
+    //   Checks wheither if correct selections are submitted
+    setSubmit(false);
     if (genre !== "Genre" && year === "Year") {
       try {
         axios
@@ -45,8 +52,6 @@ function Filter(props) {
             setFilteredResults(res.data.results);
             console.log(res.data.results);
             setDefaultMovies(false);
-
-            history.push("/filterPage");
           });
       } catch (err) {
         console.log(err);
@@ -64,8 +69,6 @@ function Filter(props) {
             setFilteredResults(res.data.results);
             console.log(res.data.results);
             setDefaultMovies(false);
-
-            history.push("/filterPage");
           });
       } catch (err) {
         console.log(err);
@@ -85,20 +88,21 @@ function Filter(props) {
             console.log(res.data.results);
             setDefaultMovies(false);
             //setSubmit(false);
-            history.push("/filterPage");
           });
       } catch (err) {
         console.log(err);
       }
     }
-  }
+  }, [page, submit]);
 
   function add() {
     setPage(prevPage => prevPage + 1);
+    setSubmit(true);
   }
 
   function minus() {
     if (page >= 1) setPage(prevPage => prevPage - 1);
+    setSubmit(true);
   }
 
   const filterbar = {
