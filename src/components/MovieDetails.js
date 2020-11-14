@@ -17,26 +17,41 @@ import {
   Text,
 } from "@chakra-ui/core";
 import axios from "axios";
+<<<<<<< HEAD
 import WatchList from './WatchList';
 
 
 function MovieDetails(props) {
   const { APIKEY, ImageUrl, allFavMovies, allWatchListMovies, db} = useContext(
+=======
+
+function MovieDetails(props) {
+  const { APIKEY, ImageUrl, db, allFavMovies, setAllFavMovies } = useContext(
+>>>>>>> 491799602361e2dd5d823ab2f197fee156a19014
     Context
   );
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
 
+  const updateFavorites = () => {
+    db.collection("favoriteMovies")
+      .get()
+      .then((movies) => {
+        setAllFavMovies(movies);
+      });
+    console.log("Favorites Updated");
+  };
 
-//create a handler for "add to favorites" button on the Modal.
-const handleAddToFavorites = () => {
+  //create a handler for "add to favorites" button on the Modal.
+  const handleAddToFavorites = () => {
     //Check for duplicate entries on the database before adding a movie.
     for (let i = 0; i < allFavMovies.length; i++) {
       if (allFavMovies[i].id === movieDetails.id) {
-        console.log('movie exists')
+        console.log("movie exists");
         return null;
       }
+<<<<<<< HEAD
   }
     //add image, title, releaseDate and rating of movies clicked to the DB
     db.collection('favoriteMovies').add({
@@ -81,8 +96,34 @@ const handleRemoveFromWatchList = () => {
 }
 
 
+=======
+    }
+    //add image and title of movies clicked to the DB
+    db.collection("favoriteMovies")
+      .add({
+        id: movieDetails.id,
+        movieImage: ImageUrl + movieDetails.poster_path,
+        movieTitle: movieDetails.title,
+        movieReleaseDate: movieDetails.release_date,
+        movieRating: movieDetails.vote_average,
+      })
+      .then(() => {
+        updateFavorites();
+      });
+  };
+>>>>>>> 491799602361e2dd5d823ab2f197fee156a19014
 
+  //create a handler for RemoveFromFavorites button on the Modal
+  const handleRemoveFromFavorites = () => {
+    db.collection("favoriteMovies")
+      .doc({ id: id })
+      .delete()
+      .then(() => {
+        updateFavorites();
+      });
+  };
 
+<<<<<<< HEAD
 
 
 //create a state for favorite movies
@@ -91,12 +132,17 @@ const [isFave, setisFave] = useState(false);
 //create a state for watchlist movies
 const [isWatchListed, setisWatchListed] = useState(false);
 //check if a movie is favorited;
+=======
+  const [isFave, setisFave] = useState(false);
+  //check if a movie is favorited;
+>>>>>>> 491799602361e2dd5d823ab2f197fee156a19014
   useEffect(() => {
     setisFave(false);
-    allFavMovies.forEach(movie => {
+    allFavMovies.forEach((movie) => {
       if (movie.id === id) {
         setisFave(true);
       }
+<<<<<<< HEAD
     })
 
     //check if a movie is in WatchList
@@ -107,6 +153,12 @@ const [isWatchListed, setisWatchListed] = useState(false);
       }
     })
   
+=======
+    });
+  }, [allFavMovies, id]);
+
+  useEffect(() => {
+>>>>>>> 491799602361e2dd5d823ab2f197fee156a19014
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
       setMovieCredits(null);
@@ -197,6 +249,22 @@ const [isWatchListed, setisWatchListed] = useState(false);
       });
   }
 
+<<<<<<< HEAD
+=======
+  //Check if movie is favorited -- remove?
+  /*
+  const [isFaved, setisFaved] = useState();
+  const checkFavorited = () => {
+    let favorited = "";
+    for (let i = 0; i < allFavMovies.length; i++) {
+      if (allFavMovies[i].id === movieDetails.id) {
+        setisFaved(movieDetails.id);
+        console.log(isFaved);
+      }
+    }
+  };
+  */
+>>>>>>> 491799602361e2dd5d823ab2f197fee156a19014
 
   return (
     <>
@@ -275,6 +343,7 @@ const [isWatchListed, setisWatchListed] = useState(false);
                 </Stack>
               </ModalBody>
 
+<<<<<<< HEAD
               <ModalFooter>  
               {/* if a movie is favorited show Remove button */}
               {isFave
@@ -302,6 +371,48 @@ const [isWatchListed, setisWatchListed] = useState(false);
                   >Add To Favorites
                 </Button>}
               <Link to={`/moviedetailspage/${id}`}>
+=======
+              <ModalFooter>
+                {isFave ? (
+                  <Button
+                    variant="outline"
+                    width="350px"
+                    borderWidth="2px"
+                    backgroundColor="#db291d"
+                    color="white"
+                    _hover
+                    mr={3}
+                    onClick={handleRemoveFromFavorites}
+                  >
+                    Remove From Favorites
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleAddToFavorites}
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3}
+                  >
+                    Add To Favorites
+                  </Button>
+                )}
+
+                {/* <Button
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3} 
+                    onClick={handleAddToFavorites}
+              >
+                    Add to favorites
+              </Button>   */}
+                <Link to={`/moviedetailspage/${id}`}>
+>>>>>>> 491799602361e2dd5d823ab2f197fee156a19014
                   {" "}
                   <Button
                     borderColor="logoText"
