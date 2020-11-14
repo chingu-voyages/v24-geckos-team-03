@@ -13,6 +13,7 @@ function Filter(props) {
 
   const inputEl = useRef(null);
   const selectEl = useRef(null);
+  const [page, setPage] = useState(1);
   const {
     APIKEY,
     setDefaultMovies,
@@ -24,25 +25,21 @@ function Filter(props) {
     console.log("hello");
     e.preventDefault();
 
-    console.log(inputEl.current.value);
-    console.log(selectEl.current.value);
-
     const genre = inputEl.current.value;
     const year = selectEl.current.value;
 
-    console.log(genre);
     if (genre === "Genre" && year === "Year") {
       setDefaultMovies(true);
       history.push("/");
     }
 
     //   Checks wheither if correct selections are submitted
-    console.log(genre);
+
     if (genre !== "Genre" && year === "Year") {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&with_genres=${genre}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&with_genres=${genre}&page=${page}`
           )
           .then(res => {
             setFilteredResults(res.data.results);
@@ -61,7 +58,7 @@ function Filter(props) {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&page=${page}`
           )
           .then(res => {
             setFilteredResults(res.data.results);
@@ -81,7 +78,7 @@ function Filter(props) {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}&page=${page}`
           )
           .then(res => {
             setFilteredResults(res.data.results);
@@ -96,7 +93,13 @@ function Filter(props) {
     }
   }
 
-  console.log(filterdResults);
+  function add() {
+    setPage(prevPage => prevPage + 1);
+  }
+
+  function minus() {
+    if (page >= 1) setPage(prevPage => prevPage - 1);
+  }
 
   const filterbar = {
     marginTop: "125px",
@@ -126,6 +129,8 @@ function Filter(props) {
     paddingLeft: "15px",
     fontSize: "0.8em"
   };
+
+  console.log(page);
 
   return (
     <div style={filterbar}>
@@ -193,8 +198,8 @@ function Filter(props) {
         </Button>
       </form>
 
-      {/* <button onClick={add}>{page > 1 ? `page `:`page2` } </button>
-      <button onClick={add}></button> */}
+      <button onClick={minus}>{page > 1 ? `page${page - 1}` : null}</button>
+      <button onClick={add}>{page ? `page${page + 1}` : null}</button>
     </div>
   );
 }
