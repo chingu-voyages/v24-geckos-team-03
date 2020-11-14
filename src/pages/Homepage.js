@@ -45,6 +45,7 @@ function Homepage() {
   }, [defaultMovies, APIKEY, setHomePageResults, setDefaultMovies]);
 
   return (
+    
     <Box
       ref={myRef}
       bg="primaryBackground"
@@ -69,7 +70,8 @@ function Homepage() {
       <Grid searchResults={homePageResults} />
       <Footer />
     </Box>
-
+    
+      
    
   );
 }
