@@ -6,13 +6,10 @@ import { Button, Select, Box, Input } from "@chakra-ui/core";
 import { Link, useHistory } from "react-router-dom";
 
 function Filter(props) {
-  const history = useHistory();
-  const [genre, setGenre] = useState("Genre");
-  const [year, setYear] = useState("Year");
-  const [page, setPage] = useState(1);
   const genreOption = useRef(null);
   const yearOption = useRef(null);
-  const [submit, setSubmit] = useState(false);
+
+  const history = useHistory();
 
   const inputEl = useRef(null);
   const selectEl = useRef(null);
@@ -24,38 +21,43 @@ function Filter(props) {
   } = useContext(Context);
 
   function formSubmit(e) {
+    console.log("hello");
     e.preventDefault();
-    setSubmit(true);
-    setGenre(inputEl.current.value);
-    setYear(selectEl.current.value);
-    genreOption.current.disabled = true;
 
-    yearOption.current.disabled = true;
-    history.push("/filterPage"); // Routes to search page on submit
-  }
+    console.log(inputEl.current.value);
+    console.log(selectEl.current.value);
 
-  useEffect(() => {
+    const genre = inputEl.current.value;
+    const year = selectEl.current.value;
+
+    console.log(genre);
+    if (genre === "Genre" && year === "Year") {
+      setDefaultMovies(true);
+      history.push("/");
+    }
+
     //   Checks wheither if correct selections are submitted
-    if (genre !== "Genre") {
-      console.log(genre);
-      console.log("hh");
+    console.log(genre);
+    if (genre !== "Genre" && year === "Year") {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&with_genres=${genre}&page=${page}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&with_genres=${genre}`
           )
           .then(res => {
             setFilteredResults(res.data.results);
-            console.log(res);
+            console.log(res.data.results);
             setDefaultMovies(false);
-            setSubmit(false);
+
+            history.push("/filterPage");
           });
       } catch (err) {
         console.log(err);
       }
     }
 
-    if (year !== "Year") {
+    console.log(year);
+    if (year !== "Year" && genre === "Genre") {
       try {
         axios
           .get(
@@ -63,15 +65,36 @@ function Filter(props) {
           )
           .then(res => {
             setFilteredResults(res.data.results);
+            console.log(res.data.results);
             setDefaultMovies(false);
-            setSubmit(false);
+
+            history.push("/filterPage");
           });
       } catch (err) {
         console.log(err);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submit, page, genre]);
+
+    console.log(year);
+    console.log(genre);
+    if (year !== "Year" && genre !== "Genre") {
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}`
+          )
+          .then(res => {
+            setFilteredResults(res.data.results);
+            console.log(res.data.results);
+            setDefaultMovies(false);
+            //setSubmit(false);
+            history.push("/filterPage");
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 
   console.log(filterdResults);
 
@@ -111,13 +134,12 @@ function Filter(props) {
         onSubmit={formSubmit}
         style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
       >
-        >
         <Box d="inline" color="primaryText" fontSize="1em" mx="7px" my="5px">
           Find Movies By
         </Box>
         <Select ref={inputEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={genreOption}>Genre</option>
-          <option>Off</option>
+
           <option value="28">Action</option>
 
           <option value="12">Adventure</option>
@@ -138,7 +160,7 @@ function Filter(props) {
         </Select>
         <Select ref={selectEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={yearOption}>Year</option>
-          <option>Off</option>
+
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>
@@ -152,6 +174,7 @@ function Filter(props) {
           <option>2010</option>
           <option>2009</option>
         </Select>
+
         <Button
           backgroundColor="primaryBackground"
           borderColor="logoText"

@@ -203,11 +203,10 @@ function MovieDetailsBody(props) {
             >
               {movieData.original_title}
             </Heading>
-            <Link to="/">
-              <span className="responsiveArrow" onClick={goBack}>
-                &#8592;
-              </span>
-            </Link>
+
+            <span className="responsiveArrow" onClick={goBack}>
+              &#8592;
+            </span>
           </Box>
         </Box>
       </Box>

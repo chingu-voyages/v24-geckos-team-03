@@ -4,15 +4,21 @@ import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
+import { Link, useHistory } from "react-router-dom";
 
 const FavoriteMovies = () => {
   const [movieId, setMovieId] = useState(null);
+  const history = useHistory();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   function onHandleMovieClick(id) {
     setMovieId(id);
     onOpen();
   }
+
+  const goBack = () => {
+    history.goBack();
+  };
 
   const { db, allFavMovies, setAllFavMovies } = useContext(Context);
 
@@ -36,8 +42,20 @@ const FavoriteMovies = () => {
     justifyContent: "space-evenly"
   };
 
+  const responsiveArrow = {
+    color: "white",
+    fontSize: "80px",
+    position: "absolute",
+    top: "140px",
+    left: "80px",
+    cursor: "pointer"
+  };
   return (
     <>
+      <span style={responsiveArrow} onClick={goBack}>
+        &#8592;
+      </span>
+
       <div className="container" style={gridStyles}>
         {allFavMovies.map(movie => {
           return (
