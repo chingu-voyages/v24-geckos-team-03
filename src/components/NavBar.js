@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import Searchbar from './Searchbar';
 import { Link as RouterLink } from "react-router-dom";
 import { Context } from "../Context";
-import { Box, Image, Link, Switch, Heading, Stack } from "@chakra-ui/core";
+import { Box, Image, Link, Switch, Heading, Stack , Icon, useColorMode, Button} from "@chakra-ui/core";
+import {SunIcon, MoonIcon} from '@chakra-ui/icons';
 
 const NavBar = () => {
   const {
@@ -13,12 +14,15 @@ const NavBar = () => {
     setDefaultMovies(true);
   };
 
+//lightMode toggling
+const {colorMode, toggleColorMode} = useColorMode();
+
   return (
     <Box
       className="nav-bar"
       style={{ top: 0 }}
       position="absolute"
-      bg="primaryBackground"
+      bg={colorMode === 'light' ? 'white' : 'primaryBackground'}
       w="100%"
       px={5}
       py={5}
@@ -44,7 +48,7 @@ const NavBar = () => {
           </Link>
           <Stack isInline>
             <Searchbar />
-            <Switch size="sm" ml={2}/>
+            <Icon as={colorMode === "dark" ? SunIcon : MoonIcon} onClick={() => toggleColorMode()} />
           </Stack>
         </Stack>
         <Box float="right" marginRight="198px">

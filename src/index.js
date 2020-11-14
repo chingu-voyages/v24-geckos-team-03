@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset, ColorModeProvider, theme } from "@chakra-ui/core";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
@@ -12,8 +12,10 @@ ReactDOM.render(
   <ContextProvider>
     <Router>
       <ThemeProvider theme={customTheme}>
-        <CSSReset />
-        <App />
+        <ColorModeProvider>
+          <CSSReset />
+          <App />
+        </ColorModeProvider>
       </ThemeProvider>
     </Router>
   </ContextProvider>,

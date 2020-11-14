@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, Heading , useColorMode} from "@chakra-ui/core";
 import axios from "axios";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
