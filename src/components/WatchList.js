@@ -13,8 +13,18 @@ const WatchList = () => {
     onOpen();
   }
 
-  const { allWatchListMovies } = useContext(Context);
-console.log(allWatchListMovies);
+  const {db2, allWatchListMovies, setallWatchListMovies } = useContext(Context);
+
+  //Get data from the DB and store all favotired movies to an array
+  useEffect(() => {
+    db2.collection("watchListMovies")
+      .get()
+      .then(movies => {
+        setallWatchListMovies(movies);
+   
+      });
+  }, []);
+
   //styles for the grid
   const gridStyles = {
     maxWidth: "1200px",
