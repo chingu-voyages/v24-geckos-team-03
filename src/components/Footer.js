@@ -9,7 +9,8 @@ import {
     Divider,
     Flex,
     Image,
-    Box
+    Box,
+    Icon
   } from "@chakra-ui/core";
 const movieDB_logo = 'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg';
 
@@ -40,15 +41,22 @@ const movieDB_logo = 'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_squar
          
           >
             <Flex  margin="0 4px" className="footer-githubs">
+              {/* <Text className="copyright" color="#F34C28">&copy; Copyright 2020  </Text>
+              <Link className="names"href="https://github.com/dpajek" _hover={{color : "#49c3fd"}} isExternal mt={-2} ml={2} >Pajek<FaGithub size="30px"/></Link>
+             <Link className="names" href="https://github.com/Eerian" _hover={{color : "#49c3fd"}} isExternal mt={-2}>Erion<FaGithub size="30px" /> </Link>
+              <Link className="names" href="https://github.com/Rayhan1998" _hover={{color : "#49c3fd"}} isExternal mt={-2}>Rayhan<FaGithub size="30px" /></Link> */}
               <Text className="copyright" color="#F34C28">&copy; Copyright 2020  </Text>
-              <Link className="names"href="https://github.com/dpajek" _hover={{color : "#49c3fd"}} isExternal mt={-2} ml={2} ><i className="fa fa-fw fa-2x fa-inverse fa-github footer-icons"></i>Pajek</Link>
-              <Link className="names" href="https://github.com/Eerian" _hover={{color : "#49c3fd"}} isExternal mt={-2}><i className="fa fa-fw fa-2x fa-inverse fa-github footer-icons"></i>Erion </Link>
-              <Link className="names" href="https://github.com/Rayhan1998" _hover={{color : "#49c3fd"}} isExternal mt={-2}><i className="fa fa-fw fa-2x fa-inverse fa-github footer-icons"></i>Rayhan</Link>
+              <Link className="dev-names" href="https://github.com/dpajek" _hover={{color : "#49c3fd"}} isExternal mt={-2} ml={2} >Pajek</Link>
+              <FaGithub size="30px" className="git-icons" />
+             <Link className="dev-names" href="https://github.com/Eerian" _hover={{color : "#49c3fd"}} isExternal mt={-2}>Erion </Link>
+             <FaGithub size="30px" className="git-icons" />
+              <Link className="dev-names" href="https://github.com/Rayhan1998" _hover={{color : "#49c3fd"}} isExternal mt={-2}>Rayhan</Link>
+              <FaGithub size="30px" className="git-icons" />
             </Flex>
             <Divider mt="-4px" orientation="vertical"/>
             <Flex className="project-repo">
               <Link color={colorMode === 'light' ? "#333" : '#fff'} w="100%" ml="20px" _hover={{color : "#49c3fd"}} href="https://github.com/chingu-voyages/v24-geckos-team-03" isExternal mt={-2}><span className="repo-name">Project Repo</span></Link>
-              {colorMode === 'light' ? <FaGithub size="30px" /> : <FaGithubAlt size="30px" />} 
+              <FaGithub size="45px" className="repo-git-icon"/>
             </Flex>
           </Flex>
     
