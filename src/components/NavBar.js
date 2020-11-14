@@ -17,7 +17,7 @@ const NavBar = () => {
     <Box
       className="nav-bar"
       style={{ top: 0 }}
-      position="absolute"
+      position="fixed"
       bg="primaryBackground"
       w="100%"
       px={5}

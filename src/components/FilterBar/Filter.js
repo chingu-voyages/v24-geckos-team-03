@@ -49,7 +49,7 @@ function Filter() {
   }, [submit]);
 
   const filterbar = {
-    marginTop: "125px",
+    marginTop: "100px",
     textAlign: "center",
   };
   const filterButton = {
