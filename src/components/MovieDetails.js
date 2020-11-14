@@ -50,17 +50,26 @@ const handleAddToFavorites = () => {
     movieReleaseDate: movieDetails.release_date,
     movieRating: movieDetails.vote_average,
   })
-
-  db.collection("favoriteMovies")
-  .get()
-  .then(movies => {
-    setAllFavMovies(movies);
-  })
- 
+  .then(() => {
+    db.collection("favoriteMovies")
+    .get()
+    .then(movies => {
+      setAllFavMovies(movies);
+    });
+  });
+  
 }
 //create a handler for RemoveFromFavorites button on the Modal
 const handleRemoveFromFavorites = () => {
   db.collection('favoriteMovies').doc({id : id}).delete()
+  //update favorite list
+  .then(() => {
+    db.collection("favoriteMovies")
+    .get()
+    .then(movies => {
+      setAllFavMovies(movies);
+    });
+  });
 }
 
 
@@ -82,13 +91,27 @@ const handleAddToWatchList = () => {
     movieReleaseDate: movieDetails.release_date,
     movieRating: movieDetails.vote_average,
   })
+    .then(() => {
+      db2.collection("watchListMovies")
+      .get()
+      .then(movies => {
+        setallWatchListMovies(movies);
+  });
+});
 
-  db2.collection("watchListMovies")
-  .get()
-  .then(movies => {
-    setallWatchListMovies(movies);
-  })
- 
+}
+
+//Create a handler to remove movies from watchlist
+const handleRemoveFromWatchList = () => {
+    db2.collection('watchListMovies').doc({id : id}).delete()
+    //update watchlist
+    .then(() => {
+      db2.collection("watchListMovies")
+      .get()
+      .then(movies => {
+        setallWatchListMovies(movies);
+      });
+    });
 }
 
 
@@ -337,7 +360,7 @@ const [isFaved, setisFaved] = useState();
                   backgroundColor="primaryBackground"
                   color="logoText"
                   _hover
-                  mr={3}
+                  mr={1}
                   onClick={onClose}
                 >
                   Close
@@ -346,13 +369,13 @@ const [isFaved, setisFaved] = useState();
               {iswatchListed
               ? <Button
                   variant="outline"
-                  width="350px"
                   borderWidth="2px"
                   backgroundColor="#db291d"
                   color="white"
                   _hover
-                  mr={3}
-                  onClick={handleRemoveFromFavorites}
+                  mr={6}
+                  ml={6}
+                  onClick={handleRemoveFromWatchList}
                   >Remove From WatchList
                 </Button>
               : <Button 
@@ -362,7 +385,8 @@ const [isFaved, setisFaved] = useState();
                   backgroundColor="primaryBackground"
                   color="logoText"
                   _hover
-                  mr={3}
+                  mr={6}
+                  ml={6}
                   
                   >Add To WatchList
                 </Button>}
