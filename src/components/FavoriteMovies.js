@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
+import Footer from './Footer';
 
 const FavoriteMovies = () => {
   const [movieId, setMovieId] = useState(null);

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Box} from "@chakra-ui/core";
 import NavBar from "../components/NavBar";
 import FavoriteMovies from './../components/FavoriteMovies';
+import Footer from './../components/Footer';
 
 
 
@@ -31,6 +32,7 @@ const FavoriteMoviespage = () => {
       <Box className="movie-grid">
         <FavoriteMovies />
       </Box>
+      <Footer />
     </Box>
   
   );    

@@ -3,6 +3,7 @@ import Grid from "../components/Grid";
 import Navbar from "../components/NavBar";
 import { Heading, Box } from "@chakra-ui/core";
 import { Context } from "../Context";
+import Footer from './../components/Footer';
 
 function SearchPage() {
   const { search, searchResults, isSearch } = useContext(Context);
@@ -22,6 +23,7 @@ function SearchPage() {
       </Heading>
      
       <Grid searchResults={searchResults} />
+      <Footer />
     </Box>
   );
 }
