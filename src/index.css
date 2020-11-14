@@ -119,6 +119,7 @@ body {
 }
 
 
+<<<<<<< HEAD
 /* NAVBAR Responsive Styles */
 @media screen and (max-width: 640px) {
   .nav-lists {
@@ -163,3 +164,59 @@ body {
   
   
   }
+=======
+/* FOOTER responsive Styles */
+
+@media screen and (max-width: 795px) {
+
+.githubs-container {
+  flex-direction: column;
+}
+
+.footer-githubs {
+  align-self: start;
+  width: 100%;
+}
+.project-repo {
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 5%;
+}
+
+.footer-logo {
+  align-self: flex-end;
+  width: 25%;
+  margin-left: 10px;
+}
+
+}
+
+@media screen and (max-width: 586px) {
+ 
+  .copyright {
+    display: none;
+  }
+
+  .footer-icons,
+  .names {
+    display: none;
+  }
+  .footer-logo {
+    margin-top: -10px;
+
+  }
+  .project-repo {
+    width: 100%;
+    margin-top: -80px;
+    margin-left: -20px;
+  }
+  .fa-github {
+    font-size: 50px;
+  }
+ 
+  .repo-name {
+    display: none;
+  }
+
+}
+>>>>>>> feature/footer

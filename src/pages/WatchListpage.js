@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Box} from "@chakra-ui/core";
 import NavBar from "../components/NavBar";
 import WatchList from './../components/WatchList';
+import Footer from './../components/Footer';
 
 const WatchListpage = () => {
 
@@ -29,6 +30,7 @@ const WatchListpage = () => {
       <Box className="movie-grid">
         <WatchList />
       </Box>
+      <Footer />
     </Box>
   
   );    
