@@ -25,7 +25,7 @@ npm install npm@latest -g
 1. Clone the repo
 
 ```
-git clone https://github.com/AlanBayWalker/film-cloud.git
+git clone https://github.com/chingu-voyages/v24-geckos-team-03.git
 ```
 
 2. Run npm install inside project root directory
