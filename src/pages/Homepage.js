@@ -49,6 +49,7 @@ const {colorMode} = useColorMode();
   }, [defaultMovies, APIKEY, setHomePageResults, setDefaultMovies]);
 
   return (
+    
     <Box
       ref={myRef}
       bg={colorMode === 'light' ? "white" : 'primaryBackground'}
@@ -73,7 +74,8 @@ const {colorMode} = useColorMode();
       <Grid searchResults={homePageResults} />
       <Footer />
     </Box>
-
+    
+      
    
   );
 }

@@ -10,7 +10,7 @@ import WatchListpage from './pages/WatchListpage';
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="App">
         <Switch>
           <Route exact path="/">
@@ -36,7 +36,7 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

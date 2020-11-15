@@ -131,7 +131,7 @@ const {colorMode} = useColorMode();
           borderColor={colorMode === 'light' ? "#333" : 'logoText'}
           color={colorMode === 'light' ? "#333" : 'logoText'}
           style={filterButton}
-          _hover={{ backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
+          _hover={colorMode === "light" ? {backgroundColor: "#CBD5E0"} : { backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
           type="submit"
           mx="7px" 
           my="7px"

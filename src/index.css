@@ -17,6 +17,12 @@ body {
   font-weight: 400;
 }
 
+.navbar-links {
+  font-weight: 400;
+}
+.logo-name {
+  margin-left: 10px;
+}
 
 /* Page Headings styles -Favorites Page*/
 .page-heading {
@@ -68,8 +74,9 @@ body {
   text-align: left;
 }
 
-/* SEARCH BUTTON styles */
-.search input {
+/* SEARCH BUTTON styles */ 
+
+ /* .search input {
   width: 300px;
   height: 35px;
   border-radius: 30px;
@@ -78,8 +85,8 @@ body {
   background: #fff;
   border: 2px solid #49c3fd;
   color: #888; 
-  margin-right: 65px;
-}
+  margin-right: 75px;
+} */
 
 .search input:focus::placeholder {
   color: transparent;
@@ -89,7 +96,7 @@ body {
   opacity: 1; /* ONLY FOR MOZILLA USERS */
 }
 
-.search button {
+/* .search button {
   width: 75px;
   height: 35px;
   border: none;
@@ -99,18 +106,18 @@ body {
   transition-property: all;
   transition-duration: 0.5s;
   position: absolute;
-  right: 90px;
+  right: 110px;
   outline: none;
-}
+}  */
 
-.search button:hover {
-  background: #379fcf;;
-}
+/* .search button:hover {
+  background: #379fcf;
+} */
 
-.search button i {
+/* .search button i {
   transition-property: all;
   transition-duration: 0.5s;
-}
+} */
 
 .search button:hover i {
   transform: scale(1.5);
@@ -138,6 +145,64 @@ body {
   margin-top: -8px;
   margin-right: 30px;
 }
+/* Footer */
+.footer-container {
+  width: 100%;
+  margin-top: 100px;
+  bottom: 0;
+}
+
+
+/* NAVBAR Responsive Styles */
+@media screen and (max-width: 640px) {
+  .nav-lists {
+    margin-top: -28px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+
+  .logo {
+    width: 50px;
+    margin-top: -4px;
+  }
+  .logo-name {
+    display: none;
+  }
+  
+  .nav-lists {
+    margin: 0 auto;
+    margin-top: 1px;
+  }
+
+  .search-bar-section {
+    justify-content: flex-end;
+    margin-left: 10px;
+  }
+
+  .search button {
+    margin-right: -13px;
+  }
+  
+}
+
+  @media screen and (max-width: 500px) {
+    .nav-lists {
+      width: 65%;
+    }
+    .switch-button {
+      margin-right: 5%;
+      margin-left: -5%;
+    }
+    .search input {
+      width: 250px;
+    }
+    .search button {
+      margin-right: -30px;
+    }
+    
+  
+  }
 /* FOOTER responsive Styles */
 
 @media screen and (max-width: 795px) {
@@ -190,6 +255,21 @@ body {
 
   .repo-name {
     display: none;
+  }
+}
+
+/* Favortite movies title styles */
+
+@media screen and (max-width: 586px) {
+  .page-heading::before {
+    left: 0;
+
+  }
+
+
+  .page-heading::after {
+    width: 70%;
+    left: 15%;
   }
 
 }

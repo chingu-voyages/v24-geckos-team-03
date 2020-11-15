@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import { useColorMode } from '@chakra-ui/core';
+import { useColorMode , Flex, Button, Input} from '@chakra-ui/core';
 
 
 function Search() {
@@ -56,18 +56,48 @@ const {colorMode } = useColorMode();
 
   return (
     <div className="search">
-      <form onSubmit={searchSubmit}>
-        <input
+      <Flex onSubmit={searchSubmit}>
+        <Input
+          width = "300px"
+          height = "35px"
+          borderRadius = "30px"
+          paddingLeft = "15px"
+          background = "#fff"
+          borderWidth = "2px"
+          borderColor={colorMode === "light" ? "gray.400" : "#49c3fd"}
+          focusBorderColor={colorMode === "light" ? "gray.600" : "blue.200"}
+          marginRight = "75px"
           type="text"
           name="search"
           ref={inputEl}
           placeholder="Search movie here!"
-        ></input>
-        <button type="submit" name="button">
-          <i className="fas fa-search"></i>
-          {/* <input type="text" ref={inputEl}></input> */}
-        </button>
-      </form>
+        >
+        </Input>
+        <Button 
+          width= "75px"
+          height= "35px"
+          borderRadius = "25px"
+          color = {colorMode === "light" ? "#fff" : "#fff"}
+          background = {colorMode === "light" ? "#4A5568" : "#49c3fd"}
+          transitionProperty = "all"
+          transitionDuration = "0.5s"
+          position = "absolute"
+          right = "132px"
+          outline = "none"
+          zIndex="33"
+          _hover={{background : "#379fcf"}}
+      
+      ><i className="fas fa-search"
+          transitionProperty= "all"
+          transitionDuration= "0.5s"
+          _hover={{ transform : "scale(1.5)",
+            transitionProperty: "all",
+            transitionDuration: "0.5s"}}
+      ></i>
+      </Button>
+      
+        
+      </Flex>
     </div>
   );
 }
