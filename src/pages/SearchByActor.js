@@ -75,8 +75,10 @@ function SearchByActor() {
             {personDetails.name}
           </Heading>
           <ChakraGrid
-            mx="125px"
-            my="50px"
+            className="actorBio"
+            mx={{ base: "10px", md: "125px"}}
+            marginTop={{ base: "10px", md: "50px"}}
+            marginBottom="50px"
             borderWidth="1px"
             borderColor="primaryBorder"
             rounded="lg"
