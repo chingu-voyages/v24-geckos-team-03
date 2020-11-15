@@ -94,7 +94,7 @@ function Filter(props) {
   }
 
   const filterbar = {
-    marginTop: "125px",
+    marginTop: "100px",
     textAlign: "center"
   };
   const filterButton = {
