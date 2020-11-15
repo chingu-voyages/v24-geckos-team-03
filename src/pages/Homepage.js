@@ -5,7 +5,7 @@ import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
 import Filter from "../components/FilterBar/Filter";
 import { Context } from "../Context";
-import Footer from './../components/Footer';
+import Footer from "./../components/Footer";
 
 function Homepage() {
   const {
@@ -43,9 +43,7 @@ function Homepage() {
   }, [defaultMovies, APIKEY, setHomePageResults, setDefaultMovies]);
 
   return (
-    
     <Box
-      ref={myRef}
       bg="primaryBackground"
       h="100vh"
       w="100vw"
@@ -68,9 +66,6 @@ function Homepage() {
       <Grid searchResults={homePageResults} />
       <Footer />
     </Box>
-    
-      
-   
   );
 }
 
