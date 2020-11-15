@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Localbase from "localbase";
 const Context = React.createContext();
 
@@ -21,8 +21,7 @@ function ContextProvider(props) {
 
   //Create a LOCAL DATABASE for Watchlist movies using localbase imported.
   let db2 = new Localbase("db2");
- const [allWatchListMovies, setallWatchListMovies] = useState([]);
- 
+  const [allWatchListMovies, setallWatchListMovies] = useState([]);
 
   return (
     <Context.Provider
@@ -30,7 +29,6 @@ function ContextProvider(props) {
         searchQuery,
         setSearchQuery,
         setSearchResults,
-
         searchResults,
         homePageResults,
         setHomePageResults,
@@ -49,7 +47,7 @@ function ContextProvider(props) {
         setNavShadow,
         defaultMovies,
         filterdResults,
-        setFilteredResults
+        setFilteredResults,
       }}
     >
       {props.children}

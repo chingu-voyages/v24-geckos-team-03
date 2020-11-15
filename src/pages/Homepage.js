@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, Heading } from "@chakra-ui/core";
 import axios from "axios";
 import Grid from "../components/Grid";
@@ -15,7 +15,7 @@ function Homepage() {
     setHomePageResults,
     defaultMovies,
     setDefaultMovies,
-    APIKEY
+    APIKEY,
   } = useContext(Context);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function Homepage() {
           .get(
             `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
           )
-          .then(res => {
+          .then((res) => {
             setHomePageResults(res.data.results);
           });
       } catch (err) {
@@ -54,7 +54,6 @@ function Homepage() {
 
   return (
     <Box bg="primaryBackground">
-      {" "}
       &nbsp;
       <Filter />
       <Heading

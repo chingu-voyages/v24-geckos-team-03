@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Box, Image, Grid as ChakraGrid, Heading } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
+import Footer from "./../components/Footer";
 import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
@@ -96,6 +97,7 @@ function SearchByActor() {
           {searchResults.length > 0 && <Grid searchResults={searchResults} />}
         </>
       )}
+    <Footer />
     </Box>
   );
 }
