@@ -17,125 +17,125 @@ import {
   Text,
 } from "@chakra-ui/core";
 import axios from "axios";
-import FavoriteMovies from './FavoriteMovies';
-import Movieboxes from './Movieboxes';
 
 function MovieDetails(props) {
-  const { APIKEY, ImageUrl, db, db2} = useContext(
-    Context
-  );
+  const { APIKEY, ImageUrl, db, db2 } = useContext(Context);
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
 
-  const {allFavMovies, setAllFavMovies } = useContext(Context);
-  const {allWatchListMovies, setallWatchListMovies} = useContext(Context)
+  const { allFavMovies, setAllFavMovies } = useContext(Context);
+  const { allWatchListMovies, setallWatchListMovies } = useContext(Context);
 
-
-//create a handler for "add to favorites" button on the Modal.
-const handleAddToFavorites = () => {
-  //Check for duplicate entries on the database before adding a movie.
-  for (let i = 0; i < allFavMovies.length; i++) {
-    if (allFavMovies[i].id === movieDetails.id) {
-      console.log('movie exists')
-      return null;
+  //create a handler for "add to favorites" button on the Modal.
+  const handleAddToFavorites = () => {
+    //Check for duplicate entries on the database before adding a movie.
+    for (let i = 0; i < allFavMovies.length; i++) {
+      if (allFavMovies[i].id === movieDetails.id) {
+        console.log("movie exists");
+        return null;
       }
     }
 
-  //add image and title of movies clicked to the DB
-  db.collection('favoriteMovies').add({
-    id: movieDetails.id,
-    movieImage: ImageUrl + movieDetails.poster_path,
-    movieTitle: movieDetails.title,
-    movieReleaseDate: movieDetails.release_date,
-    movieRating: movieDetails.vote_average,
-  })
-  .then(() => {
+    //add image and title of movies clicked to the DB
     db.collection("favoriteMovies")
-    .get()
-    .then(movies => {
-      setAllFavMovies(movies);
-    });
-  });
-  
-}
-//create a handler for RemoveFromFavorites button on the Modal
-const handleRemoveFromFavorites = () => {
-  db.collection('favoriteMovies').doc({id : id}).delete()
-  //update favorite list
-  .then(() => {
-    db.collection("favoriteMovies")
-    .get()
-    .then(movies => {
-      setAllFavMovies(movies);
-    });
-  });
-}
-
-
-//create a handler for "add to watch list" button on the Modal.
-const handleAddToWatchList = () => {
-  //Check for duplicate entries on the database before adding a movie.
-  for (let i = 0; i < allWatchListMovies.length; i++) {
-    if (allWatchListMovies[i].id === movieDetails.id) {
-      console.log('movie exists')
-      return null;
-      }
-    }
-
-  //add image and title of movies clicked to the DB
-  db2.collection('watchListMovies').add({
-    id: movieDetails.id,
-    movieImage: ImageUrl + movieDetails.poster_path,
-    movieTitle: movieDetails.title,
-    movieReleaseDate: movieDetails.release_date,
-    movieRating: movieDetails.vote_average,
-  })
-    .then(() => {
-      db2.collection("watchListMovies")
-      .get()
-      .then(movies => {
-        setallWatchListMovies(movies);
-  });
-});
-
-}
-
-//Create a handler to remove movies from watchlist
-const handleRemoveFromWatchList = () => {
-    db2.collection('watchListMovies').doc({id : id}).delete()
-    //update watchlist
-    .then(() => {
-      db2.collection("watchListMovies")
-      .get()
-      .then(movies => {
-        setallWatchListMovies(movies);
+      .add({
+        id: movieDetails.id,
+        movieImage: ImageUrl + movieDetails.poster_path,
+        movieTitle: movieDetails.title,
+        movieReleaseDate: movieDetails.release_date,
+        movieRating: movieDetails.vote_average,
+      })
+      .then(() => {
+        db.collection("favoriteMovies")
+          .get()
+          .then((movies) => {
+            setAllFavMovies(movies);
+          });
       });
-    });
-}
+  };
+  //create a handler for RemoveFromFavorites button on the Modal
+  const handleRemoveFromFavorites = () => {
+    db.collection("favoriteMovies")
+      .doc({ id: id })
+      .delete()
+      //update favorite list
+      .then(() => {
+        db.collection("favoriteMovies")
+          .get()
+          .then((movies) => {
+            setAllFavMovies(movies);
+          });
+      });
+  };
 
+  //create a handler for "add to watch list" button on the Modal.
+  const handleAddToWatchList = () => {
+    //Check for duplicate entries on the database before adding a movie.
+    for (let i = 0; i < allWatchListMovies.length; i++) {
+      if (allWatchListMovies[i].id === movieDetails.id) {
+        console.log("movie exists");
+        return null;
+      }
+    }
 
+    //add image and title of movies clicked to the DB
+    db2
+      .collection("watchListMovies")
+      .add({
+        id: movieDetails.id,
+        movieImage: ImageUrl + movieDetails.poster_path,
+        movieTitle: movieDetails.title,
+        movieReleaseDate: movieDetails.release_date,
+        movieRating: movieDetails.vote_average,
+      })
+      .then(() => {
+        db2
+          .collection("watchListMovies")
+          .get()
+          .then((movies) => {
+            setallWatchListMovies(movies);
+          });
+      });
+  };
 
-const [isFave, setisFave] = useState(false);
-const [iswatchListed, setisWatchListed] = useState(false);
-//check if a movie is favorited;
+  //Create a handler to remove movies from watchlist
+  const handleRemoveFromWatchList = () => {
+    db2
+      .collection("watchListMovies")
+      .doc({ id: id })
+      .delete()
+      //update watchlist
+      .then(() => {
+        db2
+          .collection("watchListMovies")
+          .get()
+          .then((movies) => {
+            setallWatchListMovies(movies);
+          });
+      });
+  };
+
+  const [isFave, setisFave] = useState(false);
+  const [iswatchListed, setisWatchListed] = useState(false);
+  //check if a movie is favorited;
   useEffect(() => {
     setisFave(false);
-    allFavMovies.forEach(movie => {
+    allFavMovies.forEach((movie) => {
       if (movie.id === id) {
         setisFave(true);
       }
-    })
-  },[allFavMovies, id]);
-//check is a movie is watchlisted
+    });
+  }, [allFavMovies, id]);
+  //check is a movie is watchlisted
   useEffect(() => {
     setisWatchListed(false);
-    allWatchListMovies.forEach(movie => {
+    allWatchListMovies.forEach((movie) => {
       if (movie.id === id) {
         setisWatchListed(true);
       }
-    })
-  },[allWatchListMovies, id]);
+    });
+  }, [allWatchListMovies, id]);
   useEffect(() => {
     if (id !== null) {
       setMovieDetails(null); // prevents details from previous modal from showing up
@@ -227,18 +227,6 @@ const [iswatchListed, setisWatchListed] = useState(false);
       });
   }
 
-//Check if movie is favorited 
-const [isFaved, setisFaved] = useState();
-// const checkFavorited = () => {
-//     let favorited = "";
-//     for (let i = 0; i < allFavMovies.length; i++) {
-//       if (allFavMovies[i].id === movieDetails.id) {
-//         setisFaved(movieDetails.id)
-//         console.log(isFaved);
-//       }
-//   }
-// }
-
   return (
     <>
       <Modal preserveScrollBarGap isOpen={isOpen} onClose={onClose}>
@@ -316,31 +304,8 @@ const [isFaved, setisFaved] = useState();
                 </Stack>
               </ModalBody>
 
-              <ModalFooter>  
-              {isFave
-              ? <Button
-                  variant="outline"
-                  width="350px"
-                  borderWidth="2px"
-                  backgroundColor="#db291d"
-                  color="white"
-                  _hover
-                  mr={3}
-                  onClick={handleRemoveFromFavorites}
-                  >Remove From Favorites
-                </Button>
-              : <Button 
-                  onClick={handleAddToFavorites}
-                  borderColor="logoText"
-                  borderWidth="3px"
-                  backgroundColor="primaryBackground"
-                  color="logoText"
-                  _hover
-                  mr={3}
-                  
-                  >Add To Favorites
-                </Button>}
-              <Link to={`/moviedetailspage/${id}`}>
+              <ModalFooter>
+                <Link to={`/moviedetailspage/${id}`}>
                   {" "}
                   <Button
                     borderColor="logoText"
@@ -354,6 +319,64 @@ const [isFaved, setisFaved] = useState();
                     More Details
                   </Button>
                 </Link>
+
+                {isFave ? (
+                  <Button
+                    variant="outline"
+                    //width="350px"
+                    borderWidth="2px"
+                    backgroundColor="#db291d"
+                    color="white"
+                    _hover
+                    mr={3}
+                    onClick={handleRemoveFromFavorites}
+                  >
+                    -Favorites
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleAddToFavorites}
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3}
+                  >
+                    +Favorites
+                  </Button>
+                )}
+
+                {iswatchListed ? (
+                  <Button
+                    variant="outline"
+                    borderWidth="2px"
+                    backgroundColor="#db291d"
+                    color="white"
+                    _hover
+                    mr={3}
+                    //ml={6}
+                    onClick={handleRemoveFromWatchList}
+                  >
+                    -WatchList
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleAddToWatchList}
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3}
+                    //ml={6}
+                  >
+                    +WatchList
+                  </Button>
+                )}
+              </ModalFooter>
+
+              <ModalFooter>
                 <Button
                   borderColor="logoText"
                   borderWidth="3px"
@@ -365,33 +388,6 @@ const [isFaved, setisFaved] = useState();
                 >
                   Close
                 </Button>
-              </ModalFooter>
-              {iswatchListed
-              ? <Button
-                  variant="outline"
-                  borderWidth="2px"
-                  backgroundColor="#db291d"
-                  color="white"
-                  _hover
-                  mr={6}
-                  ml={6}
-                  onClick={handleRemoveFromWatchList}
-                  >Remove From WatchList
-                </Button>
-              : <Button 
-                  onClick={handleAddToWatchList}
-                  borderColor="logoText"
-                  borderWidth="3px"
-                  backgroundColor="primaryBackground"
-                  color="logoText"
-                  _hover
-                  mr={6}
-                  ml={6}
-                  
-                  >Add To WatchList
-                </Button>}
-              <ModalFooter>
-
               </ModalFooter>
             </ModalContent>
           )}
