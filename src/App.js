@@ -7,11 +7,11 @@ import SearchByActor from "./pages/SearchByActor";
 import FilterPage from "./pages/FilterPage";
 
 import SearchPage from "./pages/SearchPage";
-import WatchListpage from './pages/WatchListpage';
+import WatchListpage from "./pages/WatchListpage";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App">
         <Switch>
           <Route exact path="/">
@@ -40,7 +40,7 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

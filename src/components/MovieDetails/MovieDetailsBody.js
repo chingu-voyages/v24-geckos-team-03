@@ -20,7 +20,7 @@ function MovieDetailsBody(props) {
   }, 2500);
 
   const goBack = () => {
-    history.goBack();
+    history.go(-1);
     setDefaultMovies(true);
   };
   const youtubeLink = `https://www.youtube.com/embed/`;
