@@ -19,12 +19,22 @@ function Homepage() {
     APIKEY,
   } = useContext(Context);
 
-  const myRef = React.createRef(); //need so that we can access scrolling position of div on scroll event
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navShadow]);
+  // need navShadow as a dependency, or the value of navShadow won't change between onScroll events (it will always be false)
 
   function onScroll() {
-    const scrollTop = myRef.current.scrollTop;
-    if (!navShadow && scrollTop > 0) setNavShadow(true);
-    else if (navShadow && scrollTop === 0) setNavShadow(false);
+    const scrollTop = window.scrollY;
+
+    if (!navShadow && scrollTop > 0) {
+      setNavShadow(true);
+    } else if (navShadow && scrollTop === 0) {
+      setNavShadow(false);
+    }
   }
 
   useEffect(() => {
@@ -45,18 +55,9 @@ function Homepage() {
   }, [defaultMovies, APIKEY, setHomePageResults, setDefaultMovies]);
 
   return (
-    
-    <Box
-      ref={myRef}
-      bg="primaryBackground"
-      h="100vh"
-      w="100vw"
-      style={{
-        overflow: "scroll",
-      }}
-      onScroll={onScroll}
-    >
-      <NavBar />
+    <Box bg="primaryBackground">
+      {" "}
+      &nbsp;
       <Filter />
       <Heading
         as="h3"
@@ -68,6 +69,7 @@ function Homepage() {
         {isSearch ? null : "Popular Movies"}
       </Heading>
       <Grid searchResults={homePageResults} />
+      <NavBar />
       <Footer />
     </Box>
     
