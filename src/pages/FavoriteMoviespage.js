@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box} from "@chakra-ui/core";
+import { Box, useColorMode} from "@chakra-ui/core";
 import NavBar from "../components/NavBar";
 import FavoriteMovies from './../components/FavoriteMovies';
 import Footer from './../components/Footer';
@@ -7,7 +7,7 @@ import Footer from './../components/Footer';
 
 
 const FavoriteMoviespage = () => {
-
+const {colorMode} = useColorMode();
 // const headerStyles = {
     // position: "absolute",
     // top: "100px",
@@ -18,7 +18,7 @@ const FavoriteMoviespage = () => {
 //   };
   return (
     <Box
-      bg="primaryBackground"
+      bg={colorMode === 'light' ? "white" : 'primaryBackground'} 
       h="100vh"
       w="100vw"
       style={{

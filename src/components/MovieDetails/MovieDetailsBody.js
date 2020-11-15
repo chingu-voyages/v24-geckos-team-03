@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { Context } from "./../../Context";
-import { Box, Heading, Image, Text, Flex, Spinner } from "@chakra-ui/core";
+import { Box, Heading, Image, Text, Flex, Spinner , useColorMode} from "@chakra-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import "./MovieDetailsBody.css";
 
@@ -14,6 +14,10 @@ function MovieDetailsBody(props) {
   const [movieCast, setMovieCast] = useState([]);
   const [movieTrailers, setMovieTrailers] = useState([]);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
+
+
+//color mode
+const {colorMode} = useColorMode();
 
   setTimeout(() => {
     setIsPageLoaded(true);
@@ -137,7 +141,7 @@ function MovieDetailsBody(props) {
 
   // styling varibles
   const detailBody = {
-    backgroundColor: "#333333",
+    backgroundColor: `{colorMode === 'light' ? "white" : '#333'}`,
     height: "100%",
     width: "100%",
     overflowY: "scroll"
@@ -153,7 +157,7 @@ function MovieDetailsBody(props) {
   const container = {
     maxWidth: "80%",
     margin: "0 auto",
-    color: "white"
+    color: `{colorMode === 'light' ? "#333" : '#fff'}` 
   };
 
   const pageSpinner = {

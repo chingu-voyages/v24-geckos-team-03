@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../Context";
 import { Link } from "react-router-dom";
+
 import {
   Modal,
   ModalOverlay,
@@ -15,12 +16,16 @@ import {
   Grid,
   Image,
   Text,
+  useColorMode
 } from "@chakra-ui/core";
 import axios from "axios";
 import FavoriteMovies from './FavoriteMovies';
 import Movieboxes from './Movieboxes';
 
 function MovieDetails(props) {
+//color mode 
+const {colorMode} = useColorMode();
+
   const { APIKEY, ImageUrl, db, db2} = useContext(
     Context
   );
@@ -222,7 +227,7 @@ const [isFaved, setisFaved] = useState();
         <ModalOverlay />
         {movieDetails !== null &&
           movieCredits !== null && ( // boolean && will only execute what comes next if true
-            <ModalContent bg="primaryBackground" color="primaryText">
+            <ModalContent bg={colorMode === 'light' ? "white" : 'primaryBackground'}  color={colorMode === 'light' ? "#333" : 'primaryText'} >
               <ModalHeader>{movieDetails.title}</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
@@ -310,7 +315,7 @@ const [isFaved, setisFaved] = useState();
                   onClick={handleAddToFavorites}
                   borderColor="logoText"
                   borderWidth="3px"
-                  backgroundColor="primaryBackground"
+                  backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
                   color="logoText"
                   _hover
                   mr={3}
@@ -322,7 +327,7 @@ const [isFaved, setisFaved] = useState();
                   <Button
                     borderColor="logoText"
                     borderWidth="3px"
-                    backgroundColor="primaryBackground"
+                    backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
                     color="logoText"
                     _hover
                     mr={3}
@@ -334,7 +339,7 @@ const [isFaved, setisFaved] = useState();
                 <Button
                   borderColor="logoText"
                   borderWidth="3px"
-                  backgroundColor="primaryBackground"
+                  backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
                   color="logoText"
                   _hover
                   mr={3}
@@ -359,7 +364,7 @@ const [isFaved, setisFaved] = useState();
                   onClick={handleAddToWatchList}
                   borderColor="logoText"
                   borderWidth="3px"
-                  backgroundColor="primaryBackground"
+                  backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
                   color="logoText"
                   _hover
                   mr={3}

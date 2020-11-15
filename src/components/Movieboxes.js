@@ -11,18 +11,18 @@ const {colorMode} = useColorMode();
   return (
     <PseudoBox
       onClick={() => onClick()}
-      bg="cardBackground"
+      bg={colorMode === 'light' ? "white" : 'cardBackground'} 
       w="13vw"
       minW="175px"
       m={4}
-      color="primaryText"
+      color={colorMode === 'light' ? "#333" : 'primaryText'} 
       cursor="pointer"
       borderWidth="1px"
       borderColor="primaryBorder"
       rounded="lg"
       fontSize="0.8em"
       p="5px"
-      opacity="0.75"
+      opacity={colorMode === 'light' ? "1" : '0.75'} 
       _hover={{ borderColor: "#666", opacity: "1" }}
       position="relative"
     >

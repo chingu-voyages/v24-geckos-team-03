@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Box, Image, Grid as ChakraGrid, Heading } from "@chakra-ui/core";
+import { Box, Image, Grid as ChakraGrid, Heading , useColorMode} from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
 import axios from "axios";
@@ -8,6 +8,9 @@ import { useParams } from "react-router-dom";
 
 
 function SearchByActor() {
+//color mode
+const {colorMode} = useColorMode();
+
   const { APIKEY, ImageUrl, setNavShadow, navShadow } = useContext(Context);
 
   const { personId } = useParams();
@@ -52,7 +55,7 @@ function SearchByActor() {
   return (
     <Box
       ref={myRef}
-      bg="primaryBackground"
+      bg={colorMode === 'light' ? "white" : 'primaryBackground'} 
       h="100vh"
       w="100vw"
       style={{
@@ -69,7 +72,7 @@ function SearchByActor() {
             size="lg"
             marginTop="100px"
             marginLeft="5%"
-            color="primaryText"
+            color={colorMode === 'light' ? "#333" : 'primaryText'} 
           >
             {personDetails.name}
           </Heading>
@@ -88,7 +91,7 @@ function SearchByActor() {
               objectFit="cover"
               rounded="lg"
             />
-            <Box m="10px" color="primaryText" fontSize="0.9em">
+            <Box m="10px" color={colorMode === 'light' ? "#333" : 'primaryText'}  fontSize="0.9em">
               Actor Biography: {personDetails.biography}
             </Box>
           </ChakraGrid>
