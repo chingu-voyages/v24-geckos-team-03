@@ -4,6 +4,7 @@ import axios from "axios";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
 import Filter from "../components/FilterBar/Filter";
+import Footer from "./../components/Footer";
 
 import { Context } from "../Context";
 

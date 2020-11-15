@@ -15,9 +15,14 @@ function ContextProvider(props) {
 
   const APIKEY = "6ee25636d25df9899ed46e80a13383ff";
 
-  //Create a LOCAL DATABASE using localbase imported.
+  //Create a LOCAL DATABASE forfavorite movies using localbase imported.
   let db = new Localbase("db");
   const [allFavMovies, setAllFavMovies] = useState([]);
+
+  //Create a LOCAL DATABASE for Watchlist movies using localbase imported.
+  let db2 = new Localbase("db2");
+ const [allWatchListMovies, setallWatchListMovies] = useState([]);
+ 
 
   return (
     <Context.Provider
@@ -36,6 +41,9 @@ function ContextProvider(props) {
         db,
         allFavMovies,
         setAllFavMovies,
+        db2,
+        allWatchListMovies,
+        setallWatchListMovies,
         setDefaultMovies,
         navShadow,
         setNavShadow,

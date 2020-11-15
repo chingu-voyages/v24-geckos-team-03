@@ -3,13 +3,9 @@ import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
-import { Link, useHistory } from "react-router-dom";
-import "./MovieDetails/MovieDetailsBody.css";
-import Footer from "./Footer";
 
-const FavoriteMovies = () => {
+const WatchList = () => {
   const [movieId, setMovieId] = useState(null);
-  const history = useHistory();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   function onHandleMovieClick(id) {
@@ -17,19 +13,15 @@ const FavoriteMovies = () => {
     onOpen();
   }
 
-  const goBack = () => {
-    history.goBack();
-  };
-
-  const { db, allFavMovies, setAllFavMovies } = useContext(Context);
+  const {db2, allWatchListMovies, setallWatchListMovies } = useContext(Context);
 
   //Get data from the DB and store all favotired movies to an array
   useEffect(() => {
-    db.collection("favoriteMovies")
+    db2.collection("watchListMovies")
       .get()
       .then(movies => {
-        setAllFavMovies(movies);
-        console.log(db);
+        setallWatchListMovies(movies);
+   
       });
   }, []);
 
@@ -40,29 +32,13 @@ const FavoriteMovies = () => {
     margin: "0 auto",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   };
 
-  const responsiveArrow = {
-    color: "white",
-
-    position: "absolute",
-    top: "170px",
-    left: "70px",
-    cursor: "pointer"
-  };
   return (
     <>
-      <span
-        style={responsiveArrow}
-        className="responsiveArrow"
-        onClick={goBack}
-      >
-        &#8592;
-      </span>
-
       <div className="container" style={gridStyles}>
-        {allFavMovies.map(movie => {
+        {allWatchListMovies.map((movie) => {
           return (
             <Movieboxes
               key={movie.id}
@@ -86,4 +62,5 @@ const FavoriteMovies = () => {
   );
 };
 
-export default FavoriteMovies;
+
+export default WatchList;

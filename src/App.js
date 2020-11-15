@@ -7,6 +7,7 @@ import SearchByActor from "./pages/SearchByActor";
 import FilterPage from "./pages/FilterPage";
 
 import SearchPage from "./pages/SearchPage";
+import WatchListpage from './pages/WatchListpage';
 
 const App = () => {
   return (
@@ -19,10 +20,12 @@ const App = () => {
           <Route path="/favorites">
             <FavoriteMoviespage />
           </Route>
+          <Route path="/watchList">
+            <WatchListpage />
+          </Route>
           <Route path="/moviedetailspage/:movieId">
             <MovieDetailsPage />
           </Route>
-
           <Route path="/actor/:personId">
             <SearchByActor />
           </Route>
