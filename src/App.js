@@ -10,7 +10,7 @@ import SearchPage from "./pages/SearchPage";
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="App">
         <Switch>
           <Route exact path="/">
@@ -32,12 +32,12 @@ const App = () => {
           <Route path="/filterPage">
             <FilterPage />
           </Route>
-          <Route exact path="/">
+          <Route path="/">
             <Homepage />
           </Route>
         </Switch>
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
