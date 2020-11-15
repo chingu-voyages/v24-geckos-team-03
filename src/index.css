@@ -56,6 +56,12 @@ body {
   z-index: -1;
 }
 
+.watch-list {
+  color: red;
+}
+
+
+
 /* Movie Titles */
 .movie-titles {
   padding-top: 5px;
@@ -110,4 +116,130 @@ body {
   transform: scale(1.5);
   transition-property: all;
   transition-duration: 0.5s;
+}
+
+
+/* Footer */
+.footer-container {
+  width: 100%;
+  margin-top: 100px;
+  bottom: 0;
+}
+
+
+/* NAVBAR Responsive Styles */
+@media screen and (max-width: 640px) {
+  .nav-lists {
+    margin-top: -28px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+
+  .logo {
+    width: 50px;
+    margin-top: -4px;
+  }
+  .logo-name {
+    display: none;
+  }
+  
+  .nav-lists {
+    margin: 0 auto;
+    margin-top: 1px;
+  }
+
+  .search-bar-section {
+    justify-content: flex-end;
+    margin-left: 10px;
+  }
+
+  .search button {
+    margin-right: -13px;
+  }
+  
+}
+
+  @media screen and (max-width: 500px) {
+    .nav-lists {
+      width: 65%;
+    }
+    .switch-button {
+      margin-right: 5%;
+      margin-left: -5%;
+    }
+    .search button {
+      margin-right: -30px;
+    }
+    
+  
+  }
+/* FOOTER responsive Styles */
+
+@media screen and (max-width: 795px) {
+
+.githubs-container {
+  flex-direction: column;
+}
+
+.footer-githubs {
+  align-self: start;
+  width: 100%;
+}
+.project-repo {
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 5%;
+}
+
+.footer-logo {
+  align-self: flex-end;
+  width: 25%;
+  margin-left: 10px;
+}
+
+}
+
+@media screen and (max-width: 586px) {
+ 
+  .copyright {
+    display: none;
+  }
+
+  .footer-icons,
+  .names {
+    display: none;
+  }
+  .footer-logo {
+    margin-top: -10px;
+
+  }
+  .project-repo {
+    width: 100%;
+    margin-top: -80px;
+    margin-left: -20px;
+  }
+  .fa-github {
+    font-size: 50px;
+  }
+ 
+  .repo-name {
+    display: none;
+  }
+}
+
+/* Favortite movies title styles */
+
+@media screen and (max-width: 586px) {
+  .page-heading::before {
+    left: 0;
+
+  }
+
+
+  .page-heading::after {
+    width: 70%;
+    left: 15%;
+  }
+
 }
