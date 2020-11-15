@@ -1,75 +1,49 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function Search() {
   const history = useHistory();
+
   const {
-    setSearch,
     setSearchResults,
-    search,
-    searchResults,
+    searchQuery,
+    setSearchQuery,
+
     setIsSearch,
-    APIKEY,
-    setDefaultMovies
+    APIKEY
   } = useContext(Context);
 
   const inputEl = useRef(null);
 
   function searchSubmit(e) {
     e.preventDefault();
-    setSearch(inputEl.current.value);
+
+    setSearchQuery(inputEl.current.value);
 
     setIsSearch(true);
 
     history.push("/searchPage"); // Routes to search page on submit
+    console.log(searchQuery);
   }
 
   useEffect(() => {
-    if (search.length > 0) {
+    if (searchQuery.length > 0) {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${search}`
+            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${searchQuery}`
           )
           .then(res => {
             setSearchResults(res.data.results);
             setIsSearch(true);
-            setDefaultMovies(false);
           });
       } catch (err) {
         console.log(err);
       }
     }
+  }, [searchQuery]);
 
-    console.log(searchResults);
-  }, [search]);
-
-  const buttonStyle = {
-    borderRadius: "0.25rem",
-    fontWeight: 600,
-    display: "inline-flex",
-    appearance: "none",
-    WebkitBoxAlign: "center",
-    alignItems: "center",
-    WebkitBoxPack: "center",
-    justifyContent: "center",
-    transition: "all 250ms ease 0s",
-    userSelect: "none",
-    position: "relative",
-    whiteSpace: "nowrap",
-    verticalAlign: "middle",
-    lineHeight: 1.2,
-    outline: "none",
-    height: "2em",
-    minWidth: "2.5rem",
-    fontSize: "1rem",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
-    backgroundColor: "rgb(237, 242, 247)",
-    marginLeft: "5px",
-    marginRight: "5px"
-  };
   return (
     <div className="search">
       <form onSubmit={searchSubmit}>
@@ -81,7 +55,6 @@ function Search() {
         ></input>
         <button type="submit" name="button">
           <i className="fas fa-search"></i>
-          {/* <input type="text" ref={inputEl}></input> */}
         </button>
       </form>
     </div>

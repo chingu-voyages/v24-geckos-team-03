@@ -3,16 +3,23 @@ import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
-import Footer from './Footer';
+import { Link, useHistory } from "react-router-dom";
+
+import Footer from "./Footer";
 
 const FavoriteMovies = () => {
   const [movieId, setMovieId] = useState(null);
+  const history = useHistory();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   function onHandleMovieClick(id) {
     setMovieId(id);
     onOpen();
   }
+
+  const goBack = () => {
+    history.goBack();
+  };
 
   const { db, allFavMovies, setAllFavMovies } = useContext(Context);
 
@@ -36,6 +43,14 @@ const FavoriteMovies = () => {
     justifyContent: "space-evenly"
   };
 
+  const responsiveArrow = {
+    color: "white",
+
+    position: "absolute",
+    top: "170px",
+    left: "70px",
+    cursor: "pointer"
+  };
   return (
     <>
       <div className="container" style={gridStyles}>
@@ -62,6 +77,5 @@ const FavoriteMovies = () => {
     </>
   );
 };
-
 
 export default FavoriteMovies;

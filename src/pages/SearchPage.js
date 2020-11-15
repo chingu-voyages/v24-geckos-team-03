@@ -6,8 +6,9 @@ import { Context } from "../Context";
 import Footer from './../components/Footer';
 
 function SearchPage() {
-  const { search, searchResults, isSearch } = useContext(Context);
-  console.log(search);
+  const { searchQuery, searchResults } = useContext(Context);
+  console.log(searchQuery);
+
   return (
     <Box
       bg="primaryBackground"
@@ -17,11 +18,13 @@ function SearchPage() {
         overflow: "scroll"
       }}
     >
-       <Navbar />
+      <Navbar />
       <Heading paddingY="80px" marginY="50px" textAlign="center" color="white">
-        {isSearch ? `Search Results for ${search}` : `Search For Movie`}
+        {searchQuery.length > 0
+          ? `Search Results for ${searchQuery}`
+          : `Search For Movie`}
       </Heading>
-     
+
       <Grid searchResults={searchResults} />
       <Footer />
     </Box>

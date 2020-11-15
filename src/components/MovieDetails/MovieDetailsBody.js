@@ -8,6 +8,7 @@ import "./MovieDetailsBody.css";
 function MovieDetailsBody(props) {
   const history = useHistory();
   const { APIKEY, ImageUrl, setDefaultMovies } = useContext(Context);
+  const [page, setPage] = useState(1);
 
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
@@ -19,7 +20,7 @@ function MovieDetailsBody(props) {
   }, 2500);
 
   const goBack = () => {
-    history.goBack();
+    history.go(-1);
     setDefaultMovies(true);
   };
   const youtubeLink = `https://www.youtube.com/embed/`;
@@ -27,7 +28,6 @@ function MovieDetailsBody(props) {
 
   // movie cast card creator
   if (movieCast !== null) {
-    const numberOfActorsDisplayed = 10;
     // the code beloe takes the first X objects in the movie credit array
     // for each of these, a Box is generated with a headshot, actor name, and character
     castList = movieCast.map((castMember, index) => {
@@ -133,7 +133,7 @@ function MovieDetailsBody(props) {
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [APIKEY, movieId]);
 
   // styling varibles
   const detailBody = {
@@ -203,11 +203,15 @@ function MovieDetailsBody(props) {
             >
               {movieData.original_title}
             </Heading>
-            <Link to="/">
-              <span className="responsiveArrow" onClick={goBack}>
-                &#8592;
-              </span>
-            </Link>
+
+            <span
+              className={
+                isPageLoaded ? `responsiveArrow` : `responsiveArrow removeClick`
+              }
+              onClick={goBack}
+            >
+              &#8592;
+            </span>
           </Box>
         </Box>
       </Box>
@@ -229,7 +233,9 @@ function MovieDetailsBody(props) {
           <Box paddingTop="30px">
             <Heading pb="10px">Trailers</Heading>
             <Flex wrap="nowrap" overflowX="auto" justifyContent="center">
-              {movieTrailersboxes}
+              {movieTrailers.length > 0
+                ? movieTrailersboxes
+                : "No Trailers Available"}
             </Flex>
           </Box>
         </Box>

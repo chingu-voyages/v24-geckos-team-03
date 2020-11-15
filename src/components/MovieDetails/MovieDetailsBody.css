@@ -34,6 +34,11 @@
   font-size: 80px;
   position: absolute;
   top: 50px;
+  cursor: pointer;
+}
+
+.removeClick {
+  pointer-events: none;
 }
 
 @media screen and (min-width: 300px) {
