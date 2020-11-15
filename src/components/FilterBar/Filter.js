@@ -93,14 +93,6 @@ function Filter(props) {
     }
   }
 
-  // function add() {
-  //   setPage(prevPage => prevPage + 1);
-  // }
-
-  // function minus() {
-  //   if (page >= 1) setPage(prevPage => prevPage - 1);
-  // }
-
   const filterbar = {
     marginTop: "125px",
     textAlign: "center"
@@ -197,9 +189,6 @@ function Filter(props) {
           Submit
         </Button>
       </form>
-
-      {/* <button onClick={minus}>{page > 1 ? `page${page - 1}` : null}</button>
-      <button onClick={add}>{page ? `page${page + 1}` : null}</button> */}
     </div>
   );
 }
