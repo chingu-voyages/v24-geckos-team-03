@@ -204,7 +204,12 @@ function MovieDetailsBody(props) {
               {movieData.original_title}
             </Heading>
 
-            <span className="responsiveArrow" onClick={goBack}>
+            <span
+              className={
+                isPageLoaded ? `responsiveArrow` : `responsiveArrow removeClick`
+              }
+              onClick={goBack}
+            >
               &#8592;
             </span>
           </Box>

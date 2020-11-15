@@ -37,6 +37,10 @@
   cursor: pointer;
 }
 
+.removeClick {
+  pointer-events: none;
+}
+
 @media screen and (min-width: 300px) {
   .responsiveArrow {
     font-size: 30px;
