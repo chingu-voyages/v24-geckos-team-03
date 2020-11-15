@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Box, Image, Grid as ChakraGrid, Heading } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
+import Footer from "./../components/Footer";
 import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
@@ -74,8 +75,10 @@ function SearchByActor() {
             {personDetails.name}
           </Heading>
           <ChakraGrid
-            mx="125px"
-            my="50px"
+            className="actorBio"
+            mx={{ base: "10px", md: "125px"}}
+            marginTop={{ base: "10px", md: "50px"}}
+            marginBottom="50px"
             borderWidth="1px"
             borderColor="primaryBorder"
             rounded="lg"
@@ -96,6 +99,7 @@ function SearchByActor() {
           {searchResults.length > 0 && <Grid searchResults={searchResults} />}
         </>
       )}
+    <Footer />
     </Box>
   );
 }

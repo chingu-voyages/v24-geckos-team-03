@@ -1,6 +1,6 @@
 import React from "react";
 import Homepage from "./pages/Homepage";
-import { BrowserRouter, Switch, Route, HashRouter } from "react-router-dom";
+import { Switch, Route, HashRouter } from "react-router-dom";
 import FavoriteMoviespage from "./pages/FavoriteMoviespage";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 import SearchByActor from "./pages/SearchByActor";
