@@ -9,10 +9,9 @@ function Search() {
     setSearchResults,
     searchQuery,
     setSearchQuery,
-    searchResults,
+
     setIsSearch,
-    APIKEY,
-    setDefaultMovies
+    APIKEY
   } = useContext(Context);
 
   const inputEl = useRef(null);
@@ -45,31 +44,6 @@ function Search() {
     }
   }, [searchQuery]);
 
-  const buttonStyle = {
-    borderRadius: "0.25rem",
-    fontWeight: 600,
-    display: "inline-flex",
-    appearance: "none",
-    WebkitBoxAlign: "center",
-    alignItems: "center",
-    WebkitBoxPack: "center",
-    justifyContent: "center",
-    transition: "all 250ms ease 0s",
-    userSelect: "none",
-    position: "relative",
-    whiteSpace: "nowrap",
-    verticalAlign: "middle",
-    lineHeight: 1.2,
-    outline: "none",
-    height: "2em",
-    minWidth: "2.5rem",
-    fontSize: "1rem",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
-    backgroundColor: "rgb(237, 242, 247)",
-    marginLeft: "5px",
-    marginRight: "5px"
-  };
   return (
     <div className="search">
       <form onSubmit={searchSubmit}>
@@ -81,7 +55,6 @@ function Search() {
         ></input>
         <button type="submit" name="button">
           <i className="fas fa-search"></i>
-          {/* <input type="text" ref={inputEl}></input> */}
         </button>
       </form>
     </div>

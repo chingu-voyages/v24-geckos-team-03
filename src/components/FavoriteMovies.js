@@ -4,7 +4,7 @@ import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
 import { Link, useHistory } from "react-router-dom";
-import "./MovieDetails/MovieDetailsBody.css";
+
 import Footer from "./Footer";
 
 const FavoriteMovies = () => {
@@ -53,14 +53,6 @@ const FavoriteMovies = () => {
   };
   return (
     <>
-      <span
-        style={responsiveArrow}
-        className="responsiveArrow"
-        onClick={goBack}
-      >
-        &#8592;
-      </span>
-
       <div className="container" style={gridStyles}>
         {allFavMovies.map(movie => {
           return (
