@@ -4,7 +4,6 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 function Search() {
   const history = useHistory();
-  console.log(history);
   const {
     setSearch,
     setSearchResults,

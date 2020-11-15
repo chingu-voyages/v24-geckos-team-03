@@ -6,10 +6,11 @@ import MovieDetailsPage from "./pages/MovieDetailsPage";
 import SearchByActor from "./pages/SearchByActor";
 
 import SearchPage from "./pages/SearchPage";
+import WatchListpage from './pages/WatchListpage';
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="App">
         <Switch>
           <Route exact path="/">
@@ -18,10 +19,12 @@ const App = () => {
           <Route path="/favorites">
             <FavoriteMoviespage />
           </Route>
+          <Route path="/watchList">
+            <WatchListpage />
+          </Route>
           <Route path="/moviedetailspage/:movieId">
             <MovieDetailsPage />
           </Route>
-
           <Route path="/actor/:personId">
             <SearchByActor />
           </Route>
@@ -33,7 +36,7 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

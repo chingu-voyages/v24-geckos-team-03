@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 import { Box} from "@chakra-ui/core";
 import NavBar from "../components/NavBar";
-import FavoriteMovies from './../components/FavoriteMovies';
+import WatchList from './../components/WatchList';
 import Footer from './../components/Footer';
 
-
-
-const FavoriteMoviespage = () => {
+const WatchListpage = () => {
 
 // const headerStyles = {
     // position: "absolute",
@@ -27,10 +25,10 @@ const FavoriteMoviespage = () => {
     >
       <NavBar />
       <Box>
-        <h1 className="page-heading favorites-list">Favorite Movies</h1>
+        <h1 className="page-heading watch-list">Movies for later</h1>
       </Box>
       <Box className="movie-grid">
-        <FavoriteMovies />
+        <WatchList />
       </Box>
       <Footer />
     </Box>
@@ -39,4 +37,4 @@ const FavoriteMoviespage = () => {
     
 }
 
-export default FavoriteMoviespage;
+export default WatchListpage;

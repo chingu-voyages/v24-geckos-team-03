@@ -3,9 +3,8 @@ import { Context } from "../Context";
 import Movieboxes from "../components/Movieboxes";
 import MovieDetails from "./MovieDetails";
 import { useDisclosure } from "@chakra-ui/core";
-import Footer from './Footer';
 
-const FavoriteMovies = () => {
+const WatchList = () => {
   const [movieId, setMovieId] = useState(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -14,15 +13,15 @@ const FavoriteMovies = () => {
     onOpen();
   }
 
-  const { db, allFavMovies, setAllFavMovies } = useContext(Context);
+  const {db2, allWatchListMovies, setallWatchListMovies } = useContext(Context);
 
   //Get data from the DB and store all favotired movies to an array
   useEffect(() => {
-    db.collection("favoriteMovies")
+    db2.collection("watchListMovies")
       .get()
       .then(movies => {
-        setAllFavMovies(movies);
-        console.log(db);
+        setallWatchListMovies(movies);
+   
       });
   }, []);
 
@@ -33,13 +32,13 @@ const FavoriteMovies = () => {
     margin: "0 auto",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   };
 
   return (
     <>
       <div className="container" style={gridStyles}>
-        {allFavMovies.map(movie => {
+        {allWatchListMovies.map((movie) => {
           return (
             <Movieboxes
               key={movie.id}
@@ -64,4 +63,4 @@ const FavoriteMovies = () => {
 };
 
 
-export default FavoriteMovies;
+export default WatchList;
