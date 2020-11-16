@@ -36,7 +36,7 @@ const WatchListpage = () => {
           
       &nbsp;
       <Box>
-        <h1 className="page-heading watch-list">Movies for later</h1>
+        <h1 className="page-heading watch-list">Movies to watch</h1>
       </Box>
       <Box className="movie-grid">
         <WatchList />
