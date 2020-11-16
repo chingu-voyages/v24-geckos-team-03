@@ -16,14 +16,15 @@ const Footer = () => {
       bg="primaryBackground"
       paddingTop="10px"
       boxShadow="0px -4px 4px 1px rgba(0,0,0,0.25)"
+      position="relative"
     >
-      <Divider />
+      <Divider mb={-1}/>
       <Flex
         className="footer"
         justifyContent="space-around"
         flexDirection="row"
-        paddingTop="8px"
-        paddingBottom="10px"
+        paddingTop="2px"
+        paddingBottom="5px"
       >
         <Flex
           className="githubs-container"
@@ -91,7 +92,7 @@ const Footer = () => {
           >
             Powered By
           </Text>
-          <Image src={movieDB_logo} size="65px" />
+          <Image src={movieDB_logo} size="50px" />
         </Flex>
       </Flex>
     </Box>
