@@ -1,8 +1,14 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
+<<<<<<< ours
 import { Link, useHistory } from "react-router-dom";
 import { useColorMode , Flex, Button, Input} from '@chakra-ui/core';
+
+=======
+import { useHistory } from "react-router-dom";
+>>>>>>> theirs
+
 function Search() {
 //lightMode toggling
 const {colorMode } = useColorMode();
@@ -49,6 +55,13 @@ const {colorMode } = useColorMode();
     }
   }, [APIKEY, searchQuery, setIsSearch, setSearchResults]);
 
+<<<<<<< ours
+    console.log(searchResults);
+  }, [search]);
+
+
+=======
+>>>>>>> theirs
   return (
     <div className="search">
       <Flex onSubmit={searchSubmit}>
@@ -65,11 +78,11 @@ const {colorMode } = useColorMode();
           type="text"
           name="search"
           ref={inputEl}
+<<<<<<< ours
           placeholder="Search movie here!"
         >
         </Input>
         <Button 
-          className="search-btn"
           width= "75px"
           height= "35px"
           borderRadius = "25px"
@@ -94,6 +107,14 @@ const {colorMode } = useColorMode();
       
         
       </Flex>
+=======
+          placeholder="Search movies!"
+        ></input>
+        <button type="submit" name="button">
+          <i className="fas fa-search"></i>
+        </button>
+      </form>
+>>>>>>> theirs
     </div>
   );
 }

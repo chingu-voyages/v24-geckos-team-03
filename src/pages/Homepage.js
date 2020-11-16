@@ -57,9 +57,22 @@ const {colorMode} = useColorMode();
   }, [defaultMovies, APIKEY, setHomePageResults, setDefaultMovies]);
 
   return (
-    <Box bg={colorMode === 'light' ? "white" : 'primaryBackground'}
+<<<<<<< ours
+    
+    <Box
+      ref={myRef}
+      bg={colorMode === 'light' ? "white" : 'primaryBackground'}
+      h="100vh"
+      w="100vw"
+      style={{
+        overflow: "scroll",
+      }}
+      onScroll={onScroll}
+=======
+    <Box bg="primaryBackground"
     position="relative"
     minHeight="100vh"
+>>>>>>> theirs
     >
       &nbsp;
       <Filter />

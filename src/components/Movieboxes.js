@@ -1,7 +1,12 @@
 import React from "react";
+<<<<<<< ours
 import { Box, Image, PseudoBox, Icon, useColorMode } from "@chakra-ui/core";
+import { FaHeart } from "react-icons/fa";
+=======
+import { Box, Image, PseudoBox, Icon } from "@chakra-ui/core";
 import { FaHeart, FaClipboardList } from "react-icons/fa";
 import NotFound from "../img/not-found.jpg";
+>>>>>>> theirs
 
 function Movieboxes(props) {
   const {

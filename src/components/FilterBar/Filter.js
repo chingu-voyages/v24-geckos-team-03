@@ -2,13 +2,22 @@ import React, { useContext, useRef, useState } from "react";
 import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
-import { Button, Select, Box ,  useColorMode} from "@chakra-ui/core";
-import { useHistory } from "react-router-dom";
+<<<<<<< ours
+import { Heading, Button, Select, Box , useColorMode} from "@chakra-ui/core";
 
-function Filter(props) {
+function Filter() {
 //color mode 
 const {colorMode} = useColorMode();
 
+
+  const [genre, setGenre] = useState("Genre");
+  const [year, setYear] = useState("Year");
+=======
+import { Button, Select, Box } from "@chakra-ui/core";
+import { useHistory } from "react-router-dom";
+
+function Filter(props) {
+>>>>>>> theirs
   const genreOption = useRef(null);
   const yearOption = useRef(null);
 
@@ -178,8 +187,15 @@ const {colorMode} = useColorMode();
           borderColor={colorMode === 'light' ? "#333" : 'logoText'}
           color={colorMode === 'light' ? "#333" : 'logoText'}
           style={filterButton}
+<<<<<<< ours
           _hover={colorMode === "light" ? {backgroundColor: "#CBD5E0"} : { backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
-        
+=======
+          _hover={{
+            backgroundColor: "logoText",
+            color: "primaryBackground",
+            fontWeight: "900"
+          }}
+>>>>>>> theirs
           type="submit"
           mx="7px"
           my="7px"

@@ -6,13 +6,27 @@ import { Context } from "../Context";
 import Footer from "./../components/Footer";
 
 function SearchPage() {
-  const { searchQuery, searchResults, setNavShadow, navShadow , isSearch, search} = useContext(Context);
-  console.log(searchQuery);
-  
+<<<<<<< ours
   //color mode 
   const {colorMode} = useColorMode();
-
-
+  const { search, searchResults, isSearch } = useContext(Context);
+  console.log(search);
+  return (
+    <Box
+      bg={colorMode === 'light' ? "white" : 'primaryBackground'} 
+      h="100vh"
+      w="100vw"
+      style={{
+        overflow: "scroll"
+      }}
+    >
+       <Navbar />
+      <Heading paddingY="80px" marginY="50px" textAlign="center" color={colorMode === 'light' ? "#333" : '#fff'} >
+        {isSearch ? `Search Results for ${search}` : `Search For Movie`}
+=======
+  const { searchQuery, searchResults, setNavShadow, navShadow } = useContext(Context);
+  console.log(searchQuery);
+  
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
 
@@ -32,13 +46,16 @@ function SearchPage() {
   }
 
   return (
-    <Box bg={colorMode === 'light' ? "white" : 'primaryBackground'} 
+    <Box bg="primaryBackground"
     position="relative"
     minHeight="100vh"
     >
       &nbsp;
-      <Heading paddingY="80px" marginY="50px" textAlign="center" color={colorMode === 'light' ? "#333" : '#fff'} >
-        {isSearch ? `Search Results for ${search}` : `Search For Movie`}
+      <Heading paddingY="80px" marginY="50px" textAlign="center" color="white">
+        {searchQuery.length > 0
+          ? `Search Results for ${searchQuery}`
+          : `Search For Movie`}
+>>>>>>> theirs
       </Heading>
       <Grid searchResults={searchResults} />
       <Navbar />

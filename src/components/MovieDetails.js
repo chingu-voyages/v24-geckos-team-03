@@ -1,7 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../Context";
 import { Link } from "react-router-dom";
+<<<<<<< ours
+
+=======
 import NotFound from "../img/not-found.jpg";
+>>>>>>> theirs
 import {
   Modal,
   ModalOverlay,
@@ -18,13 +22,19 @@ import {
   Text,
   useColorMode
 } from "@chakra-ui/core";
-
 import axios from "axios";
+
 function MovieDetails(props) {
+<<<<<<< ours
 //color mode 
 const {colorMode} = useColorMode();
 
+  const { APIKEY, ImageUrl, db, db2} = useContext(
+    Context
+  );
+=======
   const { APIKEY, ImageUrl, db, db2 } = useContext(Context);
+>>>>>>> theirs
   const { isOpen, onClose, id } = props;
   const [movieDetails, setMovieDetails] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
@@ -325,6 +335,33 @@ const {colorMode} = useColorMode();
                 </Stack>
               </ModalBody>
 
+<<<<<<< ours
+              <ModalFooter>  
+              {isFave
+              ? <Button
+                  variant="outline"
+                  width="350px"
+                  borderWidth="2px"
+                  backgroundColor="#db291d"
+                  color="white"
+                  _hover
+                  mr={3}
+                  onClick={handleRemoveFromFavorites}
+                  >Remove From Favorites
+                </Button>
+              : <Button 
+                  onClick={handleAddToFavorites}
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
+                  color="logoText"
+                  _hover
+                  mr={3}
+                  
+                  >Add To Favorites
+                </Button>}
+              <Link to={`/moviedetailspage/${id}`}>
+=======
               <ModalFooter>
                 {isFave ? (
                   <Button
@@ -344,7 +381,7 @@ const {colorMode} = useColorMode();
                     onClick={handleAddToFavorites}
                     borderColor="logoText"
                     borderWidth="3px"
-                    backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
+                    backgroundColor="primaryBackground"
                     color="logoText"
                     _hover
                     mr={3}
@@ -371,7 +408,7 @@ const {colorMode} = useColorMode();
                     onClick={handleAddToWatchList}
                     borderColor="logoText"
                     borderWidth="3px"
-                    backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
+                    backgroundColor="primaryBackground"
                     color="logoText"
                     _hover
                     mr={3}
@@ -384,6 +421,7 @@ const {colorMode} = useColorMode();
 
               <ModalFooter>
                 <Link to={`/moviedetailspage/${id}`}>
+>>>>>>> theirs
                   {" "}
                   <Button
                     borderColor="logoText"
@@ -409,6 +447,36 @@ const {colorMode} = useColorMode();
                   Close
                 </Button>
               </ModalFooter>
+<<<<<<< ours
+              {iswatchListed
+              ? <Button
+                  variant="outline"
+                  borderWidth="2px"
+                  backgroundColor="#db291d"
+                  color="white"
+                  _hover
+                  mr={6}
+                  ml={6}
+                  onClick={handleRemoveFromWatchList}
+                  >Remove From WatchList
+                </Button>
+              : <Button 
+                  onClick={handleAddToWatchList}
+                  borderColor="logoText"
+                  borderWidth="3px"
+                  backgroundColor={colorMode === 'light' ? "white" : 'primaryBackground'} 
+                  color="logoText"
+                  _hover
+                  mr={6}
+                  ml={6}
+                  
+                  >Add To WatchList
+                </Button>}
+              <ModalFooter>
+
+              </ModalFooter>
+=======
+>>>>>>> theirs
             </ModalContent>
           )}
       </Modal>

@@ -63,8 +63,23 @@ const {colorMode} = useColorMode();
   }, [APIKEY, personId, setSearchResults]);
 
   return (
-    <Box bg={colorMode === 'light' ? "white" : 'primaryBackground'}  position="relative" minHeight="100vh">
+<<<<<<< ours
+    <Box
+      ref={myRef}
+      bg={colorMode === 'light' ? "white" : 'primaryBackground'} 
+      h="100vh"
+      w="100vw"
+      style={{
+        overflow: "scroll",
+      }}
+      onScroll={onScroll}
+    >
+      <NavBar />
+
+=======
+    <Box bg="primaryBackground" position="relative" minHeight="100vh">
       &nbsp;
+>>>>>>> theirs
       {personDetails !== null && (
         <>
           <Heading

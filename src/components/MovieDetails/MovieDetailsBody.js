@@ -162,7 +162,11 @@ const {colorMode} = useColorMode();
   const container = {
     maxWidth: "80%",
     margin: "0 auto",
+<<<<<<< ours
     color: `{colorMode === 'light' ? "#333" : '#fff'}` 
+=======
+    color: "white",
+>>>>>>> theirs
   };
 
   const pageSpinner = {

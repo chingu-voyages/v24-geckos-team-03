@@ -1,4 +1,4 @@
-import { Box, useColorMode} from "@chakra-ui/core";
+import { Box, useColorMode, Text} from "@chakra-ui/core";
 import React, { useContext, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import FavoriteMovies from "./../components/FavoriteMovies";
@@ -29,15 +29,40 @@ const {colorMode} = useColorMode();
     }
   }
 
+
+
   return (
     <Box bg={colorMode === 'light' ? "white" : 'primaryBackground'} 
     position="relative"
     minHeight="100vh"
      >
       &nbsp;
-      <Box>
-        <h1 className="page-heading favorites-list">Favorite Movies</h1>
-      </Box>
+      {/* <Box
+        color={colorMode === 'light' ? "#333" : '#fff'} 
+        fontSize="200%"
+        maxWidth="800px"
+        margin= "0 auto"
+        marginTop= "135px"
+        marginBottom="2%"
+        display= "block"
+        textTransform="uppercase"
+        padding="0 20px"
+        position= "relative"
+        z-index= "3"
+        textAlign= "center"
+        _hover={{color: 'red'}}
+        _before={{content: '', background: 'white', height: '1px', position: 'absolute',  width: '100%', maxWidth: '800px',  left: 0, top: '50%', zindex: -1}}
+        _after={{ content: '',  background: '#333', position: 'absolute', width: '52%', height: '100%', maxWidth: '800px', left: '24%', top: 0, zindex: -1}}
+      >
+        Favorite Movies
+      </Box> */}
+        <Box className="page-heading watch-list"
+             color={colorMode === 'light' ? "#fff" : '#fff'}
+    
+        >
+        Favorite Movies
+        </Box>
+      
       <Box className="movie-grid">
         <FavoriteMovies />
       </Box>
