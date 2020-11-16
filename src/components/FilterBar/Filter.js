@@ -1,60 +1,104 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
-import { Heading, Button, Select, Box , useColorMode} from "@chakra-ui/core";
+import { Button, Select, Box ,  useColorMode} from "@chakra-ui/core";
+import { useHistory } from "react-router-dom";
 
-function Filter() {
+function Filter(props) {
 //color mode 
 const {colorMode} = useColorMode();
 
-
-  const [genre, setGenre] = useState("Genre");
-  const [year, setYear] = useState("Year");
   const genreOption = useRef(null);
   const yearOption = useRef(null);
-  const [submit, setSubmit] = useState(false);
+
+  const history = useHistory();
+
   const inputEl = useRef(null);
   const selectEl = useRef(null);
+  // eslint-disable-next-line no-unused-vars
+  const [page, setPage] = useState(1);
   const {
     APIKEY,
     setDefaultMovies,
-    setHomePageResults
+    setFilteredResults
   } = useContext(Context);
 
   function formSubmit(e) {
+    console.log("hello");
     e.preventDefault();
-    setSubmit(true);
-    setGenre(inputEl.current.value);
-    setYear(selectEl.current.value);
-    genreOption.current.disabled = true;
 
-    yearOption.current.disabled = true;
-  }
+    const genre = inputEl.current.value;
+    const year = selectEl.current.value;
 
-  useEffect(() => {
+    if (genre === "Genre" && year === "Year") {
+      setDefaultMovies(true);
+      history.push("/");
+    }
+
     //   Checks wheither if correct selections are submitted
-    if (genre !== "Genre" && year !== "Year") {
+
+    if (genre !== "Genre" && year === "Year") {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&with_genres=${genre}&page=${page}`
           )
           .then(res => {
-            setHomePageResults(res.data.results);
+            setFilteredResults(res.data.results);
+            console.log(res.data.results);
             setDefaultMovies(false);
-            setSubmit(false);
+
+            history.push("/filterPage");
           });
       } catch (err) {
         console.log(err);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submit]);
+
+    console.log(year);
+    if (year !== "Year" && genre === "Genre") {
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&page=${page}`
+          )
+          .then(res => {
+            setFilteredResults(res.data.results);
+            console.log(res.data.results);
+            setDefaultMovies(false);
+
+            history.push("/filterPage");
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    console.log(year);
+    console.log(genre);
+    if (year !== "Year" && genre !== "Genre") {
+      try {
+        axios
+          .get(
+            `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&sort_by=popularity.desc&page=1&year=${year}&with_genres=${genre}&page=${page}`
+          )
+          .then(res => {
+            setFilteredResults(res.data.results);
+            console.log(res.data.results);
+            setDefaultMovies(false);
+            //setSubmit(false);
+            history.push("/filterPage");
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 
   const filterbar = {
-    marginTop: "125px",
-    textAlign: "center",
+    marginTop: "100px",
+    textAlign: "center"
   };
   const filterButton = {
     height: "2em",
@@ -64,7 +108,7 @@ const {colorMode} = useColorMode();
     display: "inlineBlock",
     fontSize: "0.9em",
     cursor: "pointer",
-    borderRadius: "1em",
+    borderRadius: "1em"
   };
 
   const selectStyles = {
@@ -76,8 +120,10 @@ const {colorMode} = useColorMode();
     borderRadius: "1em",
     cursor: "pointer",
     paddingLeft: "15px",
-    fontSize: "0.8em",
+    fontSize: "0.8em"
   };
+
+  console.log(page);
 
   return (
     <div style={filterbar}>
@@ -91,6 +137,7 @@ const {colorMode} = useColorMode();
         </Box>
         <Select ref={inputEl} style={selectStyles}  color= {colorMode === 'light' ? "#333" : '#fff'} bg={colorMode === 'light' ? "white" : '#444'} w="8em" mx="7px" my="7px">
           <option ref={genreOption}>Genre</option>
+
           <option value="28">Action</option>
 
           <option value="12">Adventure</option>
@@ -109,9 +156,9 @@ const {colorMode} = useColorMode();
           <option value="53">Thriller</option>
           <option value="10752">War</option>
         </Select>
-
         <Select ref={selectEl} style={selectStyles} w="8em" mx="7px" my="7px">
           <option ref={yearOption}>Year</option>
+
           <option>2020</option>
           <option>2019</option>
           <option>2018</option>
@@ -132,8 +179,9 @@ const {colorMode} = useColorMode();
           color={colorMode === 'light' ? "#333" : 'logoText'}
           style={filterButton}
           _hover={colorMode === "light" ? {backgroundColor: "#CBD5E0"} : { backgroundColor: "logoText", color: "primaryBackground", fontWeight: "900" }}
+        
           type="submit"
-          mx="7px" 
+          mx="7px"
           my="7px"
         >
           Submit

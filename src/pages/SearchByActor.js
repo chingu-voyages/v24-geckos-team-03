@@ -2,10 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { Box, Image, Grid as ChakraGrid, Heading , useColorMode} from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
+import Footer from "./../components/Footer";
 import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
-
 
 function SearchByActor() {
 //color mode
@@ -18,12 +18,22 @@ const {colorMode} = useColorMode();
   const [personDetails, setPersonDetails] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
 
-  const myRef = React.createRef(); //need so that we can access scrolling position of div on scroll event
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navShadow]);
+  // need navShadow as a dependency, or the value of navShadow won't change between onScroll events (it will always be false)
 
   function onScroll() {
-    const scrollTop = myRef.current.scrollTop;
-    if (!navShadow && scrollTop > 0) setNavShadow(true);
-    else if (navShadow && scrollTop === 0) setNavShadow(false);
+    const scrollTop = window.scrollY;
+
+    if (!navShadow && scrollTop > 0) {
+      setNavShadow(true);
+    } else if (navShadow && scrollTop === 0) {
+      setNavShadow(false);
+    }
   }
 
   useEffect(() => {
@@ -53,18 +63,8 @@ const {colorMode} = useColorMode();
   }, [APIKEY, personId, setSearchResults]);
 
   return (
-    <Box
-      ref={myRef}
-      bg={colorMode === 'light' ? "white" : 'primaryBackground'} 
-      h="100vh"
-      w="100vw"
-      style={{
-        overflow: "scroll",
-      }}
-      onScroll={onScroll}
-    >
-      <NavBar />
-
+    <Box bg={colorMode === 'light' ? "white" : 'primaryBackground'}  position="relative" minHeight="100vh">
+      &nbsp;
       {personDetails !== null && (
         <>
           <Heading
@@ -77,8 +77,10 @@ const {colorMode} = useColorMode();
             {personDetails.name}
           </Heading>
           <ChakraGrid
-            mx="125px"
-            my="50px"
+            className="actorBio"
+            mx={{ base: "0px", sm: "10px", md: "125px" }}
+            marginTop={{ base: "10px", md: "50px" }}
+            marginBottom="50px"
             borderWidth="1px"
             borderColor="primaryBorder"
             rounded="lg"
@@ -87,7 +89,7 @@ const {colorMode} = useColorMode();
             <Image
               m="10px"
               src={ImageUrl + personDetails.profile_path}
-              h="220px"
+              h={{ base: "150px", sm: "220px" }}
               objectFit="cover"
               rounded="lg"
             />
@@ -99,6 +101,8 @@ const {colorMode} = useColorMode();
           {searchResults.length > 0 && <Grid searchResults={searchResults} />}
         </>
       )}
+      <NavBar />
+      <Footer />
     </Box>
   );
 }

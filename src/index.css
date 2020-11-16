@@ -63,7 +63,7 @@ body {
 }
 
 .watch-list {
-  color: red;
+  color: white;
 }
 
 
@@ -127,6 +127,27 @@ body {
 
 
 /* Footer Styles */
+.footer-container {
+  width: 100%;
+  margin-top: 50px;
+  bottom: 0;
+  padding-bottom: 5px;
+}
+
+.githubs-container {
+  margin-left: -10%;
+}
+
+.project-repo {
+  margin-left : -15%;
+  margin-top : 30px;
+}
+
+
+.footer-logo {
+  margin-right: -10%;
+}
+
 .git-icons {
   margin-top: -17px;
   margin-left: 5px;
@@ -137,6 +158,8 @@ body {
   margin-top: -18px;
   margin-left: 5px;
 }
+
+
 .footer-githubs {
   margin: 5px;
 }
@@ -145,12 +168,7 @@ body {
   margin-top: -8px;
   margin-right: 30px;
 }
-/* Footer */
-.footer-container {
-  width: 100%;
-  margin-top: 100px;
-  bottom: 0;
-}
+
 
 
 /* NAVBAR Responsive Styles */
@@ -201,31 +219,55 @@ body {
       margin-right: -30px;
     }
     
-  
   }
+  @media screen and (max-width: 414px) {
+    .light-mode {
+      margin-left: -25px;
+    }
+    .search input {
+      width: 230px;
+    }
+
+    .nav-lists {
+      margin-left: 41px;
+    }
+  }
+
+
+  @media screen and (max-width: 375px) {
+    .light-mode {
+      margin-left: -25px;
+    }
+    .search input {
+      width: 180px;
+    }
+
+    .nav-lists {
+      margin-left: 41px;
+    }
+  }
+
+
+  @media screen and (max-width: 320px) {
+    .search input {
+      width: 140px;
+    }
+
+    .nav-lists {
+      margin-left: -26px;
+      width: 100%;
+    }
+
+    .search button {
+      width: 60px;
+    }
+  } 
+
 /* FOOTER responsive Styles */
 
-@media screen and (max-width: 795px) {
-
-.githubs-container {
-  flex-direction: column;
-}
-
-.footer-githubs {
-  align-self: start;
-  width: 100%;
-
-}
-.project-repo {
-  width: 40%;
-  margin-left: 30%;
-  margin-top: 5%;
-}
-
-.footer-logo {
-  align-self: flex-end;
-  width: 25%;
-  margin-left: 10px;
+@media screen and (max-width: 820px) {
+.copyright {
+  display: none;
 }
 
 }
@@ -236,36 +278,37 @@ body {
     display: none;
   }
 
-  .repo-git-icon {
-    width: 100%;
-    margin-left: -80px;
-    margin-right: 120px;
-    margin-top: -55px;
-    font-size: 50px;
+  .project-repo {
+    width: 20%;
+    margin-top: -1%;
+    margin-left: -27%;
+    margin-right: 20%;
+
   }
+
+  .repo-git-icon {
+    margin-top: 50%;
+  }
+  .footer-divider {
+    display: none;
+  }
+
   .git-icons,
   .dev-names {
     display: none;
   }
-  .footer-logo {
-    margin-top: -10px;
-
-  }
-
 
   .repo-name {
     display: none;
   }
 }
 
-/* Favortite movies title styles */
+/* Favortite movies title styles responsive */
 
 @media screen and (max-width: 586px) {
   .page-heading::before {
     left: 0;
-
   }
-
 
   .page-heading::after {
     width: 70%;
@@ -273,3 +316,21 @@ body {
   }
 
 }
+
+
+@media screen and (max-width: 375px) {
+  .page-heading::after {
+    width: 85%;
+    left: 7%;
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+
+
+  .page-heading::after {
+    width: 90%;
+    left: 5%;
+  }
+} 

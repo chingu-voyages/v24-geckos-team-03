@@ -13,16 +13,19 @@ const WatchList = () => {
     onOpen();
   }
 
-  const {db2, allWatchListMovies, setallWatchListMovies } = useContext(Context);
+  const { db2, allWatchListMovies, setallWatchListMovies } = useContext(
+    Context
+  );
 
   //Get data from the DB and store all favotired movies to an array
   useEffect(() => {
-    db2.collection("watchListMovies")
+    db2
+      .collection("watchListMovies")
       .get()
       .then(movies => {
         setallWatchListMovies(movies);
-   
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //styles for the grid
@@ -32,13 +35,13 @@ const WatchList = () => {
     margin: "0 auto",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-evenly",
+    justifyContent: "space-evenly"
   };
 
   return (
     <>
       <div className="container" style={gridStyles}>
-        {allWatchListMovies.map((movie) => {
+        {allWatchListMovies.map(movie => {
           return (
             <Movieboxes
               key={movie.id}
@@ -61,6 +64,5 @@ const WatchList = () => {
     </>
   );
 };
-
 
 export default WatchList;

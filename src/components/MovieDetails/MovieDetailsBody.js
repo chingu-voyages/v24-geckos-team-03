@@ -4,6 +4,7 @@ import { Context } from "./../../Context";
 import { Box, Heading, Image, Text, Flex, Spinner , useColorMode} from "@chakra-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import "./MovieDetailsBody.css";
+import NotFound from "../../img/not-found.jpg";
 
 function MovieDetailsBody(props) {
   const history = useHistory();
@@ -24,7 +25,7 @@ const {colorMode} = useColorMode();
   }, 2500);
 
   const goBack = () => {
-    history.goBack();
+    history.go(-1);
     setDefaultMovies(true);
   };
   const youtubeLink = `https://www.youtube.com/embed/`;
@@ -40,7 +41,7 @@ const {colorMode} = useColorMode();
         character,
         name,
         profile_path,
-        id: person_id
+        id: person_id,
       } = castMember;
 
       return (
@@ -51,15 +52,27 @@ const {colorMode} = useColorMode();
           marginLeft="60px"
         >
           <Link to={`/actor/${person_id}`}>
-            <Image
-              m="0 auto"
-              cursor="pointer"
-              rounded="lg"
-              src={ImageUrl + profile_path}
-              objectFit="cover"
-              width="100px"
-              maxWidth="none"
-            />
+            {profile_path === null ? (
+              <Image
+                m="0 auto"
+                cursor="pointer"
+                rounded="lg"
+                src={NotFound}
+                objectFit="cover"
+                width="100px"
+                maxWidth="none"
+              />
+            ) : (
+              <Image
+                m="0 auto"
+                cursor="pointer"
+                rounded="lg"
+                src={ImageUrl + profile_path}
+                objectFit="cover"
+                width="100px"
+                maxWidth="none"
+              />
+            )}
           </Link>
           <Box p="7px">
             {name} <br />{" "}
@@ -76,7 +89,7 @@ const {colorMode} = useColorMode();
 
   let movieTrailersboxes = [];
   if (movieTrailers.length > 0) {
-    movieTrailersboxes = movieTrailers.map(trailer => {
+    movieTrailersboxes = movieTrailers.map((trailer) => {
       return (
         <Box mr="10px" key={trailer.id}>
           <iframe
@@ -90,14 +103,6 @@ const {colorMode} = useColorMode();
       );
     });
   }
-  // Carousel settiings
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  };
 
   // Id is passed from MovieDetails component
   const { movieId } = props;
@@ -106,7 +111,7 @@ const {colorMode} = useColorMode();
     try {
       axios
         .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${APIKEY}`)
-        .then(res => {
+        .then((res) => {
           // stores movie data using movie ID
           setMovieData(res.data);
         });
@@ -118,7 +123,7 @@ const {colorMode} = useColorMode();
         .get(
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=${APIKEY}&append_to_response=videos`
         )
-        .then(res => {
+        .then((res) => {
           // stores all movie trailers keys
           setMovieTrailers(res.data.videos.results);
         });
@@ -130,7 +135,7 @@ const {colorMode} = useColorMode();
         .get(
           `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${APIKEY}`
         )
-        .then(res => {
+        .then((res) => {
           // stores cast data using movie ID
           setMovieCast(res.data.cast);
         });
@@ -144,14 +149,14 @@ const {colorMode} = useColorMode();
     backgroundColor: `{colorMode === 'light' ? "white" : '#333'}`,
     height: "100%",
     width: "100%",
-    overflowY: "scroll"
+    overflowY: "scroll",
   };
 
   const imageContainer = {
     width: "100vw",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${movieData.backdrop_path})`,
     backgroundSize: "cover",
-    backgroundPosition: "top"
+    backgroundPosition: "top",
   };
 
   const container = {
@@ -165,7 +170,7 @@ const {colorMode} = useColorMode();
     top: "50%",
     left: "50%",
 
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
   };
   return (
     <>
@@ -195,7 +200,7 @@ const {colorMode} = useColorMode();
             left: "0",
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0,0,0,0.5)"
+            backgroundColor: "rgba(0,0,0,0.5)",
           }}
         >
           <Box style={container}>
@@ -207,11 +212,15 @@ const {colorMode} = useColorMode();
             >
               {movieData.original_title}
             </Heading>
-            <Link to="/">
-              <span className="responsiveArrow" onClick={goBack}>
-                &#8592;
-              </span>
-            </Link>
+
+            <span
+              className={
+                isPageLoaded ? `responsiveArrow` : `responsiveArrow removeClick`
+              }
+              onClick={goBack}
+            >
+              &#8592;
+            </span>
           </Box>
         </Box>
       </Box>

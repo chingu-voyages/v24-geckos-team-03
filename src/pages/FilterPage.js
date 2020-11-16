@@ -1,26 +1,15 @@
 import React, { useContext, useEffect } from "react";
-import { Box, Heading , useColorMode} from "@chakra-ui/core";
-import axios from "axios";
+import { Box, Heading } from "@chakra-ui/core";
 import Grid from "../components/Grid";
 import NavBar from "../components/NavBar";
 import Filter from "../components/FilterBar/Filter";
-import { Context } from "../Context";
 import Footer from "./../components/Footer";
 
+import { Context } from "../Context";
 
-function Homepage() {
-
-//color Mode 
-const {colorMode} = useColorMode();
-  const {
-    setNavShadow,
-    navShadow,
-    homePageResults,
-    setHomePageResults,
-    defaultMovies,
-    setDefaultMovies,
-    APIKEY,
-  } = useContext(Context);
+function FilterPage() {
+  const { filterdResults, navShadow, setNavShadow } = useContext(Context);
+  console.log(filterdResults);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
@@ -40,27 +29,11 @@ const {colorMode} = useColorMode();
     }
   }
 
-  useEffect(() => {
-    if (defaultMovies === true) {
-      try {
-        axios
-          .get(
-            `https://api.themoviedb.org/3/trending/movie/week?api_key=${APIKEY}`
-          )
-          .then((res) => {
-            setHomePageResults(res.data.results);
-          });
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }, [defaultMovies, APIKEY, setHomePageResults, setDefaultMovies]);
-
   return (
-    <Box bg={colorMode === 'light' ? "white" : 'primaryBackground'}
+    <Box bg="primaryBackground"
     position="relative"
     minHeight="100vh"
-    >
+      >
       &nbsp;
       <Filter />
       <Heading
@@ -68,15 +41,15 @@ const {colorMode} = useColorMode();
         size="lg"
         marginTop="10px"
         marginLeft="5%"
-        color={colorMode === 'light' ? "#333" : 'primaryText'}
+        color="primaryText"
       >
-        {defaultMovies ? "Popular Movies" : null}
+        Filter Results
       </Heading>
-      <Grid searchResults={homePageResults} />
+      <Grid searchResults={filterdResults} />
       <NavBar />
       <Footer />
     </Box>
   );
 }
 
-export default Homepage;
+export default FilterPage;

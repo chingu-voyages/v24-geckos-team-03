@@ -3,8 +3,6 @@ import { Context } from "../Context";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useColorMode , Flex, Button, Input} from '@chakra-ui/core';
-
-
 function Search() {
 //lightMode toggling
 const {colorMode } = useColorMode();
@@ -12,47 +10,44 @@ const {colorMode } = useColorMode();
 
 
   const history = useHistory();
+
   const {
-    setSearch,
     setSearchResults,
-    search,
-    searchResults,
+    searchQuery,
+    setSearchQuery,
     setIsSearch,
-    APIKEY,
-    setDefaultMovies
+    APIKEY
   } = useContext(Context);
 
   const inputEl = useRef(null);
 
   function searchSubmit(e) {
     e.preventDefault();
-    setSearch(inputEl.current.value);
+
+    setSearchQuery(inputEl.current.value);
 
     setIsSearch(true);
 
     history.push("/searchPage"); // Routes to search page on submit
+    console.log(searchQuery);
   }
 
   useEffect(() => {
-    if (search.length > 0) {
+    if (searchQuery.length > 0) {
       try {
         axios
           .get(
-            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${search}`
+            `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${searchQuery}`
           )
           .then(res => {
             setSearchResults(res.data.results);
             setIsSearch(true);
-            setDefaultMovies(false);
           });
       } catch (err) {
         console.log(err);
       }
     }
-
-    console.log(searchResults);
-  }, [search]);
-
+  }, [APIKEY, searchQuery, setIsSearch, setSearchResults]);
 
   return (
     <div className="search">
@@ -74,6 +69,7 @@ const {colorMode } = useColorMode();
         >
         </Input>
         <Button 
+          className="search-btn"
           width= "75px"
           height= "35px"
           borderRadius = "25px"

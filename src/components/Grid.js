@@ -7,16 +7,23 @@ import MovieDetails from "./MovieDetails";
 function Grid(props) {
   const { searchResults } = props;
 
-  const { ImageUrl, allFavMovies, setAllFavMovies, db } = useContext(Context);
+  const {
+    ImageUrl,
+    allFavMovies,
+    setAllFavMovies,
+    allWatchListMovies,
+    setallWatchListMovies,
+    db,
+    db2,
+  } = useContext(Context);
 
   // State variables for moviedetails modal popup
   const [movieId, setMovieId] = useState(null);
-  const [movieImage, setMovieImage] = useState("");
-  const [movieTitle, setMovieTitle] = useState("");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [favoriteMovieIds, setFavoriteMovieIds] = useState([]);
+  const [watchListMovieIds, setWatchListMovieIds] = useState([]);
 
   //Get data from the DB and store all movie ids to an array
   useEffect(() => {
@@ -26,10 +33,18 @@ function Grid(props) {
         setAllFavMovies(movies);
       });
     console.log("getFavMovies UseEffect");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    db2
+      .collection("watchListMovies")
+      .get()
+      .then((movies) => {
+        setallWatchListMovies(movies);
+      });
+    console.log("getWLMovies UseEffect");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //Get data from the DB and store all movie ids to an array
+  //Get data from the favorites DB and store all movie ids to an array
   useEffect(() => {
     if (allFavMovies.length > 0) {
       const movieIdArray = [];
@@ -39,6 +54,17 @@ function Grid(props) {
       setFavoriteMovieIds(movieIdArray);
     }
   }, [allFavMovies]);
+
+  //Get data from the watchlist DB and store all movie ids to an array
+  useEffect(() => {
+    if (allWatchListMovies.length > 0) {
+      const movieIdArray = [];
+      allWatchListMovies.forEach((movie) => {
+        movieIdArray.push(movie.id);
+      });
+      setWatchListMovieIds(movieIdArray);
+    }
+  }, [allWatchListMovies]);
 
   const gridStyles = {
     maxWidth: "1200px",
@@ -54,29 +80,26 @@ function Grid(props) {
       <Movieboxes
         key={movie.id}
         title={movie.original_title}
-        imageSrc={ImageUrl + movie.poster_path}
-        year={new Date(movie.release_date).getFullYear()}
+        imageSrc={
+          movie.poster_path === null ? null : ImageUrl + movie.poster_path
+        }
+        year={
+          movie.release_date === undefined || movie.release_date === ""
+            ? null
+            : new Date(movie.release_date).getFullYear()
+        }
         rating={movie.vote_average}
         isFavorite={favoriteMovieIds.includes(movie.id)}
-        onClick={() =>
-          onHandleMovieClick(
-            movie.id,
-            movie.backdrop_path,
-            movie.original_title
-          )
-        }
+        isWantToWatch={watchListMovieIds.includes(movie.id)}
+        onClick={() => onHandleMovieClick(movie.id)}
       />
     );
   });
 
-  function onHandleMovieClick(id, movieImage, movieName) {
+  function onHandleMovieClick(id) {
     setMovieId(id);
-    setMovieImage(movieImage);
-    setMovieTitle(movieName);
+
     onOpen();
-    console.log(id);
-    console.log(movieImage);
-    console.log(movieName);
   }
 
   return (
@@ -84,13 +107,7 @@ function Grid(props) {
       <div className="container" style={gridStyles}>
         {searchResults.length > 0 ? movieBoxes : null}
       </div>
-      <MovieDetails
-        isOpen={isOpen}
-        onClose={onClose}
-        id={movieId}
-        movieImage={movieImage}
-        movieTitle={movieTitle}
-      />
+      <MovieDetails isOpen={isOpen} onClose={onClose} id={movieId} />
     </>
   );
 }
