@@ -42,7 +42,10 @@ function MovieDetails(props) {
     db.collection("favoriteMovies")
       .add({
         id: movieDetails.id,
-        movieImage: ImageUrl + movieDetails.poster_path,
+        movieImage:
+          movieDetails.poster_path === null
+            ? null
+            : ImageUrl + movieDetails.poster_path,
         movieTitle: movieDetails.title,
         movieReleaseDate: movieDetails.release_date,
         movieRating: movieDetails.vote_average,
@@ -85,7 +88,10 @@ function MovieDetails(props) {
       .collection("watchListMovies")
       .add({
         id: movieDetails.id,
-        movieImage: ImageUrl + movieDetails.poster_path,
+        movieImage:
+          movieDetails.poster_path === null
+            ? null
+            : ImageUrl + movieDetails.poster_path,
         movieTitle: movieDetails.title,
         movieReleaseDate: movieDetails.release_date,
         movieRating: movieDetails.vote_average,
