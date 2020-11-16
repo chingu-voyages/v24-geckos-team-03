@@ -25,6 +25,7 @@ const WatchList = () => {
       .then(movies => {
         setallWatchListMovies(movies);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //styles for the grid

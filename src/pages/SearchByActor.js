@@ -7,7 +7,6 @@ import axios from "axios";
 import { Context } from "../Context";
 import { useParams } from "react-router-dom";
 
-
 function SearchByActor() {
   const { APIKEY, ImageUrl, setNavShadow, navShadow } = useContext(Context);
 
@@ -16,12 +15,22 @@ function SearchByActor() {
   const [personDetails, setPersonDetails] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
 
-  const myRef = React.createRef(); //need so that we can access scrolling position of div on scroll event
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navShadow]);
+  // need navShadow as a dependency, or the value of navShadow won't change between onScroll events (it will always be false)
 
   function onScroll() {
-    const scrollTop = myRef.current.scrollTop;
-    if (!navShadow && scrollTop > 0) setNavShadow(true);
-    else if (navShadow && scrollTop === 0) setNavShadow(false);
+    const scrollTop = window.scrollY;
+
+    if (!navShadow && scrollTop > 0) {
+      setNavShadow(true);
+    } else if (navShadow && scrollTop === 0) {
+      setNavShadow(false);
+    }
   }
 
   useEffect(() => {
@@ -51,18 +60,8 @@ function SearchByActor() {
   }, [APIKEY, personId, setSearchResults]);
 
   return (
-    <Box
-      ref={myRef}
-      bg="primaryBackground"
-      h="100vh"
-      w="100vw"
-      style={{
-        overflow: "scroll",
-      }}
-      onScroll={onScroll}
-    >
-      <NavBar />
-
+    <Box bg="primaryBackground">
+      &nbsp;
       {personDetails !== null && (
         <>
           <Heading
@@ -76,8 +75,8 @@ function SearchByActor() {
           </Heading>
           <ChakraGrid
             className="actorBio"
-            mx={{ base: "10px", md: "125px"}}
-            marginTop={{ base: "10px", md: "50px"}}
+            mx={{ base: "0px", sm: "10px", md: "125px" }}
+            marginTop={{ base: "10px", md: "50px" }}
             marginBottom="50px"
             borderWidth="1px"
             borderColor="primaryBorder"
@@ -87,7 +86,7 @@ function SearchByActor() {
             <Image
               m="10px"
               src={ImageUrl + personDetails.profile_path}
-              h="220px"
+              h={{ base: "150px", sm: "220px" }}
               objectFit="cover"
               rounded="lg"
             />
@@ -99,7 +98,8 @@ function SearchByActor() {
           {searchResults.length > 0 && <Grid searchResults={searchResults} />}
         </>
       )}
-    <Footer />
+      <NavBar />
+      <Footer />
     </Box>
   );
 }

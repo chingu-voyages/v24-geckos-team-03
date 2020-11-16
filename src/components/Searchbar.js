@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useContext } from "react";
 import { Context } from "../Context";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+
 function Search() {
   const history = useHistory();
 
@@ -9,7 +10,6 @@ function Search() {
     setSearchResults,
     searchQuery,
     setSearchQuery,
-
     setIsSearch,
     APIKEY
   } = useContext(Context);
@@ -42,7 +42,7 @@ function Search() {
         console.log(err);
       }
     }
-  }, [searchQuery]);
+  }, [APIKEY, searchQuery, setIsSearch, setSearchResults]);
 
   return (
     <div className="search">
@@ -51,7 +51,7 @@ function Search() {
           type="text"
           name="search"
           ref={inputEl}
-          placeholder="Search movie here!"
+          placeholder="Search movies!"
         ></input>
         <button type="submit" name="button">
           <i className="fas fa-search"></i>

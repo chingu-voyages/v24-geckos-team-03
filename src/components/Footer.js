@@ -1,6 +1,5 @@
 import React from "react";
-import { Link as Links } from "react-router-dom";
-import { Link, Text, Stack, Divider, Flex, Image, Box } from "@chakra-ui/core";
+import { Link, Text, Divider, Flex, Image, Box } from "@chakra-ui/core";
 const movieDB_logo =
   "https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg";
 

@@ -205,6 +205,10 @@ body {
       margin-left: -26px;
       width: 100%;
     }
+
+    .search button {
+      width: 60px;
+    }
   } 
 
 /* FOOTER responsive Styles */
