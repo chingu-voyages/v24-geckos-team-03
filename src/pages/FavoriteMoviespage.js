@@ -27,7 +27,10 @@ const FavoriteMoviespage = () => {
   }
 
   return (
-    <Box bg="primaryBackground">
+    <Box bg="primaryBackground"
+    position="relative"
+    minHeight="100vh"
+     >
       &nbsp;
       <Box>
         <h1 className="page-heading favorites-list">Favorite Movies</h1>

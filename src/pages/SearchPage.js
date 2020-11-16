@@ -28,7 +28,10 @@ function SearchPage() {
   }
 
   return (
-    <Box bg="primaryBackground">
+    <Box bg="primaryBackground"
+    position="relative"
+    minHeight="100vh"
+    >
       &nbsp;
       <Heading paddingY="80px" marginY="50px" textAlign="center" color="white">
         {searchQuery.length > 0

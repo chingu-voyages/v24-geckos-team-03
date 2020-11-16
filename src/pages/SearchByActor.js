@@ -60,6 +60,8 @@ function SearchByActor() {
         overflow: "scroll",
       }}
       onScroll={onScroll}
+      position="relative"
+      minHeight="100vh"
     >
       <NavBar />
 
