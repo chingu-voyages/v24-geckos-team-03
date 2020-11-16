@@ -60,7 +60,7 @@ function SearchByActor() {
   }, [APIKEY, personId, setSearchResults]);
 
   return (
-    <Box bg="primaryBackground">
+    <Box bg="primaryBackground" position="relative" minHeight="100vh">
       &nbsp;
       {personDetails !== null && (
         <>

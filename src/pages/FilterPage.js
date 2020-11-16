@@ -30,7 +30,10 @@ function FilterPage() {
   }
 
   return (
-    <Box bg="primaryBackground">
+    <Box bg="primaryBackground"
+    position="relative"
+    minHeight="100vh"
+      >
       &nbsp;
       <Filter />
       <Heading

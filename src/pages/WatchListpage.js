@@ -29,7 +29,11 @@ const WatchListpage = () => {
   }
 
   return (
-    <Box bg="primaryBackground">
+    <Box bg="primaryBackground"
+          position="relative"
+          minHeight="100vh"
+    >
+          
       &nbsp;
       <Box>
         <h1 className="page-heading watch-list">Movies for later</h1>
