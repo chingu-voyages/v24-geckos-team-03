@@ -4,6 +4,7 @@ import { Context } from "./../../Context";
 import { Box, Heading, Image, Text, Flex, Spinner } from "@chakra-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import "./MovieDetailsBody.css";
+import NotFound from "../../img/not-found.jpg";
 
 function MovieDetailsBody(props) {
   const history = useHistory();
@@ -35,7 +36,7 @@ function MovieDetailsBody(props) {
         character,
         name,
         profile_path,
-        id: person_id
+        id: person_id,
       } = castMember;
 
       return (
@@ -46,15 +47,27 @@ function MovieDetailsBody(props) {
           marginLeft="60px"
         >
           <Link to={`/actor/${person_id}`}>
-            <Image
-              m="0 auto"
-              cursor="pointer"
-              rounded="lg"
-              src={ImageUrl + profile_path}
-              objectFit="cover"
-              width="100px"
-              maxWidth="none"
-            />
+            {profile_path === null ? (
+              <Image
+                m="0 auto"
+                cursor="pointer"
+                rounded="lg"
+                src={NotFound}
+                objectFit="cover"
+                width="100px"
+                maxWidth="none"
+              />
+            ) : (
+              <Image
+                m="0 auto"
+                cursor="pointer"
+                rounded="lg"
+                src={ImageUrl + profile_path}
+                objectFit="cover"
+                width="100px"
+                maxWidth="none"
+              />
+            )}
           </Link>
           <Box p="7px">
             {name} <br />{" "}
@@ -71,7 +84,7 @@ function MovieDetailsBody(props) {
 
   let movieTrailersboxes = [];
   if (movieTrailers.length > 0) {
-    movieTrailersboxes = movieTrailers.map(trailer => {
+    movieTrailersboxes = movieTrailers.map((trailer) => {
       return (
         <Box mr="10px" key={trailer.id}>
           <iframe
@@ -85,14 +98,6 @@ function MovieDetailsBody(props) {
       );
     });
   }
-  // Carousel settiings
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  };
 
   // Id is passed from MovieDetails component
   const { movieId } = props;
@@ -101,7 +106,7 @@ function MovieDetailsBody(props) {
     try {
       axios
         .get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${APIKEY}`)
-        .then(res => {
+        .then((res) => {
           // stores movie data using movie ID
           setMovieData(res.data);
         });
@@ -113,7 +118,7 @@ function MovieDetailsBody(props) {
         .get(
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=${APIKEY}&append_to_response=videos`
         )
-        .then(res => {
+        .then((res) => {
           // stores all movie trailers keys
           setMovieTrailers(res.data.videos.results);
         });
@@ -125,7 +130,7 @@ function MovieDetailsBody(props) {
         .get(
           `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${APIKEY}`
         )
-        .then(res => {
+        .then((res) => {
           // stores cast data using movie ID
           setMovieCast(res.data.cast);
         });
@@ -139,20 +144,20 @@ function MovieDetailsBody(props) {
     backgroundColor: "#333333",
     height: "100%",
     width: "100%",
-    overflowY: "scroll"
+    overflowY: "scroll",
   };
 
   const imageContainer = {
     width: "100vw",
     backgroundImage: `url(https://image.tmdb.org/t/p/original${movieData.backdrop_path})`,
     backgroundSize: "cover",
-    backgroundPosition: "top"
+    backgroundPosition: "top",
   };
 
   const container = {
     maxWidth: "80%",
     margin: "0 auto",
-    color: "white"
+    color: "white",
   };
 
   const pageSpinner = {
@@ -160,7 +165,7 @@ function MovieDetailsBody(props) {
     top: "50%",
     left: "50%",
 
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
   };
   return (
     <>
@@ -190,7 +195,7 @@ function MovieDetailsBody(props) {
             left: "0",
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0,0,0,0.5)"
+            backgroundColor: "rgba(0,0,0,0.5)",
           }}
         >
           <Box style={container}>

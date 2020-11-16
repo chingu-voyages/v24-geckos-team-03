@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../Context";
 import { Link } from "react-router-dom";
+import NotFound from "../img/not-found.jpg";
 import {
   Modal,
   ModalOverlay,
@@ -41,7 +42,10 @@ function MovieDetails(props) {
     db.collection("favoriteMovies")
       .add({
         id: movieDetails.id,
-        movieImage: ImageUrl + movieDetails.poster_path,
+        movieImage:
+          movieDetails.poster_path === null
+            ? null
+            : ImageUrl + movieDetails.poster_path,
         movieTitle: movieDetails.title,
         movieReleaseDate: movieDetails.release_date,
         movieRating: movieDetails.vote_average,
@@ -84,7 +88,10 @@ function MovieDetails(props) {
       .collection("watchListMovies")
       .add({
         id: movieDetails.id,
-        movieImage: ImageUrl + movieDetails.poster_path,
+        movieImage:
+          movieDetails.poster_path === null
+            ? null
+            : ImageUrl + movieDetails.poster_path,
         movieTitle: movieDetails.title,
         movieReleaseDate: movieDetails.release_date,
         movieRating: movieDetails.vote_average,
@@ -207,13 +214,23 @@ function MovieDetails(props) {
               columnGap="3px"
             >
               <Link to={`/actor/${person_id}`}>
-                <Image
-                  cursor="pointer"
-                  rounded="lg"
-                  src={ImageUrl + profile_path}
-                  h="80px"
-                  objectFit="cover"
-                />
+                {profile_path === null ? (
+                  <Image
+                    cursor="pointer"
+                    rounded="lg"
+                    src={NotFound}
+                    h="80px"
+                    objectFit="cover"
+                  />
+                ) : (
+                  <Image
+                    cursor="pointer"
+                    rounded="lg"
+                    src={ImageUrl + profile_path}
+                    h="80px"
+                    objectFit="cover"
+                  />
+                )}
               </Link>
               <Box p="7px">
                 {name} <br />{" "}
@@ -305,21 +322,6 @@ function MovieDetails(props) {
               </ModalBody>
 
               <ModalFooter>
-                <Link to={`/moviedetailspage/${id}`}>
-                  {" "}
-                  <Button
-                    borderColor="logoText"
-                    borderWidth="3px"
-                    backgroundColor="primaryBackground"
-                    color="logoText"
-                    _hover
-                    mr={3}
-                    onClick={onClose}
-                  >
-                    More Details
-                  </Button>
-                </Link>
-
                 {isFave ? (
                   <Button
                     variant="outline"
@@ -377,6 +379,20 @@ function MovieDetails(props) {
               </ModalFooter>
 
               <ModalFooter>
+                <Link to={`/moviedetailspage/${id}`}>
+                  {" "}
+                  <Button
+                    borderColor="logoText"
+                    borderWidth="3px"
+                    backgroundColor="primaryBackground"
+                    color="logoText"
+                    _hover
+                    mr={3}
+                    onClick={onClose}
+                  >
+                    More Details
+                  </Button>
+                </Link>
                 <Button
                   borderColor="logoText"
                   borderWidth="3px"
