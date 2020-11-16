@@ -80,8 +80,14 @@ function Grid(props) {
       <Movieboxes
         key={movie.id}
         title={movie.original_title}
-        imageSrc={ImageUrl + movie.poster_path}
-        year={new Date(movie.release_date).getFullYear()}
+        imageSrc={
+          movie.poster_path === null ? null : ImageUrl + movie.poster_path
+        }
+        year={
+          movie.release_date === undefined || movie.release_date === ""
+            ? null
+            : new Date(movie.release_date).getFullYear()
+        }
         rating={movie.vote_average}
         isFavorite={favoriteMovieIds.includes(movie.id)}
         isWantToWatch={watchListMovieIds.includes(movie.id)}

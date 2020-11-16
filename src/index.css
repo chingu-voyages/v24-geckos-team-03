@@ -57,7 +57,7 @@ body {
 }
 
 .watch-list {
-  color: red;
+  color: white;
 }
 
 
@@ -204,6 +204,10 @@ body {
     .nav-lists {
       margin-left: -26px;
       width: 100%;
+    }
+
+    .search button {
+      width: 60px;
     }
   } 
 

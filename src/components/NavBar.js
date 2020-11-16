@@ -6,14 +6,13 @@ import {
   Box,
   Image,
   Link,
-  Switch,
+  //Switch,
   Heading,
-  Stack,
-  Flex
+  Flex,
 } from "@chakra-ui/core";
 
 const NavBar = () => {
-  const { setDefaultMovies, navShadow, searchQuery } = useContext(Context);
+  const { setDefaultMovies, navShadow } = useContext(Context);
   const clicked = () => {
     setDefaultMovies(true);
   };
@@ -56,7 +55,8 @@ const NavBar = () => {
         </Link>
         <Flex isInline className="search-bar-section">
           <Searchbar />
-          <Switch size="sm" className="switch-button" />
+          {/*<Switch size="sm" className="switch-button" />*/}
+          &nbsp;
         </Flex>
       </Flex>
       <Flex justifyContent="flex-end" marginRight="198px" className="nav-lists">

@@ -1,9 +1,9 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./filter.css";
 import axios from "axios";
 import { Context } from "../../Context";
-import { Button, Select, Box, Input } from "@chakra-ui/core";
-import { Link, useHistory } from "react-router-dom";
+import { Button, Select, Box } from "@chakra-ui/core";
+import { useHistory } from "react-router-dom";
 
 function Filter(props) {
   const genreOption = useRef(null);
@@ -13,11 +13,11 @@ function Filter(props) {
 
   const inputEl = useRef(null);
   const selectEl = useRef(null);
+  // eslint-disable-next-line no-unused-vars
   const [page, setPage] = useState(1);
   const {
     APIKEY,
     setDefaultMovies,
-    filterdResults,
     setFilteredResults
   } = useContext(Context);
 

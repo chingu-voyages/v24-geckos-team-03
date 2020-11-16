@@ -1,9 +1,18 @@
 import React from "react";
 import { Box, Image, PseudoBox, Icon } from "@chakra-ui/core";
-import { FaHeart, FaClipboardList} from "react-icons/fa";
+import { FaHeart, FaClipboardList } from "react-icons/fa";
+import NotFound from "../img/not-found.jpg";
 
 function Movieboxes(props) {
-  const { imageSrc, title, onClick, year, rating, isFavorite, isWantToWatch } = props;
+  const {
+    imageSrc,
+    title,
+    onClick,
+    year,
+    rating,
+    isFavorite,
+    isWantToWatch,
+  } = props;
 
   return (
     <PseudoBox
@@ -59,7 +68,7 @@ function Movieboxes(props) {
           {isFavorite && <FaHeart size="20px" color="#ff0000" />}
         </Box>
       )}
-      
+
       {isWantToWatch !== null && (
         <Box
           position="absolute"
@@ -74,7 +83,13 @@ function Movieboxes(props) {
           {isWantToWatch && <FaClipboardList size="20px" color="#49c3fd" />}
         </Box>
       )}
-      <Image rounded="lg" src={imageSrc} objectFit="cover" />
+
+      {imageSrc !== null ? (
+        <Image rounded="lg" src={imageSrc} objectFit="cover" />
+      ) : (
+        <Image rounded="lg" src={NotFound} objectFit="cover" w="100%" />
+      )}
+
       <Box m="5px" textAlign="center" fontSize="1.1em">
         {`${title} ${year !== null ? `(${year})` : ""}`}
       </Box>
