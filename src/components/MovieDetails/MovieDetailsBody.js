@@ -8,7 +8,6 @@ import "./MovieDetailsBody.css";
 function MovieDetailsBody(props) {
   const history = useHistory();
   const { APIKEY, ImageUrl, setDefaultMovies } = useContext(Context);
-  const [page, setPage] = useState(1);
 
   const [movieData, setMovieData] = useState([]);
   const [movieCast, setMovieCast] = useState([]);
@@ -230,8 +229,9 @@ function MovieDetailsBody(props) {
             </Flex>
           </Box>
 
-          <Box paddingTop="30px">
+          <Box paddingTop="30px" position="relative">
             <Heading pb="10px">Trailers</Heading>
+
             <Flex wrap="nowrap" overflowX="auto" justifyContent="center">
               {movieTrailers.length > 0
                 ? movieTrailersboxes

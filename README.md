@@ -1,6 +1,6 @@
 # Daily Flix
 
-React application to browse your favorite Movies and save them to a watchlist or favorites list
+React application to browse your favorite Movies and save them to a watchlist or a favorites list
 
 ## Deployment
 
