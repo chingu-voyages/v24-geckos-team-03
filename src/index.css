@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+ 
+}
+
+/* Navbar styles */
+.link {
+  font-size: 90%;
+  font-weight: 400;
+}
+
+
+/* Page Headings styles -Favorites Page*/
+.page-heading {
+  color: white;
+  font-size: 200%;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 135px;
+  margin-bottom: 2%;
+  display: block;
+  text-transform: uppercase;
+  padding: 0 20px;
+  position: relative;
+  z-index: 3;
+  text-align: center;
+}
+.page-heading::before {
+  content: '';
+  background: white;
+  height: 1px;
+  position: absolute;
+  width: 100%;
+  max-width: 800px;
+  left: 0;
+  top: 50%;
+  z-index: -1;
+}
+.page-heading::after {
+  content: '';
+  background: #333;
+  position: absolute;
+  width: 52%;
+  height: 100%;
+  max-width: 800px;
+  left: 24%;
+  top: 0;
+  z-index: -1;
+}
+
+.watch-list {
+  color: white;
+}
+
+
+
+/* Movie Titles */
+.movie-titles {
+  padding-top: 5px;
+  text-align: left;
+}
+
+/* SEARCH BUTTON styles */
+.search input {
+  width: 300px;
+  height: 35px;
+  border-radius: 30px;
+  outline: none;
+  padding-left: 15px;
+  background: #fff;
+  border: 2px solid #49c3fd;
+  color: #888; 
+  margin-right: 65px;
+}
+
+.search input:focus::placeholder {
+  color: transparent;
+}
+.search input::placeholder{
+  color: #888;
+  opacity: 1; /* ONLY FOR MOZILLA USERS */
+}
+
+.search button {
+  width: 75px;
+  height: 35px;
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  background: #49c3fd;
+  transition-property: all;
+  transition-duration: 0.5s;
+  position: absolute;
+  right: 90px;
+  outline: none;
+}
+
+.search button:hover {
+  background: #379fcf;;
+}
+
+.search button i {
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+.search button:hover i {
+  transform: scale(1.5);
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+
+/* Footer */
+.footer-container {
+  width: 100%;
+  margin-top: 100px;
+  bottom: 0;
+}
+
+
+/* NAVBAR Responsive Styles */
+@media screen and (max-width: 640px) {
+  .nav-lists {
+    margin-top: -28px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+
+  .logo {
+    width: 50px;
+    margin-top: -4px;
+  }
+  .logo-name {
+    display: none;
+  }
+  
+  .nav-lists {
+    margin: 0 auto;
+    margin-top: 1px;
+  }
+
+  .search-bar-section {
+    justify-content: flex-end;
+    margin-left: 10px;
+  }
+
+  .search button {
+    margin-right: -13px;
+  }
+  
+}
+
+  @media screen and (max-width: 500px) {
+    .nav-lists {
+      width: 65%;
+    }
+    .switch-button {
+      margin-right: 5%;
+      margin-left: -5%;
+    }
+    .search button {
+      margin-right: -30px;
+    }
+    
+  }
+  @media screen and (max-width: 414px) {
+    .search input {
+      width: 250px;
+    }
+
+    .nav-lists {
+      margin-left: 41px;
+    }
+  }
+
+
+  @media screen and (max-width: 375px) {
+    .search input {
+      width: 200px;
+    }
+
+    .nav-lists {
+      margin-left: 41px;
+    }
+  }
+
+
+
+  @media screen and (max-width: 320px) {
+    .search input {
+      width: 150px;
+    }
+
+    .nav-lists {
+      margin-left: -26px;
+      width: 100%;
+    }
+
+    .search button {
+      width: 60px;
+    }
+  } 
+
+/* FOOTER responsive Styles */
+
+@media screen and (max-width: 795px) {
+
+.githubs-container {
+  flex-direction: column;
+}
+
+.footer-githubs {
+  align-self: start;
+  width: 100%;
+}
+.project-repo {
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 5%;
+}
+
+.footer-logo {
+  align-self: flex-end;
+  width: 25%;
+  margin-left: 10px;
+}
+
+}
+
+@media screen and (max-width: 586px) {
+ 
+  .copyright {
+    display: none;
+  }
+
+  .footer-icons,
+  .names {
+    display: none;
+  }
+  .footer-logo {
+    margin-top: -10px;
+
+  }
+  .project-repo {
+    width: 100%;
+    margin-top: -80px;
+    margin-left: -20px;
+  }
+  .fa-github {
+    font-size: 50px;
+  }
+ 
+  .repo-name {
+    display: none;
+  }
+}
+
+/* Favortite movies title styles responsive */
+
+@media screen and (max-width: 586px) {
+  .page-heading::before {
+    left: 0;
+  }
+
+  .page-heading::after {
+    width: 70%;
+    left: 15%;
+  }
+
+}
+
+
+@media screen and (max-width: 375px) {
+  .page-heading::after {
+    width: 85%;
+    left: 7%;
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+
+
+  .page-heading::after {
+    width: 90%;
+    left: 5%;
+  }
+} 

@@ -1,49 +1,45 @@
-# v24-geckos-team-03
-Add-project-description-here | Voyage-24 | https://chingu.io/
+# Daily Flix
 
-## Making Changs to the Codebase
-### How to Contribute
-1. Create a branch for your feature (see [below](#feature-branch-example) for an example)
-2. Add your code
-3. Create a Pull Request
+React application to browse your favorite Movies and save them to a watchlist or favorites list
 
-### Git Branches
-Below you can find an overview of the branches we are using.
+## Deployment
 
-```
-- master: (current production release that is seen by live users - updated through PRs)
-- dev: (code for the next release - updated through PRs)
-- feature or bug (working branches)
--- feature/#<Issue Number>_<little feature title>
--- feature/#<Issue Number>_<little feature title>
--- bug/#<Issue Number>_<little feature title>
-```
+The development branch deploys [here](https://chingu-voyages.github.io/v24-geckos-team-03/)
 
-**master**: Only updated from the development branch Pull Requests. This branch always reflects the current production release that is seen by live users.
+## Getting Started
 
-**dev**: Reflects the code for the next release. Developers work in working branches, which are then pulled into this branch. All code pulled into this branch must be tested and undergo peer review as part of the PR process.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-**feature/bug**: Individual branches created by each developer when they are working on changes and bug fixes. Format feature/#<Issue Number>_<little feature title>
+### Prerequisites
 
-### Feature Branch Example
+What things you need to install the software and how to install them
 
-An example for a ToDo list feature could look as following:
+- npm
 
 ```
--- feature/#1_todo-list
+npm install npm@latest -g
 ```
 
-## Commit Messages & Pull Requests
+### Installing
 
-For consistency and easier readability, we would like to ask everyone to use the templates for Pull Requests and Issues that we provide.
-They follow this pattern:
+1. Clone the repo
 
 ```
-<subject> (A title to summarise what this is about)
-
-<body> (A description of your PR, feature idea or issue)
-
-Resolves #ISSUE_NUMBER
+git clone https://github.com/chingu-voyages/v24-geckos-team-03.git
 ```
 
-Note: It is important to add the #number for the issue the PR is resolving in order to close the issue accordingly once the PR gets merged. You can read more about this [here](https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue)
+2. Run npm install inside project root directory
+
+```
+npm install
+```
+
+3. Start the server
+
+```
+npm run start
+```
+
+## Built With
+
+- [React](https://reactjs.org/) - The JavaScript framework used
