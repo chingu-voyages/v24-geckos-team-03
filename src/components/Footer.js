@@ -17,7 +17,6 @@ const Footer = () => {
       boxShadow="0px -4px 4px 1px rgba(0,0,0,0.25)"
       position="relative"
     >
-      <Divider mb={-1}/>
       <Flex
         className="footer"
         justifyContent="space-around"
